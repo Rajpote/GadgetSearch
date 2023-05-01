@@ -1,31 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>register</title>
-</head>
-<body>
-    <form action="">
-        <h1>register</h1>
-
-        <label for="fname">first name</label><br>
-        <input type="text" id="fname" name="fname"><br>
-        <label for="lname">last name</label><br>
-        <input type="text" id="lname" name="lname"><br>
-        <label for="phno">phone number</label><br>
-        <input type="number" id="phno" name="phnumber"><br>
-        <label for="gender">Gender</label><br>
-        <label for="ml">Male</label>
-        <input type="radio" id="ml" name="gender">
-        <label for="fm">female</label>
-        <input type="radio" id="fm" name="gender">
-        <label for="other">other</label>
-        <input type="radio" id="other" name="gender">
-        <input type="submit" value="submit">
-
-    </form>
-    <?php 
-</body>
+ <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style2.css">
+  <title>register</title>
+ </head>
+ <body>
+  <div class="container1">
+   <form action="">
+    <div>
+     <h1>register</h1>
+    </div>
+    <div class="container">
+     <label for="fname">first name:</label>
+     <input type="text" id="fname" name="fname" />
+    </div>
+    <div class="container">
+     <label for="lname">last name:</label>
+     <input type="text" id="lname" name="lname" />
+    </div>
+    <div class="container">
+        <label for="fname">E-mail:</label>
+        <input type="email" id="email" name="email" />
+       </div>
+    <div class="container">
+     <label for="phno">phone number</label>
+     <input type="number" id="phno" name="phnumber" />
+    </div>
+    <div class="container">
+     <label for="gender">Gender</label>
+     <div class="container-gender">
+      <label for="ml">Male</label>
+      <input type="radio" id="ml" name="gender" />
+      <label for="fm">female</label>
+      <input type="radio" id="fm" name="gender" />
+      <label for="other">other</label>
+      <input type="radio" id="other" name="gender" />
+     </div>
+    </div>
+    <div class="container">
+        <input type="checkbox" checked="checked">
+        <span>I aggree with all thr term & condition</span>
+    </div>
+    <div class="container">
+     <div class="reg-btn">
+      <input type="submit" value="submit" />
+     </div>
+    </div>
+   </form>
+  </div>
+ </body>
 </html>

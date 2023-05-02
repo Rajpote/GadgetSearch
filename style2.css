@@ -7,12 +7,16 @@ body {
     width: 300px;
     display: grid;
     place-items: center;
-    border: 5px solid black;
+    border: 5px solid rgb(28, 162, 77);
+    background-color: rgb(16, 65, 108);
    }
    h1 {
     text-align: center;
     margin-top: 0;
     padding: 0;
+   }
+   .login-box .uname{
+    /* background-color: transparent; */
    }
    .reg a {
     text-decoration: none;
@@ -33,7 +37,7 @@ body {
     height: 30px;
     width: 50px;
     color: black;
-    background-color: azure;
+    background-color: aliceblue;
     transition: 1s;
    }
    .login-btn input:hover {
@@ -62,3 +66,8 @@ body {
     box-shadow: 2px 2px 2px #000;
     cursor: pointer;
    }
+
+
+
+
+   

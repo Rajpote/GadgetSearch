@@ -2,6 +2,7 @@ body {
     display: grid;
     place-items: center;
     margin-top: 100px;
+    background-color: transparent;
    }
    .container1 {
     width: 300px;

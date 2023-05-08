@@ -181,29 +181,14 @@ input[type="search"] {
    cursor: pointer;
 }
 
-.log {
-   padding: 20px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   height: 40px;
-   width: 100px;
-   border-radius: 25px 0 0 0;
-   background-color: transparent;
-   font-size: 20px;
-}
 
 .login-btn {
    margin-right: 0vw;
    background-color: white;
-   width: 15%;
-   padding: 0.5vw;
+   width: 7%;
+   padding: 0.1vw;
    font-size: 1rem;
    border-radius: 25px;
-}
-
-.fa-user {
-   padding-left: 0.5vw;
 }
 
 main {

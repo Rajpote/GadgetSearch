@@ -26,7 +26,7 @@
 
          <ul class="navbar">
             <input type="search" class="search-bar" placeholder="Search . . . " id="search" /><i class="fa-solid fa-magnifying-glass"></i>
-            <button id="modal-btn" class="login-btn">Login<i class="fa-solid fa-user"></i></button>
+            <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
          </ul>
 
          <div id="my-modal" class="modal">

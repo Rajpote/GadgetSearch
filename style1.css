@@ -23,7 +23,7 @@ header {
    align-items: center;
    justify-content: left;
    padding: 0px 20px;
-   background-color: rgb(114, 234, 214);
+   background-color: rgb(41, 184, 227);
    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
    position: sticky;
    top: 0;
@@ -58,14 +58,14 @@ img {
 }
 .navbar li a:hover,
 .navbar li a.active {
-   color: blue;
+   color: rgb(5, 5, 56);
 }
 .navbar li a.active::after,
 .navbar li a:hover::after {
    content: "";
    width: 30%;
    height: 2px;
-   background-color: blue;
+   background-color: rgb(11, 11, 58);
    position: absolute;
    bottom: -4px;
    left: 20px;
@@ -104,12 +104,16 @@ input[type="search"] {
    height: 100%;
    width: 100%;
    overflow: auto;
-   background-color: rgba(0, 0, 0, 0.7);
+   background-color: transparent;
+   color: #35a8e6;
+}
+.modal form {
+   color: #1caa90;
 }
 
 .fa-xmark {
    position: relative;
-   top: -37vh;
+   top: -36vh;
    left: 29vw;
    cursor: pointer;
 }
@@ -181,17 +185,6 @@ input[type="search"] {
    cursor: pointer;
 }
 
-/* .log {
-   padding: 20px;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   height: 40px;
-   width: 100px;
-   border-radius: 25px 0 0 0;
-   background-color: transparent;
-   font-size: 20px;
-} */
 .login-btn {
    margin-right: 0vw;
    background-color: white;
@@ -199,6 +192,25 @@ input[type="search"] {
    padding: 0.1vw;
    font-size: 1rem;
    border-radius: 25px;
+}
+.login-button {
+   position: relative;
+   top: -1vh;
+   left: 2.5vw;
+   background-color: #082465;
+   border-radius: 30px;
+   height: 5.5vh;
+   width: 7vw;
+   color: white;
+   border: none;
+   font-size: 1rem;
+   padding: 1vh 1vw;
+   cursor: pointer;
+   transition: transform 0.35s;
+}
+
+.login-button:hover {
+   transform: scale(1.1);
 }
 
 main {

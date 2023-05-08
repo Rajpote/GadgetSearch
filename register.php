@@ -39,15 +39,15 @@
     </div>
     <div class="container">
      <label for="uname">user name:</label>
-     <input type="text" id="uname" name="uname" />
+     <input type="text" id="uname" name="uname" required/>
     </div>
     <div class="container">
      <label for="password">password:</label>
-     <input type="text" id="pass" name="password" />
+     <input type="text" id="pass" name="password" required/>
     </div>
     <div class="container">
         <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" />
+        <input type="email" id="email" name="email" required/>
        </div>
     <div class="container0">
         <input type="checkbox" checked="checked">

@@ -40,27 +40,15 @@
 
          <div id="my-modal" class="modal">
             <form action="" method="POST" class="login-form">
-               <div class="container">
-                  <i class="fa-solid fa-user"></i>
-                  <input type="text" class="uname" placeholder="User-name" name="uname" required/>
+            <div class="container">
+                  <?php echo $_SESSION['username'] ?>
                </div>
-
-               <div class="container">
-                  <i class="fa-solid fa-lock"></i>
-                  <input type="text" class="uname" placeholder="password" name="password" required/>
-               </div>
-
-               <span class="reg">
-                  <a href="register.php">Register</a>
-               </span>
-
-               <input type="checkbox" class="checkbox-login" onclick="loginPassword()" />
-               <div class="show-password">Show Password</div>
-
-               <div>
-                  <input type="submit" class="submit-login" name="login-submit" id="login-submit" value="Login" />
-               </div>
-               <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
+               
+                  
+                  <div class="container">
+                     <a href="home.php">logout</a>
+                  </div>
+                  <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
             </form>
          </div>
          <div id="mobile">

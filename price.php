@@ -1,20 +1,34 @@
+<?php
+    session_start();
+    include 'connect.php';
+
+    if(!isset($_SESSION['username'])){
+      header('location: home.php');
+  }
+ 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="style1.css">
-  </head>
-  <body>
-  <header>
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+      <link rel="stylesheet" href="style1.css" />
+
+      <title>Document</title>
+   </head>
+   <body>
+      <header>
          <div>
-            <a class="logo" href="home.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
+            <a class="logo" href="user.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
          </div>
          <ul class="navbar">
-            <li><a href="home.php">Home</a></li>
+            <li><a href="user.php">Home</a></li>
             <li><a href="gadget.php">Gadget</a></li>
             <li><a class="active" href="price.php">Price</a></li>
             <li><a href="about.php">About Us</a></li>
@@ -24,30 +38,18 @@
             <input type="search" class="search-bar" placeholder="Search . . . " id="search" /><i class="fa-solid fa-magnifying-glass"></i>
             <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
          </ul>
-
+         
          <div id="my-modal" class="modal">
             <form action="" method="POST" class="login-form">
                <div class="container">
-                  <i class="fa-solid fa-user"></i>
-                  <input type="text" class="uname" placeholder="User-name" name="uname" required/>
+                  <?php echo $_SESSION['username'] ?>
                </div>
-
-               <div class="container">
-                  <i class="fa-solid fa-lock"></i>
-                  <input type="text" class="uname" placeholder="password" name="password" required/>
-               </div>
-
-               <span class="reg">
-                  <a href="register.php">Register</a>
-               </span>
-
-               <input type="checkbox" class="checkbox-login" onclick="loginPassword()" />
-               <div class="show-password">Show Password</div>
-
-               <div>
-                  <input type="submit" class="submit-login" name="login-submit" id="login-submit" value="Login" />
-               </div>
-               <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
+               
+                  
+                  <div class="container">
+                     <a href="home.php">logout</a>
+                  </div>
+                  <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
             </form>
          </div>
          <div id="mobile">
@@ -57,8 +59,8 @@
       </header>
       <main>
 
-      </main>
-  <footer>
+     </main>
+      <footer>
             <div class="row">
                <div class="coln">
                   <h3>contact</h3>
@@ -86,7 +88,11 @@
                   </div>
                </div>
             </div>
+
+
+            
             <center>copyright</center>
       </footer>
-  </body>
+      <script src="javascript.js"></script>
+   </body>
 </html>

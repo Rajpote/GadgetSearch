@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    include 'connect.php';
+
+    if(!isset($_SESSION['username'])){
+      header('location: home.php');
+  }
+ 
+?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -15,10 +24,10 @@
    <body>
       <header>
          <div>
-            <a class="logo" href="home.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
+            <a class="logo" href="user.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
          </div>
          <ul class="navbar">
-            <li><a href="home.php">Home</a></li>
+            <li><a href="user.php">Home</a></li>
             <li><a class="active" href="gadget.php">Gadget</a></li>
             <li><a href="price.php">Price</a></li>
             <li><a href="about.php">About Us</a></li>

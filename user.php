@@ -2,27 +2,10 @@
     session_start();
     include 'connect.php';
 
-    if(isset($_POST['login-submit'])){
-        $email = $_POST['uname'];
-        $password = md5($_POST['password']);
+    if(!isset($_SESSION['username'])){
+      header('location: home.php');
+  }
 
-        $query = "SELECT * FROM register WHERE uname = ? AND password = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->execute([$email, $password]);
-        $result = $stmt->fetch();
-
-        if($result){
-            if($result['uname'] == 'admin@gmail.com' && $result['password'] == 'e698f2679be5ba5c9c0b0031cb5b057c'){
-                $_SESSION['adminname'] = $result['email'];
-                header('location: admin.php');
-            }else{
-                $_SESSION['username'] = $result['email'];
-                header('location: user.php');
-            }
-        }else{
-            echo '<script> alert("Incorrect email or password."); </script>';
-        }
-    }   
 ?>
 
 <!DOCTYPE html>
@@ -40,45 +23,33 @@
       <title>Document</title>
    </head>
    <body>
-   <header>
+      <header>
          <div>
-            <a class="logo" href="home.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
+            <a class="logo" href="user.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
          </div>
          <ul class="navbar">
-            <li><a class="active" href="home.php">Home</a></li>
-            <li><a href="#" onclick="alertPopup()">Gadget</a></li>
-            <li><a href="#" onclick="alertPopup()">Price</a></li>
-            <li><a href="#" onclick="alertPopup()">About Us</a></li>
+            <li><a class="active" href="user.php">Home</a></li>
+            <li><a href="gadget.php">Gadget</a></li>
+            <li><a href="price.php">Price</a></li>
+            <li><a href="about.php">About Us</a></li>
          </ul>
 
          <ul class="navbar">
             <input type="search" class="search-bar" placeholder="Search . . . " id="search" /><i class="fa-solid fa-magnifying-glass"></i>
-            <button id="modal-btn" class="login-btn">Login <i class="fa-solid fa-right-to-bracket"></i></button>
+            <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
          </ul>
-
+         
          <div id="my-modal" class="modal">
             <form action="" method="POST" class="login-form">
                <div class="container">
-                  <i class="fa-solid fa-user"></i>
-                  <input type="text" class="uname" placeholder="User-name" name="uname" required/>
+                  <?php echo $_SESSION['username'] ?>
                </div>
-
-               <div class="container">
-                  <i class="fa-solid fa-lock"></i>
-                  <input type="password" class="uname" id="password" placeholder="password" name="password" required/>
-               </div>
-
-               <span class="reg">
-                  <a href="register.php">Register</a>
-               </span>
-
-               <input type="checkbox" class="checkbox-login" onclick="loginPassword()" />
-               <div class="show-password">Show Password</div>
-
-               <div>
-                  <input type="submit" class="submit-login" name="login-submit" id="login-submit" value="Login" />
-               </div>
-               <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
+               
+                  
+                  <div class="container">
+                     <a href="home.php">logout</a>
+                  </div>
+                  <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
             </form>
          </div>
          <div id="mobile">
@@ -107,7 +78,7 @@
             <div class="product-details">
                <div class="product-card">
                   <div class="product-image">
-                     <a href="#" onclick="alertPopup()"><img src="image/product/helious_2_2.png" class="product-thumb" alt="" /></a>
+                     <a href="about.php"><img src="image/product/helious_2_2.png" class="product-thumb" alt="" /></a>
                   </div>
                   <div class="product-info">
                      <h2 class="product-brand">Acer</h2>
@@ -240,6 +211,9 @@
                   </div>
                </div>
             </div>
+
+
+            
             <center>copyright</center>
       </footer>
       <script src="javascript.js"></script>

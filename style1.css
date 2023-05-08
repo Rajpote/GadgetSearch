@@ -181,11 +181,21 @@ input[type="search"] {
    cursor: pointer;
 }
 
-
+/* .log {
+   padding: 20px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 40px;
+   width: 100px;
+   border-radius: 25px 0 0 0;
+   background-color: transparent;
+   font-size: 20px;
+} */
 .login-btn {
    margin-right: 0vw;
    background-color: white;
-   width: 7%;
+   width: 12%;
    padding: 0.1vw;
    font-size: 1rem;
    border-radius: 25px;
@@ -230,7 +240,7 @@ main {
 }
 .signup a {
    text-decoration: none;
-   color: white;
+   color: black;
 }
 
 /* silder */

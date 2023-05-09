@@ -47,7 +47,7 @@
                
                   
                   <div class="container">
-                     <a href="home.php">logout</a>
+                     <a href="logout.php">logout</a>
                   </div>
                   <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
             </form>
@@ -61,12 +61,12 @@
          <div id="hero">
             <img src="image/backgrounds/background.png" alt="" class="background1" />
             <div class="cont-text">
-               <h3>search has ended</h3>
-               <h1>gadgetsearch</h1>
-               <p>make your life easy & happy</p>
-               <button class="signup">
+               <h3>Search has ended</h3>
+               <h1>GadgetSearch</h1>
+               <p>Make your life easy & happy</p>
+               <!-- <button class="signup">
                   <a href="register.php">signup</a>
-               </button>
+               </button> -->
             </div>
          </div>
          <section id="slider">

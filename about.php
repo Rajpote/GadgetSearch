@@ -5,6 +5,17 @@
     if(!isset($_SESSION['username'])){
       header('location: home.php');
   }
+  if(isset($_POST['login-submit'])){
+   $uname = $_POST['uname'];
+   $feedback = $_POST['feedback'];
+
+       $sql = "INSERT INTO feedback (uname, feedback) VALUES (?, ?)";
+       $stmt = $conn->prepare($sql);
+       $stmt->execute([$uname, $feedback]);
+       echo '<script> alert("feedback submitted."); window.location.href = "about.php"; </script>';
+   }
+
+
  
 ?>
 
@@ -19,7 +30,42 @@
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
       <link rel="stylesheet" href="style1.css" />
-
+      <style>
+         main{
+            position: relative;
+         }
+         main form{
+            display: block;
+            margin: 10px 40px 10px 20px;
+            padding: 10px 10px;
+            border-radius: 12px;
+            color: blue;
+         }
+         .feedback{
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            padding: 10px 10px;
+         }
+         h2{
+            margin: 12px 24px;
+            text-transform: uppercase;
+         }
+         
+         .about{
+            display: block;
+            margin-top: 25px;
+            margin-right: 990px;
+            margin-left: 42px;
+            margin-bottom: 20px;
+            text-align: justify;
+         }
+         .map{
+            position: absolute;
+            left: 60%;
+            top: 10%;
+         }
+      </style>
       <title>Document</title>
    </head>
    <body>
@@ -58,7 +104,25 @@
          </div>
       </header>
       <main>
+         <div class="about">
+            <h2>gadgetsearch</h2>
+            <p>With the growing number of gadgets in the market people are more confused than ever about buying new gadgets from the market. Many people don't know about the features and functionality of the gadget that they want to purchase. </p> <br>
+            <p>GadgetSearch a web platform that will allow users to see reviews and rating of various gadgets such as smartphones, laptops, tablets and other tech related devices and provide a clear concept about the gadget they want to purchase. </p>   
+         </div>
+         <div class="map">
+            <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15408.017013533878!2d85.32454960702925!3d27.6702355634462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19e8d9058ce3%3A0x5f9f01647e956594!2z4KSV4KWN4KSv4KS-4KSl4KSr4KWL4KSw4KWN4KShIOCkh-CkqOCljeCkn-CksOCkqOCljeCkr-CkvuCkuOCkqOCksiDgpJXgpLLgpYfgpJw!5e0!3m2!1sne!2snp!4v1683545778767!5m2!1sne!2snp" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+         </div>
+         <form action="" method="post">
+               <div class="feedback">
+                  <i class="fa-solid fa-user"></i>
+                  <input type="text" class="" placeholder="User-name" name="uname" required/>
+               </div>
+                  <textarea name="feedback" id="" cols="30" rows="5" class="feedback"></textarea>
 
+               <div class="feedback">
+                  <input type="submit"  name="login-submit" id="login-submit" value="submit" />
+               </div>
+        </form>
      </main>
       <footer>
             <div class="row">

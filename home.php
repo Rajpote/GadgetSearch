@@ -3,24 +3,24 @@
     include 'connect.php';
 
     if(isset($_POST['login-submit'])){
-        $email = $_POST['uname'];
+        $uname = $_POST['uname'];
         $password = md5($_POST['password']);
 
         $query = "SELECT * FROM register WHERE uname = ? AND password = ?";
         $stmt = $conn->prepare($query);
-        $stmt->execute([$email, $password]);
+        $stmt->execute([$uname, $password]);
         $result = $stmt->fetch();
 
         if($result){
-            if($result['uname'] == 'admin@gmail.com' && $result['password'] == 'e698f2679be5ba5c9c0b0031cb5b057c'){
-                $_SESSION['adminname'] = $result['email'];
+            if($result['uname'] == 'Admin' && $result['password'] == '21232f297a57a5a743894a0e4a801fc3'){
+                $_SESSION['adminname'] = $result['uname'];
                 header('location: admin.php');
             }else{
-                $_SESSION['username'] = $result['email'];
+                $_SESSION['username'] = $result['uname'];
                 header('location: user.php');
             }
         }else{
-            echo '<script> alert("Incorrect email or password."); </script>';
+            echo '<script> alert("Incorrect username or password."); </script>';
         }
     }   
 ?>
@@ -58,6 +58,7 @@
 
          <div id="my-modal" class="modal">
             <form action="" method="POST" class="login-form">
+               <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
                <div class="container">
                   <i class="fa-solid fa-user"></i>
                   <input type="text" class="uname" placeholder="User-name" name="uname" required/>
@@ -78,7 +79,6 @@
                <div>
                   <input type="submit" class="submit-login" name="login-submit" id="login-submit" value="Login" />
                </div>
-               <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
             </form>
          </div>
          <div id="mobile">

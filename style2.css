@@ -1,89 +1,78 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
 }
 body {
-    display: grid;
-    place-items: center;
-    margin-top: 100px;
-    background-image: url(image/backgrounds/background.png);
-    background-repeat: no-repeat;
-    background-size: cover;
+   display: grid;
+   place-items: center;
+   margin-top: 50px;
+   background-image: url(image/backgrounds/background.png);
+   background-repeat: no-repeat;
+   background-size: cover;
 }
 .container1 {
-    width: 500px;
-    padding: 15px 25px;
-    display: grid;
-    place-items: center;
-    border-radius: 25px;
-    box-shadow: 2px 2px 2px 2px #000;
+   width: 500px;
+   padding: 15px 15px;
+   display: grid;
+   place-items: center;
+   border-radius: 25px;
+   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
    backdrop-filter: blur(5px);
    background-color: gray;
    opacity: 2px;
 }
 
-
 h1 {
+   font-size: 30px;
+   font-weight: 500px;
    text-align: center;
-   margin-top: 0;
+   margin: 10px 0;
    padding: 0;
 }
-.reg a {
-   color: rgb(9, 241, 241);
-   text-decoration: none;
-}
-.reg a:hover {
-   color: blue;
-   background-color: aqua;
-}
-.container input {
-   width: 49%;
-   padding: 12px;
-}
-.container input {
-   width: 100%;
-   padding: 12px;
+.container1 form {
+   width: 90%;
+   height: 79vh;
 }
 .container {
-   position: relative;
+   display: flex;
+   align-items: center;
 }
-.container i {
-   position: absolute;
-   top: 0.7rem;
-   left: 0.5rem;
-   font-size: 1.5rem;
-}
-.container input {
-   padding: 0.8rem;
-   padding-left: 2rem;
+.container input,
+.container textarea,
+.container select {
+   width: 50%;
+   padding: 0.5rem;
+   padding-left: 1rem;
    margin-bottom: 1rem;
    border-radius: 5px;
    outline: none;
-   border: none;
    background-color: gray;
    border: 1px solid rgb(61, 53, 53);
-   color:white;
+   color: white;
 }
-input::placeholder {
-   color: rgb(245, 251, 250);
+.container label {
+   width: 200px;
+   font-size: 25px;
+   margin-right: 10px;
 }
-.login-btn,
+
 .reg-btn {
+   margin-top: 20px;
    height: 40px;
    display: grid;
    place-items: center;
 }
-.login-btn input,
+
 .reg-btn input {
-   height: 30px;
+   height: 50px;
    width: 50%;
    color: black;
    border-radius: 15px;
    background-color: aliceblue;
    transition: 1s;
 }
-.login-btn input:hover,
+
 .reg-btn input:hover {
    cursor: pointer;
    transform: scale(1.1);

@@ -29,7 +29,6 @@
          <ul class="navbar">
             <li><a href="user.php">Home</a></li>
             <li><a class="active" href="gadget.php">Gadget</a></li>
-            <li><a href="price.php">Price</a></li>
             <li><a href="about.php">About Us</a></li>
          </ul>
 
@@ -57,7 +56,23 @@
          </div>
       </header>
       <main>
+      <div class="courses" id="courses">
+        <p class="course-title">COURSES</p>
+        <div class="course-grid-container">
+        <?php
+            $sql = "SELECT * FROM gadget_details LIMIT 7";
+            $stmt = $pdo->query($sql);
 
+            if($stmt->rowCount() > 0){
+                while($row = $stmt->fetch()){
+                    echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="course-grid-item">' . $row['gname'] . '</a>';
+                }
+                echo '</div>';
+            }else{
+                echo "No courses found.";
+            }
+        ?>
+    </div>
       </main>
       <footer>
             <div class="row">

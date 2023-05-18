@@ -6,6 +6,27 @@
       header('location: home.php');
   }
 
+  $g_id;
+  $i = 0;
+  $searchValue;
+  @$count = $_GET['count'];
+
+  do{
+      @$g_id = $_GET[$i];
+
+      if($g_id != null){
+              $stmt = $pdo->prepare("SELECT * FROM gadget_details WHERE g_id = :g_id");
+              $stmt ->bindParam(':g_id', $g_id);
+
+          $stmt ->execute();
+          $value[$i] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+          $searchValue = true;
+      }else{
+          $searchValue = false;
+      }
+      $i++;
+  }while($i<$count);
+
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +44,27 @@
       <title>Document</title>
    </head>
    <body>
+   <?php
+        if($searchValue){?>
+            <!-- <a href="homepage.php"><img src="Images/websitelogo.png" alt="Website Logo" class="website-logo"></a> -->
+            
+            <div class="main-navbar">
+            <form action="search.php" method="post">
+            <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" /><i class="fa-solid fa-magnifying-glass"></i>
+            <!-- <input type="submit" value="submit"> -->
+            </form>
+            </div>
+
+            <div class="result">Found results.</div>
+            <?php
+                echo '<div class="search-grid-container">';
+                foreach($value as $item){
+                        echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-grid-item">' . $item[0]['gname'] . '</a>';
+                }
+                echo '</div>';
+            ?>
+        <?php 
+        }else{ ?>
       <header>
          <div>
             <a class="logo" href="user.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
@@ -30,12 +72,14 @@
          <ul class="navbar">
             <li><a class="active" href="user.php">Home</a></li>
             <li><a href="gadget.php">Gadget</a></li>
-            <li><a href="price.php">Price</a></li>
             <li><a href="about.php">About Us</a></li>
          </ul>
 
          <ul class="navbar">
-            <input type="search" class="search-bar" placeholder="Search . . . " id="search" /><i class="fa-solid fa-magnifying-glass"></i>
+            <form action="search.php" method="post">
+            <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" /><i class="fa-solid fa-magnifying-glass"></i>
+            <!-- <input type="submit" value="submit"> -->
+            </form>
             <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
          </ul>
          
@@ -64,9 +108,6 @@
                <h3>Search has ended</h3>
                <h1>GadgetSearch</h1>
                <p>Make your life easy & happy</p>
-               <!-- <button class="signup">
-                  <a href="register.php">signup</a>
-               </button> -->
             </div>
          </div>
          <section id="slider">
@@ -216,6 +257,7 @@
             
             <center>copyright</center>
       </footer>
+      <?php } ?>
       <script src="javascript.js"></script>
    </body>
 </html>

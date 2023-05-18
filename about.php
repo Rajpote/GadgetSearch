@@ -10,7 +10,7 @@
    $feedback = $_POST['feedback'];
 
        $sql = "INSERT INTO feedback (uname, feedback) VALUES (?, ?)";
-       $stmt = $conn->prepare($sql);
+       $stmt = $pdo->prepare($sql);
        $stmt->execute([$uname, $feedback]);
        echo '<script> alert("feedback submitted."); window.location.href = "about.php"; </script>';
    }
@@ -76,7 +76,6 @@
          <ul class="navbar">
             <li><a href="user.php">Home</a></li>
             <li><a href="gadget.php">Gadget</a></li>
-            <li><a href="price.php">Price</a></li>
             <li><a class="active" href="about.php">About Us</a></li>
          </ul>
 

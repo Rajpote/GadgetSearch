@@ -8,10 +8,6 @@ html {
    height: 100%;
 }
 
-h1{
-
-}
-
 body {
    position: relative;
    background-color: #f5f4f4;
@@ -83,7 +79,7 @@ img {
    align-items: center;
 }
 
-input[type="search"] {
+input .search-bar{
    width: 300px;
    margin-right: 10vw;
    padding: 10px;
@@ -109,11 +105,11 @@ input[type="search"] {
    height: 100%;
    width: 100%;
    overflow: auto;
-   background-color: transparent;
+   /* background-color: transparent; */
    color: #35a8e6;
 }
 .modal form {
-   color: #8323d7;
+   color: #16b7b4;
 }
 
 .fa-xmark {
@@ -129,7 +125,7 @@ input[type="search"] {
 .reg a {
    position: absolute;
    left: 400px;
-   color: rgb(12, 207, 207);
+   color: rgb(237, 135, 9);
    text-decoration: none;
 }
 .reg a:hover {
@@ -421,8 +417,6 @@ main {
 }
 
 /* brand  */
-.brands {
-}
 .brand1 {
    font-size: 2.3rem;
    font-weight: 1000;

@@ -4,15 +4,15 @@
 
     if(isset($_POST['login-submit'])){
         $uname = $_POST['uname'];
-        $password = md5($_POST['password']);
+        $cpassword = ($_POST['password']);
 
-        $query = "SELECT * FROM register WHERE uname = ? AND password = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->execute([$uname, $password]);
+        $query = "SELECT * FROM register WHERE uname = ? AND cpassword = ?";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute([$uname, $cpassword]);
         $result = $stmt->fetch();
 
         if($result){
-            if($result['uname'] == 'Admin' && $result['password'] == '21232f297a57a5a743894a0e4a801fc3'){
+            if($result['uname'] == 'Admin123' && $result['password'] == '$2y$10$3xYGyOoYymKkwoLqdtHVe.D6Wzt2dOUu6AFQBUgVpjE' || $result['cpassword'] == '@dmin123'){
                 $_SESSION['adminname'] = $result['uname'];
                 header('location: admin.php');
             }else{
@@ -23,6 +23,8 @@
             echo '<script> alert("Incorrect username or password."); </script>';
         }
     }   
+
+   
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +42,7 @@
       <title>Document</title>
    </head>
    <body>
+      
    <header>
          <div>
             <a class="logo" href="home.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
@@ -47,7 +50,6 @@
          <ul class="navbar">
             <li><a class="active" href="home.php">Home</a></li>
             <li><a href="#" onclick="alertPopup()">Gadget</a></li>
-            <li><a href="#" onclick="alertPopup()">Price</a></li>
             <li><a href="#" onclick="alertPopup()">About Us</a></li>
          </ul>
 
@@ -242,6 +244,7 @@
             </div>
             <center>copyright</center>
       </footer>
+
       <script src="javascript.js"></script>
    </body>
 </html>

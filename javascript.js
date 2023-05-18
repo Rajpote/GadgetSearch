@@ -24,6 +24,8 @@ function loginPassword() {
       x.type = "password";
    }
 }
+
+
 // navbar
 // const bar = document.getElementById("bar");
 // const close = document.getElementById("close");

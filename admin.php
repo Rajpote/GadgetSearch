@@ -5,10 +5,7 @@
     if(!isset($_SESSION['adminname'])){
       header('location: home.php');
   }
-  $courseCount = $conn->query("SELECT COUNT(courseId) FROM course_data") -> fetchColumn();
-    $userCount = $conn->query("SELECT COUNT(id) FROM user_data") -> fetchColumn();
-    $collegeCount = $conn->query("SELECT COUNT(collegeId) FROM college_data") -> fetchColumn();
- 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,78 +17,29 @@
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
-      <link rel="stylesheet" href="style1.css" />
+      <link rel="stylesheet" href="admin.css" />
 
       <title>Document</title>
    </head>
    <body>
       <header>
          <div>
-            <a class="logo" href="user.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
+            <a class="logo" href="admin.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
          </div>
          <ul class="navbar">
-            <li><a href="user.php">Home</a></li>
-            <li><a href="gadget.php">Gadget</a></li>
-            <li><a href="price.php">Price</a></li>
-            <li><a href="about.php">About Us</a></li>
+            <li><a class="active" href="admin.php">Admin</a></li>
+            <li><a href="gadgetdetail.php">Gadget</a></li>
+            <li><a href="userdata.php">User data</a></li>
+            <li><a href="feedback.php">user feedback</a></li>
          </ul>
-
-         <ul class="navbar">
-            <input type="search" class="search-bar" placeholder="Search . . . " id="search" /><i class="fa-solid fa-magnifying-glass"></i>
-            <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
-         </ul>
-
-         <div id="my-modal" class="modal">
-            <form action="" method="POST" class="login-form">
-            <div class="container">
-                  <?php echo $_SESSION['adminname'] ?>
-               </div>
-               
-                  
-                  <div class="container">
-                     <a href="home.php">logout</a>
-                  </div>
-                  <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
-            </form>
-         </div>
-         <div id="mobile">
-            <a href="#" id="close"><i id="bar" class="fa-solid fa-xmark"></i></a>
-            <i id="bar" class="fa-solid fa-bars"></i>
-         </div>
+         <div class="container">
+            <?php echo $_SESSION['adminname'] ?> <br>
+            <a href="home.php">logout</a>
+         </div> 
       </header>
       <main>
 
       </main>
-      <footer>
-            <div class="row">
-               <div class="coln">
-                  <h3>contact</h3>
-                  <ul>
-                     <li>
-                        <a href="#"><i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span></a>
-                     </li>
-                     <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span></li>
-                     <li><i class="fa-solid fa-envelope"></i><span class="content">gadgetsearch@gmail.com</span></li>
-                  </ul>
-               </div>
-               <div class="coln">
-                  <h3>About</h3>
-                  <ul>
-                     <li><a href="about.html">About us</a></li>
-                     <li><a href="#">Term & Condition</a></li>
-                  </ul>
-               </div>
-               <div class="coln">
-                  <h3>follow us</h3>
-                  <div>
-                     <a href="" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                     <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
-                     <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
-                  </div>
-               </div>
-            </div>
-            <center>copyright</center>
-      </footer>
       <script src="javascript.js"></script>
    </body>
 </html>

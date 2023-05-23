@@ -92,8 +92,9 @@ if (isset($_POST['update-submit'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="gadgetdetail.css">
 
-    <title>Document</title>
+    <title>GadgetSearch</title>
 </head>
 <body>
 <header>
@@ -108,30 +109,33 @@ if (isset($_POST['update-submit'])) {
     </ul>
     <div class="container">
         <?php echo $_SESSION['adminname'] ?> <br>
-        <a href="home.php">logout</a>
     </div>
+    <a href="home.php" class="logout">logout</a>
 </header>
 <main>
     <div class="gadget-details" id="gadget-details">
-        <form action="" method="POST" class="gadget-form">
-            <p class="add-course-title">ADD GADGET</p>
+        <form action="" method="POST" class="gadget-form" >
             <div class="input-container">
-                <input type="number" class="id" name="g_id" id="g_id" placeholder="Gadget ID" required>
-                <input type="text" class="abbreviation" name="gname" id="gname" placeholder="Gadget Name" required>
-                <input type="text" class="image" name="gimage" id="gimage" placeholder="Gadget Image URL" required>
-                <input type="text" class="link" name="glink" id="glink" placeholder="Gadget Link" required>
-                <input type="number" class="price" name="gprice" id="gprice" placeholder="Gadget Price" required>
-                <textarea name="gdis" id="gdis" cols="60" rows="7" placeholder="Gadget Description" required></textarea>
-                <textarea name="gspecification" id="gspecification" cols="60" rows="7" placeholder="Gadget Specification" required></textarea>
-            </div>
-            <input type="submit" class="submit" name="submit" id="submit" value="Add">
+                <div class="add">
+                    <h1 class="addtitle">ADD GADGET</h1>
+                    <input type="number" class="id" name="g_id" id="g_id" placeholder="Gadget ID" required>
+                    <input type="text" class="abbreviation" name="gname" id="gname" placeholder="Gadget Name" required>
+                    <input type="file" class="image" name="gimage" id="gimage" placeholder="Gadget Image URL" required>
+                    <textarea name="gdis" id="gdis" cols="60" rows="7" placeholder="Gadget Description"></textarea>
+                
+                    <input type="text" class="link" name="glink" id="glink" placeholder="Gadget Link" required>
+                    <input type="number" class="price" name="gprice" id="gprice" placeholder="Gadget Price" required>
+                    <textarea name="gspecification" id="gspecification" cols="60" rows="7" placeholder="Gadget Specification" required></textarea>
+                    <input type="submit" class="submit" name="submit" id="submit" value="Add">
+                </div>
+            </div> 
         </form>
     </div>
-
     <div class="gadget-details" id="gadget-update">
         <form action="" method="POST" class="manage-gadget-form">
-            <p class="update-course-title">UPDATE Gadgets</p>
             <div class="input-container">
+                <div class="updatebox">
+                    <h1 class="updatetitle">UPDATE Gadgets</h1>
                 <select class="id" name="g_id" id="g_id" onchange="this.form.submit()">
                     <option value="">Gadget ID</option>
                     <?php
@@ -145,15 +149,15 @@ if (isset($_POST['update-submit'])) {
                     }
                     ?>
                 </select>
-
-                <input type="text" class="gname" name="gname" id="gname" placeholder="Gadget Name" value="<?php echo $gname;?>" required>
-                <input type="text" class="image" name="gimage" id="gimage" placeholder="Gadget Image URL" value="<?php echo $gimage; ?>" required>
-                <input type="text" class="link" name="glink" id="glink" placeholder="Gadget Link" value="<?php echo $glink; ?>" required>
-                <input type="number" class="price" name="gprice" id="gprice" placeholder="Gadget Price" value="<?php echo $gprice; ?>" required>
-                <textarea name="gdis" id="gdis" cols="60" rows="7" placeholder="Gadget Description" required><?php echo $gdis; ?></textarea>
-                <textarea name="gspecification" id="gspecification" cols="60" rows="7" placeholder="Gadget Specification" required><?php echo $gspecification; ?></textarea>
+                    <input type="text" class="gname" name="gname" id="gname" placeholder="Gadget Name" value="<?php echo $gname;?>" required>
+                    <input type="file" class="image" name="gimage" id="gimage" placeholder="Gadget Image URL" value="<?php echo $gimage; ?>" required>
+                    <textarea name="gdis" id="gdis" cols="60" rows="7" placeholder="Gadget Description" required><?php echo $gdis; ?></textarea>
+                    <input type="text" class="link" name="glink" id="glink" placeholder="Gadget Link" value="<?php echo $glink; ?>" required>
+                    <input type="number" class="price" name="gprice" id="gprice" placeholder="Gadget Price" value="<?php echo $gprice; ?>" required>
+                    <textarea name="gspecification" id="gspecification" cols="60" rows="7" placeholder="Gadget Specification" required><?php echo $gspecification; ?></textarea>
+                    <input type="submit" class="submit" name="update-submit" id="update-submit" value="Update">
+                </div>
             </div>
-            <input type="submit" class="submit" name="update-submit" id="update-submit" value="Update">
         </form>
     </div>
 </main>

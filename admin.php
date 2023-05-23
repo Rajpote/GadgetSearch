@@ -18,8 +18,8 @@
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
       <link rel="stylesheet" href="admin.css" />
+      <title>GadgetSearch</title>
 
-      <title>Document</title>
    </head>
    <body>
       <header>
@@ -34,8 +34,8 @@
          </ul>
          <div class="container">
             <?php echo $_SESSION['adminname'] ?> <br>
-            <a href="home.php">logout</a>
          </div> 
+         <a href="home.php" class="logout">logout</a>
       </header>
       <main>
 

@@ -39,7 +39,7 @@
       <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
       <link rel="stylesheet" href="style1.css" />
 
-      <title>Document</title>
+      <title>GadgetSearch</title>
    </head>
    <body>
       
@@ -60,7 +60,7 @@
 
          <div id="my-modal" class="modal">
             <form action="" method="POST" class="login-form">
-               <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
+               <i class="fa-solid fa-xmark fa-lg"></i>
                <div class="container">
                   <i class="fa-solid fa-user"></i>
                   <input type="text" class="uname" placeholder="User-name" name="uname" required/>
@@ -71,9 +71,7 @@
                   <input type="password" class="uname" id="password" placeholder="password" name="password" required/>
                </div>
 
-               <span class="reg">
-                  <a href="register.php">Register</a>
-               </span>
+               
 
                <input type="checkbox" class="checkbox-login" onclick="loginPassword()" />
                <div class="show-password">Show Password</div>
@@ -220,7 +218,7 @@
                   <h3>contact</h3>
                   <ul>
                      <li>
-                        <a href="#"><i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span></a>
+                        <i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span>
                      </li>
                      <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span></li>
                      <li><i class="fa-solid fa-envelope"></i><span class="content">gadgetsearch@gmail.com</span></li>

@@ -25,6 +25,7 @@
       <meta charset="UTF-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>GadgetSearch</title>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,6 +38,8 @@
          main form{
             display: block;
             margin: 10px 40px 10px 20px;
+            border: 1px solid black;
+            width: 30%;
             padding: 10px 10px;
             border-radius: 12px;
             color: blue;
@@ -47,11 +50,31 @@
             justify-content: left;
             padding: 10px 10px;
          }
+         #submit-btn.feedback{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+         }
          h2{
             margin: 12px 24px;
             text-transform: uppercase;
          }
-         
+         textarea{
+            width: 90%;
+            padding: 10px;
+            margin: 15px;
+
+         }
+         input{
+           padding: 5px 5px 5px 18px;
+           
+
+         }
+         i#feedbackuser{
+            position: absolute;
+            left: 45px;
+
+         }
          .about{
             display: block;
             margin-top: 25px;
@@ -66,7 +89,6 @@
             top: 10%;
          }
       </style>
-      <title>Document</title>
    </head>
    <body>
       <header>
@@ -86,15 +108,15 @@
           
           <div id="my-modal" class="modal">
             <form action="" method="POST" class="login-form">
-              <!-- <div class="container"> -->
-                 <?php echo $_SESSION['username'] ?>
-              <!-- </div> -->
+            <div id="username" class="container">
+                  <?php echo $_SESSION['username'] ?>
+               </div>
                
                   
-                  <div class="container">
+                  <div class="logout">
                      <a href="home.php">logout</a>
                   </div>
-                  <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
+                  <i id="xmark" class="fa-solid fa-xmark fa-lg" ></i>
             </form>
          </div>
          <div id="mobile">
@@ -109,16 +131,17 @@
             <p>GadgetSearch a web platform that will allow users to see reviews and rating of various gadgets such as smartphones, laptops, tablets and other tech related devices and provide a clear concept about the gadget they want to purchase. </p>   
          </div>
          <div class="map">
+            <h1>Location on map</h1>
             <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15408.017013533878!2d85.32454960702925!3d27.6702355634462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19e8d9058ce3%3A0x5f9f01647e956594!2z4KSV4KWN4KSv4KS-4KSl4KSr4KWL4KSw4KWN4KShIOCkh-CkqOCljeCkn-CksOCkqOCljeCkr-CkvuCkuOCkqOCksiDgpJXgpLLgpYfgpJw!5e0!3m2!1sne!2snp!4v1683545778767!5m2!1sne!2snp" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p>
          </div>
          <form action="" method="post">
                <div class="feedback">
-                  <i class="fa-solid fa-user"></i>
+                  <i id="feedbackuser" class="fa-solid fa-user"></i>
                   <input type="text" class="" placeholder="User-name" name="uname" required/>
                </div>
                   <textarea name="feedback" id="" cols="30" rows="5" class="feedback"></textarea>
 
-               <div class="feedback">
+               <div class="feedback" id="submit-btn">
                   <input type="submit"  name="login-submit" id="login-submit" value="submit" />
                </div>
         </form>
@@ -129,7 +152,7 @@
                   <h3>contact</h3>
                   <ul>
                      <li>
-                        <a href="#"><i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span></a>
+                        <i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span>
                      </li>
                      <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span></li>
                      <li><i class="fa-solid fa-envelope"></i><span class="content">gadgetsearch@gmail.com</span></li>
@@ -138,7 +161,7 @@
                <div class="coln">
                   <h3>About</h3>
                   <ul>
-                     <li><a href="about.html">About us</a></li>
+                     <li><a href="about.php">About us</a></li>
                      <li><a href="#">Term & Condition</a></li>
                   </ul>
                </div>

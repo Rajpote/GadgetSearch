@@ -41,23 +41,23 @@
       <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
       <link rel="stylesheet" href="style1.css" />
 
-      <title>Document</title>
+      <title>GadgetSearch</title>
    </head>
    <body>
    <?php
         if($searchValue){?>
-            <!-- <a href="homepage.php"><img src="Images/websitelogo.png" alt="Website Logo" class="website-logo"></a> -->
             
-            <div class="main-navbar">
+            
+            <ul class="navbar">
             <form action="search.php" method="post">
-            <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" /><i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" name="search" class="search-bars" placeholder="Search . . . " id="search" /><i class="fa-solid fa-magnifying-glass"></i>
             <!-- <input type="submit" value="submit"> -->
             </form>
-            </div>
+         </ul>
 
-            <div class="result">Found results.</div>
+            <h2 class="result">Found results.</h2>
             <?php
-                echo '<div class="search-grid-container">';
+                echo '<div class="searchcontainer">';
                 foreach($value as $item){
                         echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-grid-item">' . $item[0]['gname'] . '</a>';
                 }
@@ -77,23 +77,21 @@
 
          <ul class="navbar">
             <form action="search.php" method="post">
-            <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" /><i class="fa-solid fa-magnifying-glass"></i>
-            <!-- <input type="submit" value="submit"> -->
+            <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" /><i id="search-icon" class="fa-solid fa-magnifying-glass"></i>
             </form>
             <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
          </ul>
          
          <div id="my-modal" class="modal">
             <form action="" method="POST" class="login-form">
-               <div class="container">
+               <div id="username" class="container">
                   <?php echo $_SESSION['username'] ?>
                </div>
                
-                  
-                  <div class="container">
+                  <div class="logout">
                      <a href="logout.php">logout</a>
                   </div>
-                  <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
+                  <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
             </form>
          </div>
          <div id="mobile">
@@ -239,7 +237,7 @@
                <div class="coln">
                   <h3>About</h3>
                   <ul>
-                     <li><a href="about.html">About us</a></li>
+                     <li><a href="about.php">About us</a></li>
                      <li><a href="#">Term & Condition</a></li>
                   </ul>
                </div>

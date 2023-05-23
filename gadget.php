@@ -7,6 +7,7 @@
   }
  
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -18,8 +19,8 @@
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
       <link rel="stylesheet" href="style1.css" />
-
-      <title>Document</title>
+      
+      <title>GadgetSearch</title>
    </head>
    <body>
       <header>
@@ -39,15 +40,15 @@
 
          <div id="my-modal" class="modal">
             <form action="" method="POST" class="login-form">
-            <div class="container">
+            <div id="username" class="container">
                   <?php echo $_SESSION['username'] ?>
                </div>
                
                   
-                  <div class="container">
+                  <div class="logout">
                      <a href="home.php">logout</a>
                   </div>
-                  <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
+                  <i id="xmark" class="fa-solid fa-xmark fa-lg" ></i>
             </form>
          </div>
          <div id="mobile">
@@ -56,23 +57,28 @@
          </div>
       </header>
       <main>
-      <div class="courses" id="courses">
-        <p class="course-title">COURSES</p>
-        <div class="course-grid-container">
-        <?php
-            $sql = "SELECT * FROM gadget_details LIMIT 7";
-            $stmt = $pdo->query($sql);
+      <div class="gadget" id="gadget">
+        <h1 class="title">Gadgets</h1>
+        <div class="gadget-grid-container">
+         <?php
+          $sql = "SELECT * FROM gadget_details";
+          $stmt = $pdo->query($sql);
 
-            if($stmt->rowCount() > 0){
-                while($row = $stmt->fetch()){
-                    echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="course-grid-item">' . $row['gname'] . '</a>';
-                }
-                echo '</div>';
-            }else{
-                echo "No courses found.";
-            }
-        ?>
+          if ($stmt->rowCount() > 0) {
+
+               while ($row = $stmt->fetch()) {
+                 echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="gadget-grid-item">';
+                 echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+                 echo '<p class="gadget-name">' . $row['gname'] . '</p>';
+                 echo '</a>';
+                 
+             }
+          } else {
+             echo "No courses found.";
+          }
+          ?>
     </div>
+   </div>
       </main>
       <footer>
             <div class="row">
@@ -80,7 +86,7 @@
                   <h3>contact</h3>
                   <ul>
                      <li>
-                        <a href="#"><i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span></a>
+                        <i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span>
                      </li>
                      <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span></li>
                      <li><i class="fa-solid fa-envelope"></i><span class="content">gadgetsearch@gmail.com</span></li>
@@ -89,7 +95,7 @@
                <div class="coln">
                   <h3>About</h3>
                   <ul>
-                     <li><a href="about.html">About us</a></li>
+                     <li><a href="about.php">About us</a></li>
                      <li><a href="#">Term & Condition</a></li>
                   </ul>
                </div>

@@ -9,12 +9,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamro College</title>
+    <title>GadgetSearch</title>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="Favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="Favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="Favicon/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
 
     <style>
@@ -26,27 +23,18 @@
         }
 
         html{
-            background-image: url(Images/background.jpg);
             scroll-behavior: smooth;
-        }
-
-        .website-logo{
-            margin-top: 3.5vh;
-            margin-left: 7vw;
-            width: 12.7%;
         }
 
         .content-container table{
             margin: 3vh 7.7vw 6.7vh 7.7vw;
             width: 85%;
             text-align: justify;
-            /* background-color: white; */
             border-radius: 15px;
             border-collapse: collapse;
-            /* box-shadow: 0px 0px 5px 0px rgba(163, 158, 163, 1); */
         }
 
-        .job-container table{
+        .spec-container table{
             margin: 6.7vh 10.25vw 1vh 10.25vw;
             text-align: justify;
             background-color: #e6e9ef;
@@ -107,6 +95,47 @@
         .job-list li{
             margin-right: 2.15vw;
         }
+        main{
+            position: relative;
+         }
+         main form{
+            display: block;
+            margin: 10px;
+            border: 1px solid black;
+            width: 20%;
+            height: 20%;
+            padding: 5px 5px;
+            border-radius: 12px;
+            color: blue;
+         }
+         .feedback{
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            padding: 10px 10px;
+         }
+         #submit-btn.feedback{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+         }
+         textarea{
+            width: 90%;
+            padding: 10px;
+            margin: 5px;
+
+         }
+         input{
+            width: 50%;
+           padding: 5px 0px 5px 25px;
+           
+
+         }
+         i#feedbackuser{
+            position: absolute;
+            left: 30px;
+
+         }
     </style>
 </head>
 <body>
@@ -130,7 +159,7 @@
                 foreach($result as $row){
             ?>
             <tr>
-                <td class="title cell-spacing" colspan="2"><i class="fa-sharp fa-solid fa-graduation-cap fa-lg" style="color: #000000;"></i><?php echo $row['gname']; ?></td>
+                <td class="title cell-spacing" colspan="2"><?php echo $row['gname']; ?></td>
             </tr>
             <tr>
                 <td class="content content-cell-spacing" colspan="2"><?php echo $row['gdis']; ?></td>
@@ -157,7 +186,7 @@
         </table>
         </div>
 
-        <!-- <div class="job-container">
+        <div class="spec-container">
         <table>
             <tr>
                 <td class="job job-cell-spacing">Prospect Careers</td>
@@ -165,21 +194,39 @@
             <tr>
                 <td class="job-list-cell-spacing">
                 <?php
-                    $job = explode("\n", $row['job']);
-                    echo "<ul class='job-list'>";
-                    foreach($job as $point){
-                        echo "<li>$point</li>";
-                    }
-                    echo "</ul>";
+                    echo "<p class='gprice'>{$row['gprice']} </p>";
+                    
                 ?>
                 </td>
             </tr>
         </table>
-        </div> -->
+        </div>
+        <div class="image-pro">
+        <?php
+                    echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+                    
+                ?>
+        </div>
+        <div class="elink">
+        <li><a href="<?php echo $row['glink']?>" target="_blank"><?php echo $row['glink']; ?></a></li>
+        </div>
         <?php 
         }else{
             echo "No content available!";
         }
         ?>
+        <main>
+            <form action="" method="post">
+                <div class="feedback">
+                    <i id="feedbackuser" class="fa-solid fa-user"></i>
+                    <input type="text" class="" placeholder="User-name" name="uname" required/>
+                </div>
+                <textarea name="feedback" id="" cols="30" rows="5" class="feedback"></textarea>
+                
+                <div class="feedback" id="submit-btn">
+                    <input type="submit"  name="login-submit" id="login-submit" value="submit" />
+                </div>
+            </form>
+        </main>
 </body>
 </html>

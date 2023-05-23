@@ -78,21 +78,60 @@ img {
    display: none;
    align-items: center;
 }
-
-input .search-bar{
+button#modal-btn.login-btn {
+   margin-left: 4vw;
+   background-color: white;
+   width: 15%;
+   padding: 0.1vw;
+   font-size: 1rem;
+   border-radius: 25px;
+}
+input#search.search-bar {
    width: 300px;
-   margin-right: 10vw;
-   padding: 10px;
+   margin: 10px 17vw 0 0;
+   padding: 10px 0px 10px 30px;
    font-size: 16px;
    border: 1px solid #f8f5f5;
    border-radius: 3rem;
    box-sizing: border-box;
 }
-
-.fa-magnifying-glass {
+input#search.search-bars {
+   width: 300px;
+   margin: 22px 7vw 0 0;
+   padding: 10px 0px 10px 30px;
+   font-size: 16px;
+   border: 1px solid #080808;
+   border-radius: 3rem;
+   box-sizing: border-box;
+}
+i.fa-magnifying-glass {
    color: #000;
    position: absolute;
-   margin-left: 0vw;
+   right: 45vw;
+   top: 39px;
+}
+.result {
+   display: grid;
+   place-items: center;
+   margin: 1rem 0 1rem 0;
+}
+.searchcontainer {
+   margin: 7vh 0 0 7vw;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+   grid-gap: 1vw;
+   width: 85.97vw;
+}
+.search-grid-item {
+   background-color: white;
+   color: #082465;
+   text-decoration: none;
+   font-size: 1rem;
+   border-radius: 15px;
+   text-align: center;
+   padding: 1vw;
+   margin: 0vh 0vw 0.7vh 0vw;
+   box-shadow: 0px 0px 5px 0px rgba(163, 158, 163, 1);
 }
 
 .modal {
@@ -103,53 +142,52 @@ input .search-bar{
    left: 0;
    top: 0;
    height: 100%;
-   width: 100%;
+   width: 90%;
    overflow: auto;
-   /* background-color: transparent; */
    color: #35a8e6;
 }
 .modal form {
    color: #16b7b4;
 }
 
-.fa-xmark {
+i.fa-xmark,
+i#xmark.fa-xmark {
+   color: #ccc;
    position: relative;
-   top: -2vh;
-   left: 20vw;
+   top: -4vh;
+   left: 30vw;
+   font-size: 30px;
    cursor: pointer;
+}
+i#xmark.fa-xmark {
+   position: relative;
+   top: -13vh;
+   left: 30vw;
 }
 
 .container {
    position: relative;
 }
-.reg a {
-   position: absolute;
-   left: 400px;
-   color: rgb(237, 135, 9);
-   text-decoration: none;
-}
-.reg a:hover {
-   color: rgb(53, 157, 56);
-}
 
 .container input {
    width: 100%;
-   padding: 2.5vh 1vw 2.5vh 3vw;
+   padding: 2vh 1vw 2vh 2vw;
    outline: none;
    border: none;
+   font-size: 1.2rem;
    margin-bottom: 25px;
    border-radius: 25px;
    background-color: white;
 }
 .container i {
    position: absolute;
-   top: 0.7rem;
-   left: 0.5rem;
+   top: 1.2rem;
+   left: 0.7rem;
    font-size: 1.5rem;
 }
 
-.login-form {
-   background-color: rgb(41, 184, 227);
+form.login-form {
+   background-color: rgb(0, 195, 255);
    position: fixed;
    top: 25vh;
    left: 32.1vw;
@@ -164,6 +202,7 @@ input .search-bar{
    margin-top: -2.5vh;
    width: 1vw;
    height: 3vh;
+   cursor: pointer;
 }
 
 .show-password {
@@ -179,25 +218,74 @@ input .search-bar{
    padding: 0.67rem;
    margin: 5vh 7vw;
    border: none;
-   border-radius: 25px;
+   border-radius: 15px;
    background-color: rgb(93, 60, 215);
-   color: rgb(36, 5, 235);
+   color: rgb(255, 254, 255);
    font-size: 1.25rem;
    font-weight: 500;
    cursor: pointer;
    transition: 1.2s;
 }
 .submit-login:hover {
-   color: #1caa90;
+   transform: scale(1.2);
+   color: #f7f8f8;
+}
+#username.container {
+   text-align: center;
+   color: #000;
+   margin: 15px 0px;
+   font-size: 20px;
+   font-weight: 300;
+}
+.logout a {
+   align-items: center;
+   border: 1px solid black;
+   text-decoration: none;
+   color: red;
+   margin-top: 15px;
+   padding: 10px 15px;
+   font-size: 15px;
+   background-color: white;
+   border-radius: 15px;
 }
 
-.login-btn {
-   margin-right: 0vw;
+.title {
+   margin-top: 10vh;
+   margin-left: 7vw;
+   font-weight: 500;
+   font-size: 1.7rem;
+   color: #14a3f6;
+}
+.gadget-grid-container {
+   margin-top: 5vh;
+   margin-left: 7vw;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(45vw, 1fr));
+   grid-gap: 1vw;
+   width: 80%;
+}
+a.gadget-grid-item {
+   position: relative;
    background-color: white;
-   width: 12%;
-   padding: 0.1vw;
+   color: #082465;
+   padding: 12vh;
+   text-decoration: none;
    font-size: 1rem;
-   border-radius: 25px;
+   border-radius: 15px;
+   box-shadow: 0px 0px 5px 0px rgba(163, 158, 163, 1);
+}
+.gadget-name {
+   position: absolute;
+   top: 55px;
+   left: 125px;
+   font-size: 30px;
+}
+img.gadget-img {
+   height: 100px;
+   width: 100px;
+   position: absolute;
+   top: 30px;
+   left: 10px;
 }
 
 main {
@@ -443,8 +531,8 @@ main {
    transform: scale(1.2);
 }
 .image-brands {
-   height: 100px;
-   width: 100px;
+   height: 90px;
+   width: 90px;
 }
 footer {
    display: block;

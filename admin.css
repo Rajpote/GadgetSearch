@@ -5,7 +5,7 @@
 }
 body {
    width: 100%;
-   background-color: rgb(6, 96, 175);
+   background-color: rgb(248, 250, 252);
    position: relative;
 }
 img {
@@ -14,8 +14,7 @@ img {
    margin-right: 15px;
 }
 header {
-   background-color: rgb(78, 78, 198);
-   border: 1px solid rgb(142, 142, 254);
+   background-color: rgb(225, 221, 176);
    width: 18%;
    min-height: 100vh;
    display: flex;
@@ -32,7 +31,7 @@ header .navbar li a {
    padding: 15px 40% 15px 5px;
    font-size: 25px;
    font-weight: 300px;
-   color: rgb(232, 220, 220);
+   color: rgb(0, 0, 0);
    transition: 0.3s ease;
 }
 header .navbar li a:hover,
@@ -42,14 +41,22 @@ header .navbar li a.active {
    cursor: pointer;
 }
 header .navbar li:hover a {
-   color: aqua;
+   color: rgb(238, 242, 242);
 }
-header .container a {
+.container{
+   width: 40%;
+   padding-left: 40px;
+   margin: 0 0 10px 0;
+}
+a.logout {
    text-decoration: none;
    font-size: 20px;
-   margin: 10px 15px;
+   width: 30%;
+   background-color: aliceblue;
+   margin: 10px 0 0 40px;
+   padding: 10px;
    font-weight: 300px;
-   color: rgb(232, 220, 220);
+   color: rgb(6, 6, 6);
 }
 main {
    position: absolute;
@@ -66,7 +73,7 @@ main .userdata table {
 }
 main .userdata table th {
    text-align: center;
-   color: aqua;
+   color: rgb(230, 236, 236);
    background-color: black;
    font-size: 15px;
    padding: 10px;

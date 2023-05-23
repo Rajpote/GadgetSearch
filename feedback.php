@@ -66,7 +66,7 @@
                            <td>".$result['uname']."</td>
                            <td>".$result['feedback']."</td>
                            <td>
-                           <a href='delete.php?id=".$result['id']."'><input type='submit' value='delete' class='delete'></a> 
+                           <a href='delete.php?id=".$result['f_id']."'><input type='submit' value='delete' class='delete'></a> 
                            </td>
                         </tr>
                      ";

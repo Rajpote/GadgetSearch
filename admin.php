@@ -5,6 +5,9 @@
     if(!isset($_SESSION['adminname'])){
       header('location: home.php');
   }
+  $gadgetCount = $pdo->query("SELECT COUNT(g_id) FROM gadget_details") -> fetchColumn();
+  $userCount = $pdo->query("SELECT COUNT(id) FROM register") -> fetchColumn();
+  $feedbackCount = $pdo->query("SELECT COUNT(f_id) FROM feedback") -> fetchColumn();
 
 ?>
 <!DOCTYPE html>
@@ -17,9 +20,29 @@
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
-      <link rel="stylesheet" href="admin.css" />
+      <link rel="stylesheet" href="admin.css"/>
       <title>GadgetSearch</title>
+      <style>
+         .grid-container {
+   margin-top: 5vh;
+   margin-left: 7vw;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(15vw, 1fr));
+   grid-gap: 1vw;
+   width: 67vw;
+}
+p.count-item {
+   margin: 10px;
+   padding: 10px;
+   border: 1px solid black;
+}
 
+i {
+   padding: 5px;
+   color: black;
+}
+      </style>
+      
    </head>
    <body>
       <header>
@@ -38,7 +61,23 @@
          <a href="home.php" class="logout">logout</a>
       </header>
       <main>
+         <div class="grid-container">
 
+            <p class="count-item">
+            <i class="fa-solid fa-user"></i>
+            Total user: <?php echo $userCount ?>
+            </p>
+
+            <p class="count-item">
+            <i class="fa-solid fa-laptop-mobile"></i>
+               Total gadget: <?php echo $gadgetCount ?>
+            </p>
+         
+            <p class="count-item">
+            <i class="fa-solid fa-comment"></i>
+               Total feedback: <?php echo $feedbackCount ?>
+            </p>
+         </div>
       </main>
       <script src="javascript.js"></script>
    </body>

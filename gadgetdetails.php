@@ -139,7 +139,7 @@
     </style>
 </head>
 <body>
-    <!-- <a href="homepage.php"><img src="Images/logo.png" alt="Website Logo" class="website-logo"></a> -->
+    
     <?php
         if(isset($_GET['g_id'])){
             $g_id = $_GET['g_id'];

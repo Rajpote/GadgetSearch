@@ -1,232 +1,272 @@
 <?php
-    session_start();
-    include 'connect.php';
+session_start();
+include 'connect.php';
+
+if (isset($_POST['login-submit'])) {
+    $uname = $_POST['uname'];
+    $feedback = $_POST['feedback'];
+
+    $sql = "INSERT INTO feedback (uname, feedback) VALUES (?, ?)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$uname, $feedback]);
+
+    echo '<script>alert("Feedback submitted successfully.");</script>';
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GadgetSearch</title>
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="style1.css">
 
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: Poppins, sans-serif;
         }
 
-        html{
-            scroll-behavior: smooth;
+        main {
+            margin: 9px 0px 0px 40px;
+            background-color: transparent;
+            width: 60%;
         }
 
-        .content-container table{
-            margin: 3vh 7.7vw 6.7vh 7.7vw;
-            width: 85%;
-            text-align: justify;
-            border-radius: 15px;
-            border-collapse: collapse;
+        img.gadget {
+            height: 25%;
+            width: 35%;
         }
 
-        .spec-container table{
-            margin: 6.7vh 10.25vw 1vh 10.25vw;
-            text-align: justify;
-            background-color: #e6e9ef;
-            border-radius: 15px;
-            border-collapse: collapse;
-            box-shadow: 0px 0px 5px 0px rgba(163, 158, 163, 1);
-            width: 80%;
-        }
-        
-        .content-container i{
-            position: relative;
-            right: 0.5vw;
-        }
-
-        .title{
-            font-size: 1.5rem;
-            font-weight: 500;
-            text-align: center;
-        }
-
-        .content-cell-spacing{
-            padding: 50px 37px 0px 37px;
-            line-height: 4.5vh;
-        }
-
-        .eligibility, .job{
-            font-size: 1.15rem;
-            font-weight: 500;
-        }
-
-        .cell-spacing{
-            padding: 15px 37px 0px 37px;
-            line-height: 4.5vh;
-        }
-
-        .list-cell-spacing{
-            padding: 15px 37px 0px 55px;
-            line-height: 4.5vh;
-        }
-
-        .job-list-cell-spacing{
-            padding: 15px 10px 15px 45px;
-            line-height: 4.5vh;
-        }
-
-        .job-cell-spacing{
-            padding: 15px 27px 0px 27px;
-            line-height: 4.5vh;
-        }
-
-        .job-list{
-            display: flex;
-            flex-wrap: wrap;
-            margin: 0;
-            padding: 0;
-        }
-
-        .job-list li{
-            margin-right: 2.15vw;
-        }
-        main{
-            position: relative;
-         }
-         main form{
-            display: block;
+        .title {
+            position: absolute;
+            top: 5%;
+            left: 25%;
             margin: 10px;
+            font-size: 20px;
+        }
+
+        .elink {
+            margin: 15px;
+        }
+
+        .elink a {
+            text-decoration: none;
+            color: blue;
+            cursor: pointer;
+        }
+
+        form {
+            display: block;
+            /* margin: 10px 40px 10px 20px; */
             border: 1px solid black;
-            width: 20%;
-            height: 20%;
-            padding: 5px 5px;
+            width: 25%;
+            padding: 10px 10px;
             border-radius: 12px;
             color: blue;
-         }
-         .feedback{
+        }
+
+        .feedback {
             display: flex;
             align-items: center;
             justify-content: left;
             padding: 10px 10px;
-         }
-         #submit-btn.feedback{
+        }
+
+        #submit-btn.feedback {
             display: flex;
             align-items: center;
             justify-content: center;
-         }
-         textarea{
+            color: red;
+        }
+
+        h2 {
+            margin: 12px 24px;
+            text-transform: uppercase;
+        }
+
+        textarea {
             width: 90%;
             padding: 10px;
-            margin: 5px;
+            margin: 15px;
 
-         }
-         input{
-            width: 50%;
-           padding: 5px 0px 5px 25px;
-           
+        }
 
-         }
-         i#feedbackuser{
+        input {
+            width: 90%;
+            padding: 5px 5px 5px 18px;
+        }
+
+        i#feedbackuser {
             position: absolute;
-            left: 30px;
+            left: 25px;
 
-         }
+        }
     </style>
 </head>
+
 <body>
-    
     <?php
-        if(isset($_GET['g_id'])){
-            $g_id = $_GET['g_id'];
+    if (isset($_GET['g_id'])) {
+        $g_id = $_GET['g_id'];
 
-            $sql = "SELECT * FROM gadget_details WHERE g_id=:g_id";
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':g_id', $g_id);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
-        if(count($result)>0){
-    ?>
-        <div class="content-container">
-        <table>
-            <?php
-                $i=0;
-                foreach($result as $row){
-            ?>
-            <tr>
-                <td class="title cell-spacing" colspan="2"><?php echo $row['gname']; ?></td>
-            </tr>
-            <tr>
-                <td class="content content-cell-spacing" colspan="2"><?php echo $row['gdis']; ?></td>
-            </tr>
-            <tr>
-                <td class="eligibility cell-spacing"><br>Eligibility</td>
-            </tr>
-            <tr>
-                <td class="list-cell-spacing">
-                <?php
-                    $gspecification = explode("\n", $row['gspecification']);
-                    echo "<ul>";
-                    foreach($gspecification as $point){
-                        echo "<li>$point</li>";
-                    }
-                    echo "</ul>";
-                ?>
-                </td>
-            </tr>
-            <?php
-                $i++;
-                }
-            ?>
-        </table>
-        </div>
-
-        <div class="spec-container">
-        <table>
-            <tr>
-                <td class="job job-cell-spacing">Prospect Careers</td>
-            </tr>
-            <tr>
-                <td class="job-list-cell-spacing">
-                <?php
-                    echo "<p class='gprice'>{$row['gprice']} </p>";
-                    
-                ?>
-                </td>
-            </tr>
-        </table>
-        </div>
-        <div class="image-pro">
-        <?php
-                    echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-                    
-                ?>
-        </div>
-        <div class="elink">
-        <li><a href="<?php echo $row['glink']?>" target="_blank"><?php echo $row['glink']; ?></a></li>
-        </div>
-        <?php 
-        }else{
-            echo "No content available!";
-        }
+        $sql = "SELECT * FROM gadget_details WHERE g_id=:g_id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':g_id', $g_id);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    if (count($result) > 0) {
         ?>
-        <main>
+
+        <div class="content-container">
+
+            <?php
+            $i = 0;
+            foreach ($result as $row) {
+                ?>
+
+                <header>
+                    <div>
+                        <a class="logo" href="user.php"><img src="image/gadget search-logos/gadget search-1 (1).png"
+                                alt="" /></a>
+                    </div>
+                    <ul class="navbar">
+                        <li><a href="user.php">Home</a></li>
+                        <li><a class="active" href="gadget.php">Gadget</a></li>
+                        <li><a href="about.php">About Us</a></li>
+                    </ul>
+
+                    <ul class="navbar">
+                        <input type="search" class="search-bar" placeholder="Search . . . " id="search" /><i
+                            class="fa-solid fa-magnifying-glass"></i>
+                        <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
+                    </ul>
+
+                    <div id="my-modal" class="modal">
+                        <form action="" method="POST" class="login-form">
+                            <div id="username" class="container">
+                                <?php echo $_SESSION['username'] ?>
+                            </div>
+
+
+                            <div class="logout">
+                                <a href="home.php">logout</a>
+                            </div>
+                            <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
+                        </form>
+                    </div>
+                    <div id="mobile">
+                        <a href="#" id="close"><i id="bar" class="fa-solid fa-xmark"></i></a>
+                        <i id="bar" class="fa-solid fa-bars"></i>
+                    </div>
+                </header>
+                <main>
+
+                    <div class="image-pro">
+                        <?php
+                        echo "<img class='gadget' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+                        ?>
+                    </div>
+                    <div class="title">
+                        <h4 class="name" colspan="2">
+                            <?php echo $row['gname']; ?>
+                        </h4>
+                        <h5 class="price">
+                            <?php
+                            echo "<p class='gprice'>{$row['gprice']} </p>";
+
+                            ?>
+                        </h5>
+                    </div>
+                    <p class="content content-cell-spacing" colspan="2">
+                        <?php echo $row['gdis']; ?>
+                    </p>
+                    <?php
+                    echo "<img class='gadget' src='image/product/{$row['imageone']}' alt='Gadget Image'>";
+                    ?>
+                    <h2 class="eligibility cell-spacing"><br>specifation</h2>
+
+                    <p class="list-cell-spacing">
+                        <?php
+                        $gspecifation = explode("\n", $row['gspecification']);
+                        echo "<ul>";
+                        foreach ($gspecifation as $point) {
+                            echo "<li>$point</li>";
+                        }
+                        echo "</ul>";
+                        ?>
+                    </p>
+                    <?php
+                    echo "<img class='gadget' src='image/product/{$row['imagetwo']}' alt='Gadget Image'>";
+                    ?>
+                    <?php
+                    $i++;
+            }
+            ?>
+
+
+                <div class="elink">
+                    <p>Buy Here:</p>
+                    <a href="<?php echo $row['glink'] ?>" target="_blank"><?php echo $row['glink']; ?></a>
+                </div>
+                <?php
+    } else {
+        echo "No content available!";
+    }
+    ?>
             <form action="" method="post">
                 <div class="feedback">
                     <i id="feedbackuser" class="fa-solid fa-user"></i>
-                    <input type="text" class="" placeholder="User-name" name="uname" required/>
+                    <input type="text" class="" placeholder="User-name" name="uname" required />
                 </div>
-                <textarea name="feedback" id="" cols="30" rows="5" class="feedback"></textarea>
-                
+                <textarea name="feedback" id="" cols="20" rows="3" class="feedback"></textarea>
+
                 <div class="feedback" id="submit-btn">
-                    <input type="submit"  name="login-submit" id="login-submit" value="submit" />
+                    <input type="submit" name="login-submit" id="login-submit" value="submit" />
                 </div>
             </form>
         </main>
+        <footer>
+            <div class="row">
+                <div class="coln">
+                    <h3>contact</h3>
+                    <ul>
+                        <li>
+                            <i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span>
+                        </li>
+                        <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span>
+                        </li>
+                        <li><i class="fa-solid fa-envelope"></i><span class="content">gadgetsearch@gmail.com</span></li>
+                    </ul>
+                </div>
+                <div class="coln">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="about.php">About us</a></li>
+                        <li><a href="#">Term & Condition</a></li>
+                    </ul>
+                </div>
+                <div class="coln">
+                    <h3>follow us</h3>
+                    <div>
+                        <a href="" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <center>copyright</center>
+        </footer>
 </body>
+
 </html>

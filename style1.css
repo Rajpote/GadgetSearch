@@ -276,9 +276,16 @@ a.gadget-grid-item {
 }
 .gadget-name {
    position: absolute;
-   top: 55px;
+   top: 35px;
    left: 125px;
    font-size: 30px;
+}
+p.gadget-price {
+   position: absolute;
+   top: 65px;
+   left: 125px;
+   font-size: 20px;
+   padding: 10px 0 0 0;
 }
 img.gadget-img {
    height: 100px;

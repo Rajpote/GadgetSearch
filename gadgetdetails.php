@@ -49,8 +49,8 @@ if (isset($_POST['login-submit'])) {
 
         .title {
             position: absolute;
-            top: 5%;
-            left: 25%;
+            top: 2%;
+            left: 35%;
             margin: 10px;
             font-size: 20px;
         }

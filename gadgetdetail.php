@@ -11,6 +11,7 @@ if (!isset($_SESSION['adminname'])) {
 
 if (isset($_POST['submit'])) {
     $g_id = $_POST['g_id'];
+    $type = $_POST['type'];
     $gname = $_POST['gname'];
     $gdis = $_POST['gdis'];
     $gspecification = $_POST['gspecification'];
@@ -30,22 +31,20 @@ if (isset($_POST['submit'])) {
         echo '<script> alert("Gadget already exists."); </script>';
     } else {
         if (
-            empty($g_id) || empty($gname) || empty($gdis) || empty($gspecification) || empty($gimage) || empty($imageone
-        ) || empty($imagetwo) || empty($glink) || empty($gprice)
+            empty($g_id) || empty($type) || empty($gname) || empty($gdis) || empty($gspecification) || empty($gimage) || empty($imageone) || empty($imagetwo) || empty($glink) || empty($gprice)
         ) {
             echo '<script> alert("Please fill all the fields."); window.location.href = "gadgetdetails.php"; </script>';
         } else {
-            $sql = "INSERT INTO gadget_details (g_id, gname, gdis, gspecification, gimage, imageone
-    , imagetwo, glink, gprice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO gadget_details (g_id, type, gname, gdis, gspecification, gimage, imageone, imagetwo, glink, gprice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 $g_id,
+                $type,
                 $gname,
                 $gdis,
                 $gspecification,
                 $gimage,
-                $imageone
-                ,
+                $imageone,
                 $imagetwo,
                 $glink,
                 $gprice
@@ -63,6 +62,7 @@ $stmt->execute();
 $value = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $g_id = isset($value['g_id']) ? $value['g_id'] : '';
+$type = isset($value['type']) ? $value['type'] : '';
 $gname = isset($value['gname']) ? $value['gname'] : '';
 $gdis = isset($value['gdis']) ? $value['gdis'] : '';
 $gspecification = isset($value['gspecification']) ? $value['gspecification'] : '';
@@ -74,6 +74,7 @@ $gprice = isset($value['gprice']) ? $value['gprice'] : '';
 
 if (isset($_POST['update-submit'])) {
     $g_id = $_POST['g_id'];
+    $type = $_POST['type'];
     $gname = $_POST['gname'];
     $gdis = $_POST['gdis'];
     $gspecification = $_POST['gspecification'];
@@ -83,12 +84,13 @@ if (isset($_POST['update-submit'])) {
     $glink = $_POST['glink'];
     $gprice = $_POST['gprice'];
 
-    if (empty($g_id) || empty($gname) || empty($gdis) || empty($gspecification) || empty($glink) || empty($gprice)) {
+    if (empty($g_id) || empty($type) || empty($gname) || empty($gdis) || empty($gspecification) || empty($glink) || empty($gprice)) {
         echo '<script> alert("Please fill all the fields."); window.location.href = "gadgetdetails.php"; </script>';
     } else {
-        $sql = "UPDATE gadget_details SET gname = ?, gdis = ?, gspecification = ?, gimage = ?, imageone
+        $sql = "UPDATE gadget_details SET type = ?, gname = ?, gdis = ?, gspecification = ?, gimage = ?, imageone
  = ?, imagetwo = ?, glink = ?, gprice = ? WHERE g_id = ?";
         $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $type);
         $stmt->bindParam(1, $gname);
         $stmt->bindParam(2, $gdis);
         $stmt->bindParam(3, $gspecification);
@@ -145,6 +147,11 @@ if (isset($_POST['update-submit'])) {
                     <div class="add">
                         <h1 class="addtitle">ADD GADGET</h1>
                         <input type="number" class="id" name="g_id" id="g_id" placeholder="Gadget ID" required>
+                        <select name="type" id="type">
+                            <option value="laptop">laptop</option>
+                            <option value="phone">phone</option>
+                            <option value="deals">deals</option>
+                        </select>
                         <input type="text" class="abbreviation" name="gname" id="gname" placeholder="Gadget Name"
                             required>
                         <input type="file" class="image" name="gimage" id="gimage" placeholder="Gadget Image URL"
@@ -182,6 +189,11 @@ if (isset($_POST['update-submit'])) {
                                 echo "<option value='" . $row['g_id'] . "' " . $selected . ">" . $row['g_id'] . "</option>";
                             }
                             ?>
+                        </select>
+                        <select name="type" id="type">
+                            <option value="laptop">laptop</option>
+                            <option value="phone">phone</option>
+                            <option value="deals">deals</option>
                         </select>
                         <input type="text" class="gname" name="gname" id="gname" placeholder="Gadget Name"
                             value="<?php echo $gname; ?>" required>

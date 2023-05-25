@@ -20,6 +20,14 @@ if (!isset($_SESSION['username'])) {
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
    <link rel="stylesheet" href="style1.css" />
+   <style>
+      #gadget-category{
+         border: 1px solid black;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+      }
+   </style>
 
    <title>GadgetSearch</title>
 </head>
@@ -59,6 +67,13 @@ if (!isset($_SESSION['username'])) {
          <i id="bar" class="fa-solid fa-bars"></i>
       </div>
    </header>
+   <div id="gadget-category">
+      <p class="filter-title">Filter</p>
+      <div class="category-container">
+         <a href="category.php?type=laptop" class="category-grid-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
+         <a href="category.php?type=phone" class="category-grid-item"><i class="fa fa-mobile-phone"></i>Phone</a>
+      </div>
+   </div>
    <main>
       <div class="gadget" id="gadget">
          <h1 class="title">Gadgets</h1>

@@ -43,6 +43,8 @@ do {
    <link rel="stylesheet" href="style1.css" />
 
    <title>GadgetSearch</title>
+   <script src="javascript.js" defer></script>
+
 </head>
 
 <body>
@@ -54,7 +56,6 @@ do {
          <form action="search.php" method="post">
             <input type="text" name="search" class="search-bars" placeholder="Search . . . " id="search" /><i
                class="fa-solid fa-magnifying-glass"></i>
-            <!-- <input type="submit" value="submit"> -->
          </form>
       </ul>
 
@@ -62,7 +63,10 @@ do {
       <?php
       echo '<div class="searchcontainer">';
       foreach ($value as $item) {
-         echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-grid-item">' . $item[0]['gname'] . '</a>';
+         echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-grid-item">';
+         echo "<img class='pro-img' src='image/product/{$item['gimage']}' alt='Gadget Image'>";
+         echo '<p class="pro-name">' . $item[0]['gname'] . '</p>';
+         echo '</a>';
       }
       echo '</div>';
       ?>
@@ -114,103 +118,26 @@ do {
          </div>
          <section id="slider">
             <h2 class="product-category">best gadget Deals</h2>
-            <div class="buttom-arrow">
-               <button class="pre-btn"><span class="arrow">&#187;</span></button>
-               <button class="nxt-btn"><span class="arrow">&#187;</span></button>
-            </div>
             <div class="product-details">
-               <div class="product-card">
-                  <div class="gadget-grid-container">
-                     <?php
-                     $sql = "SELECT * FROM gadget_details";
-                     $stmt = $pdo->query($sql);
+               <div class="pro-container">
+                  <?php
+                  $sql = "SELECT * FROM gadget_details WHERE type = 'deals'";
+                  $stmt = $pdo->query($sql);
 
-                     if ($stmt->rowCount() > 0) {
-
-                        while ($row = $stmt->fetch()) {
-                           echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="gadget-grid-item">';
-
-                           echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-
-                           echo '<p class="gadget-name">' . $row['gname'] . '</p>';
-                           echo '</a>';
-
-                        }
-                     } else {
-                        echo "No courses found.";
+                  if ($stmt->rowCount() > 0) {
+                     while ($row = $stmt->fetch()) {
+                        echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="slider-card">';
+                        echo "<img class='pro-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+                        echo '<p class="pro-name">' . $row['gname'] . '</p>';
+                        echo '<p class="pro-name">' . $row['gprice'] . '</p>';
+                        echo '</a>';
                      }
-                     ?>
-                  </div>
-                  <!-- <div class="product-image">
-                     <a href="about.php"><img src="image/product/helious_2_2.png" class="product-thumb" alt="" /></a>
-                  </div>
-                  <div class="product-info">
-                     <h2 class="product-brand">Acer</h2>
-                     <p class="product-short-description">Best gaming laptop</p>
-                     <div class="stars">
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                     </div>
-                     <span class="actual-price">Rs165000</span><br /><span class="price">Rs148500</span>
-                  </div> -->
+                  } else {
+                     echo "No deals found.";
+                  }
+                  ?>
                </div>
-               <div class="product-card">
-                  <div class="product-image">
-                     <img src="image/product/asus-vivobook-e410ma-price-nepal-budget-notebook.jpg" class="product-thumb"
-                        alt="" />
-                  </div>
-                  <div class="product-info">
-                     <h2 class="product-brand">Asus</h2>
-                     <p class="product-short-description">Best notebook</p>
-                     <div class="stars">
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                     </div>
-                     <span class="actual-price">Rs125000</span><br /><span class="price">Rs95500</span>
-                  </div>
-               </div>
-               <div class="product-card">
-                  <div class="product-image">
-                     <img src="image/product/acer-nitro-5_an515-55_rgb-kb_modelpreview_1_1.png" class="product-thumb"
-                        alt="" />
-                  </div>
-                  <div class="product-info">
-                     <h2 class="product-brand">Acer</h2>
-                     <p class="product-short-description">Best gaming laptop</p>
-                     <div class="stars">
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                     </div>
-                     <span class="actual-price">Rs150000</span><br /><span class="price">Rs128500</span>
-                  </div>
-               </div>
-               <div class="product-card">
-                  <div class="product-image">
-                     <img src="image/product/lenovo-thinkpad-x13-price-nepal-gen-1-laptop_1.jpg" class="product-thumb"
-                        alt="" />
-                  </div>
-                  <div class="product-info">
-                     <h2 class="product-brand">Acer</h2>
-                     <p class="product-short-description">Best ultrabook</p>
-                     <div class="stars">
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                     </div>
-                     <span class="actual-price">Rs135000</span><br /><span class="price">Rs110000</span>
-                  </div>
-               </div>
+
             </div>
          </section>
          <section id="newarival">
@@ -219,7 +146,7 @@ do {
             <div class="new-container">
                <div class="gadget-grid-container">
                   <?php
-                  $sql = "SELECT * FROM gadget_details";
+                  $sql = "SELECT * FROM gadget_details order by g_id desc";
                   $stmt = $pdo->query($sql);
 
                   if ($stmt->rowCount() > 0) {
@@ -238,22 +165,6 @@ do {
                   }
                   ?>
                </div>
-               <!-- <div class="detailes">
-                  <div class="pro-image">
-                     <img src="image/product/helious_2_2.png" class="product-thumb" alt="" />
-                  </div>
-                  <div class="product-info">
-                     <h3 class="product-brand">Acer</h3>
-                     <h5 class="product-short-description">Best gamming laptop</h5>
-                     <div class="stars">
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                     </div>
-                  </div>
-               </div> -->
             </div>
          </section>
          <section class="brands">
@@ -277,6 +188,7 @@ do {
                      class="image-brands" /></a>
             </div>
          </section>
+
       </main>
       <footer>
          <div class="row">
@@ -313,7 +225,12 @@ do {
          <center>copyright</center>
       </footer>
    <?php } ?>
-   <script src="javascript.js"></script>
+
+   <script>
+      function showDeviceType(type) {
+         window.location.href = "category.php?type=" + type;
+      }
+   </script>
 </body>
 
 </html>

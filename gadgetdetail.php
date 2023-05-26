@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
         if (
             empty($g_id) || empty($type) || empty($gname) || empty($gdis) || empty($gspecification) || empty($gimage) || empty($imageone) || empty($imagetwo) || empty($glink) || empty($gprice)
         ) {
-            echo '<script> alert("Please fill all the fields."); window.location.href = "gadgetdetails.php"; </script>';
+            echo '<script> alert("Please fill all the fields."); window.location.href = "gadgetdetail.php"; </script>';
         } else {
             $sql = "INSERT INTO gadget_details (g_id, type, gname, gdis, gspecification, gimage, imageone, imagetwo, glink, gprice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
@@ -54,7 +54,9 @@ if (isset($_POST['submit'])) {
     }
 }
 
-$g_id = isset($_POST['g_id']) ? $_POST['g_id'] : '';
+if (isset($_POST['g_id'])) {
+    $g_id = $_POST['g_id'];
+}
 
 $stmt = $pdo->prepare("SELECT * FROM gadget_details WHERE g_id = :g_id");
 $stmt->bindParam(":g_id", $g_id);
@@ -62,8 +64,8 @@ $stmt->execute();
 $value = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $g_id = isset($value['g_id']) ? $value['g_id'] : '';
-$type = isset($value['type']) ? $value['type'] : '';
 $gname = isset($value['gname']) ? $value['gname'] : '';
+$type = isset($value['type']) ? $value['type'] : '';
 $gdis = isset($value['gdis']) ? $value['gdis'] : '';
 $gspecification = isset($value['gspecification']) ? $value['gspecification'] : '';
 $gimage = isset($value['gimage']) ? $value['gimage'] : '';
@@ -84,26 +86,28 @@ if (isset($_POST['update-submit'])) {
     $glink = $_POST['glink'];
     $gprice = $_POST['gprice'];
 
-    if (empty($g_id) || empty($type) || empty($gname) || empty($gdis) || empty($gspecification) || empty($glink) || empty($gprice)) {
-        echo '<script> alert("Please fill all the fields."); window.location.href = "gadgetdetails.php"; </script>';
+    if (empty($_POST['g_id']) || empty($_POST['type']) || empty($_POST['gname']) || empty($_POST['gdis']) || empty($_POST['gspecification']) || empty($_POST['gimage']) || empty($_POST['imageone']) || empty($_POST['imagetwo']) || empty($_POST['glink']) || empty($_POST['gprice'])) {
+        echo '<script> alert("Please fill all the fields."); window.location.href = "gadgetdetail.php"; </script>';
     } else {
-        $sql = "UPDATE gadget_details SET type = ?, gname = ?, gdis = ?, gspecification = ?, gimage = ?, imageone
- = ?, imagetwo = ?, glink = ?, gprice = ? WHERE g_id = ?";
+        $sql = "UPDATE gadget_details SET g_id=:g_id, type = :type, gname = :gname, gdis = :gdis, gspecification = :gspecification, gimage = :gimage, imageone = :imageone, imagetwo = :imagetwo, glink = :glink, gprice = :gprice WHERE g_id = :g_id";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(1, $type);
-        $stmt->bindParam(1, $gname);
-        $stmt->bindParam(2, $gdis);
-        $stmt->bindParam(3, $gspecification);
-        $stmt->bindParam(4, $gimage);
-        $stmt->bindParam(5, $imageone);
-        $stmt->bindParam(6, $imagetwo);
-        $stmt->bindParam(7, $glink);
-        $stmt->bindParam(8, $gprice);
-        $stmt->bindParam(9, $g_id);
+        $stmt->bindParam("g_id", $g_id);
+        $stmt->bindParam("type", $type);
+        $stmt->bindParam("gname", $gname);
+        $stmt->bindParam("gdis", $gdis);
+        $stmt->bindParam("gspecification", $gspecification);
+        $stmt->bindParam("gimage", $gimage);
+        $stmt->bindParam("imageone", $imageone);
+        $stmt->bindParam("imagetwo", $imagetwo);
+        $stmt->bindParam("glink", $glink);
+        $stmt->bindParam("gprice", $gprice);
         $stmt->execute();
         echo '<script> alert("Gadget updated successfully."); window.location.href = "gadgetdetail.php"; </script>';
     }
 }
+
+
+
 
 ?>
 
@@ -195,23 +199,25 @@ if (isset($_POST['update-submit'])) {
                             <option value="phone">phone</option>
                             <option value="deals">deals</option>
                         </select>
+
                         <input type="text" class="gname" name="gname" id="gname" placeholder="Gadget Name"
-                            value="<?php echo $gname; ?>" required>
+                            value="<?php echo $gname ?>" required>
                         <input type="file" class="image" name="gimage" id="gimage" placeholder="Gadget Image URL"
-                            value="<?php echo $gimage; ?>" required>
+                            value="<?php echo $gimage ?>" required>
                         <textarea name="gdis" id="gdis" cols="60" rows="7" placeholder="Gadget Description"
-                            required><?php echo $gdis; ?></textarea>
+                            required><?php echo $gdis ?></textarea>
                         <input type="file" class="image" name="imageone" id="imageone" placeholder="Gadget Image URL"
-                            value="<?php echo $imageone; ?>" required>
+                            value="<?php echo $imageone ?>" required>
                         <input type="file" class="image" name="imagetwo" id="imagetwo" placeholder="Gadget Image URL"
-                            value="<?php echo $imagetwo; ?>" required>
+                            value="<?php echo $imagetwo ?>" required>
                         <input type="text" class="link" name="glink" id="glink" placeholder="Gadget Link"
-                            value="<?php echo $glink; ?>" required>
+                            value="<?php echo $glink ?>" required>
                         <input type="number" class="price" name="gprice" id="gprice" placeholder="Gadget Price"
-                            value="<?php echo $gprice; ?>" required>
+                            value="<?php echo $gprice ?>" required>
                         <textarea name="gspecification" id="gspecification" cols="60" rows="7"
-                            placeholder="Gadget Specification" required><?php echo $gspecification; ?></textarea>
+                            placeholder="Gadget Specification" required><?php echo $gspecification ?></textarea>
                         <input type="submit" class="submit" name="update-submit" id="update-submit" value="Update">
+
                     </div>
                 </div>
             </form>

@@ -63,8 +63,8 @@ do {
       <?php
       echo '<div class="searchcontainer">';
       foreach ($value as $item) {
-         echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-grid-item">';
-         echo "<img class='pro-img' src='image/product/{$item['gimage']}' alt='Gadget Image'>";
+         echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-item">';
+         echo "<img class='pro_img' src='image/product/{$item[0]['gimage']}' alt='Gadget Image'>";
          echo '<p class="pro-name">' . $item[0]['gname'] . '</p>';
          echo '</a>';
       }
@@ -121,7 +121,7 @@ do {
             <div class="product-details">
                <div class="pro-container">
                   <?php
-                  $sql = "SELECT * FROM gadget_details WHERE type = 'deals'";
+                  $sql = "SELECT * FROM gadget_details WHERE type = 'deals' limit 6";
                   $stmt = $pdo->query($sql);
 
                   if ($stmt->rowCount() > 0) {
@@ -141,22 +141,22 @@ do {
             </div>
          </section>
          <section id="newarival">
-            <h2>latest gadgets</h2>
+            <h1>latest gadgets</h1>
             <p>new gadgets reviews</p>
-            <div class="new-container">
-               <div class="gadget-grid-container">
+               <div class="latest-container">
                   <?php
-                  $sql = "SELECT * FROM gadget_details order by g_id desc";
+                  $sql = "SELECT * FROM gadget_details order by g_id desc limit 4";
                   $stmt = $pdo->query($sql);
 
                   if ($stmt->rowCount() > 0) {
 
                      while ($row = $stmt->fetch()) {
-                        echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="gadget-grid-item">';
-
+                        echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="detailes">';
+                        echo '<div class="latest">';
                         echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-
                         echo '<h5 class="gadget-name">' . $row['gname'] . '</h5>';
+                        echo '<p class="gadget-price">' . $row['gprice'] . '</p>';
+                        echo '</div>';
                         echo '</a>';
 
                      }
@@ -165,7 +165,6 @@ do {
                   }
                   ?>
                </div>
-            </div>
          </section>
          <section class="brands">
             <h2 class="brand1">Brands</h2>

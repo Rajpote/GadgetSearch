@@ -15,8 +15,9 @@ img {
 }
 header {
    background-color: rgb(225, 221, 176);
+   position: fixed;
    width: 18%;
-   min-height: 100vh;
+   height: 120vh;
    display: flex;
    flex-direction: column;
 }
@@ -106,4 +107,3 @@ main {
    border-radius: 5px;
    cursor: pointer;
 }
-

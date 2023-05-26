@@ -30,29 +30,104 @@ if (isset($_GET['type'])) {
     <link rel="icon" type="image/png" sizes="32x32" href="Favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="Favicon/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="style1.css">
 </head>
 
 <body>
-    <?php
-    if (isset($type) && !empty($devices)): ?>
-        <div class="devices" id="devices">
-            <p class="category-device-title">
-                <?php echo $type; ?> deviceS
-            </p>
-            <div class="device-grid-container">
-                <?php
-                foreach ($devices as $device):
-                    ?>
-                    <a href="gadgetdetails.php?g_id=<?php echo $device['g_id']; ?>" class="device-grid-item">
-                        <img src="./image/product/<?php echo $device['gimage']; ?>">
-                        <p class="device-name">
-                            <?php echo $device['gname']; ?>
-                        </p>
-                    </a>
-                <?php endforeach; ?>
+    <header>
+        <div>
+            <a class="logo" href="user.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
+        </div>
+        <ul class="navbar">
+            <li><a href="user.php">Home</a></li>
+            <li><a class="active" href="gadget.php">Gadget</a></li>
+            <li><a href="about.php">About Us</a></li>
+        </ul>
+
+        <ul class="navbar">
+            <input type="search" class="search-bar" placeholder="Search . . . " id="search" /><i
+                class="fa-solid fa-magnifying-glass"></i>
+            <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
+        </ul>
+
+        <div id="my-modal" class="modal">
+            <form action="" method="POST" class="login-form">
+                <div id="username" class="container">
+                    <?php echo $_SESSION['username'] ?>
+                </div>
+
+
+                <div class="logout">
+                    <a href="home.php">logout</a>
+                </div>
+                <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
+            </form>
+        </div>
+        <div id="mobile">
+            <a href="#" id="close"><i id="bar" class="fa-solid fa-xmark"></i></a>
+            <i id="bar" class="fa-solid fa-bars"></i>
+        </div>
+    </header>
+    <div id="gadget-category">
+        <p class="filter-title"><i class="fa-solid fa-filter"></i>  </p>
+        <div class="category-container">
+            <a href="category.php?type=laptop" class="category-grid-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
+            <a href="category.php?type=phone" class="category-grid-item"><i class="fa fa-mobile-phone"></i>Phone</a>
+        </div>
+    </div>
+    <main>
+        <?php
+        if (isset($type) && !empty($devices)): ?>
+            <div class="devices" id="devices">
+                <p class="category-device-title">
+                    <?php echo $type; ?> deviceS
+                </p>
+                <div class="device-grid-container">
+                    <?php
+                    foreach ($devices as $device):
+                        ?>
+                        <a href="gadgetdetails.php?g_id=<?php echo $device['g_id']; ?>" class="device-grid-item">
+                            <img src="./image/product/<?php echo $device['gimage']; ?>">
+                            <p class="device-name">
+                                <?php echo $device['gname']; ?>
+                            </p>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </main>
+    <footer>
+        <div class="row">
+            <div class="coln">
+                <h3>contact</h3>
+                <ul>
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span>
+                    </li>
+                    <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span></li>
+                    <li><i class="fa-solid fa-envelope"></i><span class="content">gadgetsearch@gmail.com</span></li>
+                </ul>
+            </div>
+            <div class="coln">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="about.php">About us</a></li>
+                    <li><a href="#">Term & Condition</a></li>
+                </ul>
+            </div>
+            <div class="coln">
+                <h3>follow us</h3>
+                <div>
+                    <a href="" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
+                </div>
             </div>
         </div>
-    <?php endif; ?>
+        <center>copyright</center>
+    </footer>
+    <script src="javascript.js"></script>
 
 
 </body>

@@ -28,7 +28,7 @@ if (!isset($_SESSION['adminname'])) {
         </div>
         <ul class="navbar">
             <li><a href="admin.php">Admin</a></li>
-            <li><a href="gadgetdetail.php">Gadget</a></li>
+            <li><a href="gadgetdata.php">Gadget data</a></li>
             <li><a class="active" href="userdata.php">User data</a></li>
             <li><a href="feedback.php">User Feedback</a></li>
         </ul>

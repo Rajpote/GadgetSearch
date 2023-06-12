@@ -10,15 +10,4 @@ if ($stmt->execute()) {
 } else {
     echo "Error deleting user record: " . $stmt->errorInfo()[2];
 }
-
-$fid = $_GET['id'];
-$query = "DELETE FROM feedback WHERE id = :id";
-$stmt = $pdo->prepare($query);
-$stmt->bindParam(':id', $fid);
-if ($stmt->execute()) {
-    echo "<script>alert('Feedback deleted successfully.'); window.location.href = 'feedback.php';</script>";
-} else {
-    echo "Error deleting feedback record: " . $stmt->errorInfo()[2];
-}
 ?>
-

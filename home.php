@@ -23,8 +23,6 @@ if (isset($_POST['login-submit'])) {
       echo '<script> alert("Incorrect username or password."); </script>';
    }
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +36,7 @@ if (isset($_POST['login-submit'])) {
    <link rel="preconnect" href="https://fonts.googleapis.com" />
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+
    <link rel="stylesheet" href="style1.css" />
 
    <title>GadgetSearch</title>
@@ -68,30 +67,21 @@ if (isset($_POST['login-submit'])) {
                <i class="fa-solid fa-user"></i>
                <input type="text" class="uname" placeholder="User-name" name="uname" required />
             </div>
-
             <div class="container">
                <i class="fa-solid fa-lock"></i>
                <input type="password" class="uname" id="password" placeholder="password" name="password" required />
             </div>
-
-
-
             <input type="checkbox" class="checkbox-login" onclick="loginPassword()" />
             <div class="show-password">Show Password</div>
-
             <div>
                <input type="submit" class="submit-login" name="login-submit" id="login-submit" value="Login" />
             </div>
          </form>
       </div>
-      <div id="mobile">
-         <a href="#" id="close"><i id="bar" class="fa-solid fa-xmark"></i></a>
-         <i id="bar" class="fa-solid fa-bars"></i>
-      </div>
    </header>
    <main>
       <div id="hero">
-         <img src="image/backgrounds/background.png" alt="" class="background1" />
+         <img src="image/backgrounds/My project.png" alt="" class="background1" />
          <div class="cont-text">
             <h3>search has ended</h3>
             <h1>gadgetsearch</h1>
@@ -126,52 +116,40 @@ if (isset($_POST['login-submit'])) {
          </div>
       </section>
       <section id="newarival">
-         <h2>latest gadgets</h2>
+         <h1>latest gadgets</h1>
          <p>new gadgets reviews</p>
-         <div class="new-container">
-            <div class="gadget-grid-container">
-               <?php
-               $sql = "SELECT * FROM gadget_details order by g_id desc";
-               $stmt = $pdo->query($sql);
+         <div class="latest-container">
+            <?php
+            $sql = "SELECT * FROM gadget_details order by g_id desc limit 4";
+            $stmt = $pdo->query($sql);
 
-               if ($stmt->rowCount() > 0) {
+            if ($stmt->rowCount() > 0) {
 
-                  while ($row = $stmt->fetch()) {
-                     echo '<a href="#" onclick="alertPopup()" class="gadget-grid-item">';
+               while ($row = $stmt->fetch()) {
+                  echo '<a href="#" onclick="alertPopup()" class="detailes">';
+                  echo "<img class='g-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+                  echo '<h5 class="g-name">' . $row['gname'] . '</h5>';
+                  echo '<p class="g-price">' . $row['gprice'] . '</p>';
+                  echo '</a>';
 
-                     echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-
-                     echo '<h5 class="gadget-name">' . $row['gname'] . '</h5>';
-                     echo '</a>';
-
-                  }
-               } else {
-                  echo "No courses found.";
                }
-               ?>
-            </div>
+            } else {
+               echo "No courses found.";
+            }
+            ?>
          </div>
       </section>
       <section class="brands">
          <h2 class="brand1">Brands</h2>
          <div class="container-brands">
-            <a class="item-brands" href="https://www.mi.com/np/phone"><img src="image/brands/mi.png" alt=""
-                  class="image-brands" /></a>
-            <a class="item-brands" href="https://www.realme.com/global/"><img src="image/brands/realme.jpg" alt=""
-                  class="image-brands" /></a>
-            <a class="item-brands" href="https://www.acer.com/us-en"><img src="image/brands/Acer.png" alt=""
-                  class="image-brands" /></a>
-            <a class="item-brands" href="https://www.apple.com/"><img src="image/brands/apple.png" alt=""
-                  class="image-brands" /></a>
-            <a class="item-brands" href="https://www.samsung.com/us/"><img src="image/brands/Samsung.png" alt=""
-                  class="image-brands" /></a>
-            <a class="item-brands" href="https://www.dell.com/en-us"><img src="image/brands/dell.png" alt=""
-                  class="image-brands" /></a>
-            <a class="item-brands" href="https://www.asus.com/np/"><img src="image/brands/asus.png" alt=""
-                  class="image-brands" /></a>
-            <a class="item-brands" href="https://www.msi.com/index.php"><img src="image/brands/msi.png" alt=""
-                  class="image-brands" /></a>
-            <a class="item-brands" href="https://www.hp.com/us-en/home.html"><img src="image/brands/hp.png" alt=""
+            <a href="https://www.mi.com/np/phone"><img src="image/brands/mi.png" alt="" class="image-brands" /></a>
+            <a href="https://www.acer.com/us-en"><img src="image/brands/Acer.png" alt="" class="image-brands" /></a>
+            <a href="https://www.apple.com/"><img src="image/brands/APPLE.png" alt="" class="image-brands" /></a>
+            <a href="https://www.samsung.com/us/"><img src="image/brands/Samsung.png" alt="" class="image-brands" /></a>
+            <a href="https://www.dell.com/en-us"><img src="image/brands/dell.png" alt="" class="image-brands" /></a>
+            <a href="https://www.asus.com/np/"><img src="image/brands/asus.png" alt="" class="image-brands" /></a>
+            <a href="https://www.msi.com/index.php"><img src="image/brands/msi.png" alt="" class="image-brands" /></a>
+            <a href="https://www.hp.com/us-en/home.html"><img src="image/brands/hp.png" alt=""
                   class="image-brands" /></a>
          </div>
       </section>

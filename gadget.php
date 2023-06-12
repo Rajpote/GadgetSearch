@@ -42,40 +42,7 @@ do {
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
    <link rel="stylesheet" href="style1.css" />
-   <style>
-      #gadget-category {
-         position: sticky;
-         top: 11%;
-         border: 1px solid black;
-         margin-left: 90vw;
-         z-index: 1;
-      }
-
-      .category-container {
-         width: 25%;
-         height: 15%;
-         font-size: 20px;
-         z-index: -1;
-      }
-
-      .category-item {
-         margin: 10px 0 10px 0;
-         display: flex;
-         align-items: center;
-         padding: 0 10px 0 10px;
-         text-decoration: none;
-         color: black;
-         cursor: pointer;
-      }
-
-      .category-item i {
-         padding: 0 10px 0 10px;
-
-      }
-   </style>
-
    <title>GadgetSearch</title>
-
 </head>
 
 <body>
@@ -123,6 +90,7 @@ do {
 
          <div id="my-modal" class="modal">
             <form action="" method="POST" class="login-form">
+               <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
                <div id="username" class="container">
                   <?php echo $_SESSION['username'] ?>
                </div>
@@ -130,56 +98,49 @@ do {
                <div class="logout">
                   <a href="logout.php">logout</a>
                </div>
-               <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
             </form>
-         </div>
-         <div id="mobile">
-            <a href="#" id="close"><i id="bar" class="fa-solid fa-xmark"></i></a>
-            <i id="bar" class="fa-solid fa-bars"></i>
          </div>
       </header>
       <div id="gadget-category">
-         <div class="category-container">
-            <p class="filter-title"><i class="fa-solid fa-filter"></i></p>
-         </div>
-         <div class="category-container">
+         <center> <i class="fa-solid fa-filter"></i> </center>
+         <a href="category.php?type=bestbuy" class="category-item"><i class="fa-duotone fa-laptop-mobile"></i>Beat Buy</a>
+         <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
+         <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
+         <a href="category.php?type=accories" class="category-item"><i class="fa fa-mobile-phone"></i>Accories</a>
 
-            <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
-            <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-            <form action="price_range.php" method="POST">
-               <input type="number" name="base_price" id="base_price">
-               <input type="number" name="upper_price" id="upper_price">
-               <input type="submit" value="submit">
-            </form>
-         </div>
+
+         <form action="price_range.php" method="POST">
+            <input type="number" name="base_price" id="base_price">
+            <input type="number" name="upper_price" id="upper_price">
+            <center><input type="submit" value="submit" id="inc-dic"></center>
+         </form>
+
       </div>
       <main>
-         <div class="gadget" id="gadget">
+         <div class="gadget-grid-container">
             <h1 class="title">Gadgets</h1>
-            <div class="gadget-grid-container">
-               <?php
-               $sql = "SELECT * FROM gadget_details";
+            <?php
+            $sql = "SELECT * FROM gadget_details";
 
-               if (isset($_GET['type'])) {
-                  $type = $_GET['type'];
-                  $sql .= " WHERE type = '$type'";
+            if (isset($_GET['type'])) {
+               $type = $_GET['type'];
+               $sql .= " WHERE type = '$type'";
+            }
+
+            $stmt = $pdo->query($sql);
+
+            if ($stmt->rowCount() > 0) {
+               while ($row = $stmt->fetch()) {
+                  echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="g-item">';
+                  echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+                  echo '<p class="gadget-name">' . $row['gname'] . '</p>';
+                  echo '<p class="gadget-price">' . $row['gprice'] . '</p>';
+                  echo '</a>';
                }
-
-               $stmt = $pdo->query($sql);
-
-               if ($stmt->rowCount() > 0) {
-                  while ($row = $stmt->fetch()) {
-                     echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="gadget-grid-item">';
-                     echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-                     echo '<p class="gadget-name">' . $row['gname'] . '</p>';
-                     echo '<p class="gadget-price">' . $row['gprice'] . '</p>';
-                     echo '</a>';
-                  }
-               } else {
-                  echo "No courses found.";
-               }
-               ?>
-            </div>
+            } else {
+               echo "No courses found.";
+            }
+            ?>
          </div>
       </main>
       <footer>

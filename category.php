@@ -21,7 +21,7 @@ if (isset($_GET['type'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamro device</title>
+    <title>GadgetSearch</title>
     <link rel="stylesheet" href="user-admin.css">
     <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
@@ -69,32 +69,41 @@ if (isset($_GET['type'])) {
         </div>
     </header>
     <div id="gadget-category">
-        <p class="filter-title"><i class="fa-solid fa-filter"></i>  </p>
-        <div class="category-container">
-            <a href="category.php?type=laptop" class="category-grid-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
-            <a href="category.php?type=phone" class="category-grid-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-        </div>
+        <center> <i class="fa-solid fa-filter"></i> </center>
+        <a href="category.php?type=bestbuy" class="category-item"><i class="fa-duotone fa-laptop-mobile"></i>Best Buy</a>
+        <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
+        <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
+        <a href="category.php?type=accories" class="category-item"><i class="fa fa-mobile-phone"></i>Accories</a>
+
+        <form action="price_range.php" method="POST">
+            <input type="number" name="base_price" id="base_price">
+            <input type="number" name="upper_price" id="upper_price">
+            <center><input type="submit" value="submit" id="inc-dic"></center>
+        </form>
     </div>
-    <main>
+    <main class="gadget-main">
         <?php
         if (isset($type) && !empty($devices)): ?>
-            <div class="devices" id="devices">
-                <p class="category-device-title">
-                    <?php echo $type; ?> deviceS
-                </p>
-                <div class="device-grid-container">
-                    <?php
-                    foreach ($devices as $device):
-                        ?>
-                        <a href="gadgetdetails.php?g_id=<?php echo $device['g_id']; ?>" class="device-grid-item">
-                            <img src="./image/product/<?php echo $device['gimage']; ?>">
-                            <p class="device-name">
-                                <?php echo $device['gname']; ?>
-                            </p>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
+
+            <h1 class="title">
+                <?php echo $type; ?>
+            </h1>
+            <div class="gadget-grid-container">
+                <?php
+                foreach ($devices as $device):
+                    ?>
+                    <a href="gadgetdetails.php?g_id=<?php echo $device['g_id']; ?>" class="g-item">
+                        <img class='gadget-img' src="./image/product/<?php echo $device['gimage']; ?>">
+                        <p class="gadget-name">
+                            <?php echo $device['gname']; ?>
+                        </p>
+                        <p class="gadget-price">
+                            <?php echo $device['gprice']; ?>
+                        </p>
+                    </a>
+                <?php endforeach; ?>
             </div>
+
         <?php endif; ?>
     </main>
     <footer>

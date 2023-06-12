@@ -5,10 +5,11 @@ include 'connect.php';
 if (isset($_POST['login-submit'])) {
     $uname = $_POST['uname'];
     $feedback = $_POST['feedback'];
+    $rating = $_POST['rating'];
 
-    $sql = "INSERT INTO feedback (uname, feedback) VALUES (?, ?)";
+    $sql = "INSERT INTO feedback (uname, feedback, rating) VALUES (?, ?, ?)";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$uname, $feedback]);
+    $stmt->execute([$uname, $feedback, $rating]);
 
     echo '<script>alert("Feedback submitted successfully.");</script>';
 }
@@ -47,6 +48,12 @@ if (isset($_POST['login-submit'])) {
             width: 35%;
         }
 
+        img.gadget-full {
+            height: 35%;
+            width: 100%;
+            image-resolution: 1080px;
+        }
+
         .title {
             position: absolute;
             top: 2%;
@@ -56,18 +63,20 @@ if (isset($_POST['login-submit'])) {
         }
 
         .elink {
+            display: flex;
+            align-items: center;
             margin: 15px;
         }
 
-        .elink a {
-            text-decoration: none;
-            color: blue;
+        .elink a img {
+            margin: 10px;
+            height: 25%;
+            width: 25%;
             cursor: pointer;
         }
 
         form {
             display: block;
-            /* margin: 10px 40px 10px 20px; */
             border: 1px solid black;
             width: 25%;
             padding: 10px 10px;
@@ -89,16 +98,15 @@ if (isset($_POST['login-submit'])) {
             color: red;
         }
 
-        h2 {
-            margin: 12px 24px;
-            text-transform: uppercase;
+        table th td {
+            margin: 20px;
+            padding: 20px;
         }
 
         textarea {
             width: 90%;
             padding: 10px;
             margin: 15px;
-
         }
 
         input {
@@ -110,6 +118,101 @@ if (isset($_POST['login-submit'])) {
             position: absolute;
             left: 25px;
 
+        }
+
+        table {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 10px;
+        }
+
+        .table-heading {
+            border: 5px solid black;
+            width: 50%;
+            text-transform: capitalize;
+            font-size: 25px;
+        }
+
+        .table-body {
+            border: 1px solid black;
+            padding: 5px 25px 5px 25px;
+        }
+
+        .point {
+            list-style: square;
+        }
+
+        .points {
+            list-style: none;
+            text-align: justify;
+            font-style: capitalize;
+        }
+
+        @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css);
+
+
+        .container11 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 20%;
+            width: 20%;
+        }
+
+        #rating-value {
+            width: 100px;
+            margin: 40px auto 0;
+            border: 1px solid black;
+            padding: 10px 5px;
+            text-align: center;
+            box-shadow: 0 0 2px 1px rgba(46, 204, 113, .2);
+        }
+
+        /*styling star rating*/
+        .rating {
+            border: none;
+            float: left;
+        }
+
+        .rating>input {
+            display: none;
+        }
+
+        .rating>label:before {
+            content: '\f005';
+            font-family: FontAwesome;
+            margin: 5px;
+            font-size: 1.5rem;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .rating>.half:before {
+            content: '\f089';
+            position: absolute;
+            cursor: pointer;
+        }
+
+
+        .rating>label {
+            color: #0a0101;
+            float: right;
+            cursor: pointer;
+        }
+
+        .rating>input:checked~label,
+        .rating:not(:checked)>label:hover,
+        .rating:not(:checked)>label:hover~label {
+            color: #b5f069;
+        }
+
+        .rating>input:checked+label:hover,
+        .rating>input:checked~label:hover,
+        .rating>label:hover~input:checked~label,
+        .rating>input:checked~label:hover~label {
+            color: #cef046;
         }
     </style>
 </head>
@@ -142,7 +245,7 @@ if (isset($_POST['login-submit'])) {
                     </div>
                     <ul class="navbar">
                         <li><a href="user.php">Home</a></li>
-                        <li><a class="active" href="gadget.php">Gadget</a></li>
+                        <li><a href="gadget.php">Gadget</a></li>
                         <li><a href="about.php">About Us</a></li>
                     </ul>
 
@@ -165,13 +268,8 @@ if (isset($_POST['login-submit'])) {
                             <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
                         </form>
                     </div>
-                    <div id="mobile">
-                        <a href="#" id="close"><i id="bar" class="fa-solid fa-xmark"></i></a>
-                        <i id="bar" class="fa-solid fa-bars"></i>
-                    </div>
                 </header>
                 <main>
-
                     <div class="image-pro">
                         <?php
                         echo "<img class='gadget' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
@@ -183,29 +281,56 @@ if (isset($_POST['login-submit'])) {
                         </h4>
                         <h5 class="price">
                             <?php
-                            echo "<p class='gprice'>{$row['gprice']} </p>";
-
+                            echo "<p class='gprice'>RS:{$row['gprice']} </p>";
+                            ?>
+                        </h5>
+                        <h5 class="rating">
+                            <?php
+                            echo "<p class='gprice'>{$row['rating']} </p>";
                             ?>
                         </h5>
                     </div>
-                    <p class="content content-cell-spacing" colspan="2">
-                        <?php echo $row['gdis']; ?>
-                    </p>
-                    <?php
-                    echo "<img class='gadget' src='image/product/{$row['imageone']}' alt='Gadget Image'>";
-                    ?>
-                    <h2 class="eligibility cell-spacing"><br>specifation</h2>
-
-                    <p class="list-cell-spacing">
+                    <div class="discription">
                         <?php
-                        $gspecifation = explode("\n", $row['gspecification']);
+                        $gdis = explode("\n", $row['gdis']);
                         echo "<ul>";
-                        foreach ($gspecifation as $point) {
-                            echo "<li>$point</li>";
+                        foreach ($gdis as $point) {
+                            echo "<li class='points'>$point</li>";
                         }
                         echo "</ul>";
                         ?>
-                    </p>
+                    </div>
+                    <?php
+                    echo "<img class='gadget-full' src='image/product/{$row['imageone']}' alt='Gadget Image'>";
+                    ?>
+                    <table>
+                        <tr>
+                            <th class="table-heading"> specifation </th>
+                            <th class="table-heading">comprasion</th>
+                        </tr>
+                        <tr>
+                            <td class="table-body">
+                                <?php
+                                $gspecifation = explode("\n", $row['gspecification']);
+                                echo "<ul>";
+                                foreach ($gspecifation as $point) {
+                                    echo "<li class='point'>$point</li>";
+                                }
+                                echo "</ul>";
+                                ?>
+                            </td>
+                            <td class="table-body">
+                                <?php
+                                $gcomprasion = explode("\n", $row['gcomprasion']);
+                                echo "<ul>";
+                                foreach ($gcomprasion as $point) {
+                                    echo "<li class='point'>$point</li>";
+                                }
+                                echo "</ul>";
+                                ?>
+                            </td>
+                        </tr>
+                    </table>
                     <?php
                     echo "<img class='gadget' src='image/product/{$row['imagetwo']}' alt='Gadget Image'>";
                     ?>
@@ -213,11 +338,10 @@ if (isset($_POST['login-submit'])) {
                     $i++;
             }
             ?>
-
-
                 <div class="elink">
                     <p>Buy Here:</p>
-                    <a href="<?php echo $row['glink'] ?>" target="_blank"><?php echo $row['glink']; ?></a>
+                    <a href="<?php echo $row['glink'] ?>" target="_blank"><img src="image/backgrounds/buy-now.png"
+                            alt=""></a>
                 </div>
                 <?php
     } else {
@@ -228,6 +352,30 @@ if (isset($_POST['login-submit'])) {
                 <div class="feedback">
                     <i id="feedbackuser" class="fa-solid fa-user"></i>
                     <input type="text" class="" placeholder="User-name" name="uname" required />
+                </div>
+                <div class="container">
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" class="full"
+                            title="Awesome"></label>
+                        <input type="radio" id="star4.5" name="rating" value="4.5" /><label for="star4.5"
+                            class="half"></label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4"
+                            class="full"></label>
+                        <input type="radio" id="star3.5" name="rating" value="3.5" /><label for="star3.5"
+                            class="half"></label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3"
+                            class="full"></label>
+                        <input type="radio" id="star2.5" name="rating" value="2.5" /><label for="star2.5"
+                            class="half"></label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2"
+                            class="full"></label>
+                        <input type="radio" id="star1.5" name="rating" value="1.5" /><label for="star1.5"
+                            class="half"></label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1"
+                            class="full"></label>
+                        <input type="radio" id="star0.5" name="rating" value="0.5" /><label for="star0.5"
+                            class="half"></label>
+                    </div>
                 </div>
                 <textarea name="feedback" id="" cols="20" rows="3" class="feedback"></textarea>
 

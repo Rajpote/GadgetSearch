@@ -64,6 +64,29 @@ main {
    top: 10%;
    left: 20%;
 }
+.grid-container {
+   margin: 10vh 7vw;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 67vw;
+}
+
+a.count-item {
+   text-decoration: none;
+   color: black;
+   margin: 20vh 5vw;
+   padding: 10px;
+   border-radius: 25px;
+   align-items: center;
+   border: 1px solid black;
+   cursor: pointer;
+}
+
+i .fa-solid {
+   padding: 5px;
+   color: black;
+}
 
 .userdata h1 {
    text-align: center;
@@ -106,4 +129,167 @@ main {
    border: none;
    border-radius: 5px;
    cursor: pointer;
+}
+
+#add-update{
+   height: 100%;
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.updatebox,
+.add{
+   background-color: rgb(241, 225, 204);
+   display: grid;
+   place-items: left;
+   justify-content: space-between;
+   margin: 30px;
+   padding: 20px;
+   border: 1px solid black;
+}
+h1.addtitle,
+h1.updatetitle{
+   margin: 12px;
+   text-align: center;
+}
+.box-content{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.con{
+   display: block;
+   width: 100%;
+}
+#g_id{
+   width: 20%;
+}
+input#gname,
+select#type,
+input#glink.link,
+input#gimage.image,
+input#imageone.image,
+input#imagetwo.image,
+input#gprice.price{
+   width: 50%;
+   margin: 5px 0;
+   padding: 5px;
+   border-radius: 5px;
+}
+
+textarea#gdis,
+textarea#gspecification,
+textarea#gcomprasion{
+   font-size: 15px;
+   color: black;
+   border-radius: 12px;
+   margin: 10px 0 10px 0;
+   padding: 5px;
+}
+input#submit.submit,
+input#update-submit.submit{
+   width: 20%;
+   height: 20px;
+   background-color: aliceblue;
+   border: none;
+   color: blue;
+}
+/* gadget data */
+.gadgetdata{
+   width: 50%;
+   margin: 10px 0 10px 400px;
+   background-color: rgb(241, 225, 204);
+   padding: 10px 10px 40px 10px ;
+}
+.table-content{
+   text-align: center;
+   text-transform: capitalize;
+}
+.table-content table{
+   margin: 10px 10px 25px 10px;
+   font-size: 20px;
+   text-overflow: clip;
+}
+.table-content table th{
+   padding: 5px;
+   background-color: black;
+   color: aliceblue;
+}
+.table-content table td{
+   padding: 5px;
+   text-overflow: hidden;
+}
+a.add-btn{
+   border: 1px solid black;
+   margin: 100px 10px 10px 10px;
+   padding: 15px;
+   background-color: blue;
+   color: aliceblue;
+   text-decoration: none;
+}
+
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css);
+
+
+.container11{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 40%;
+}
+
+#rating-value{	
+	width: 100px;
+	margin: 40px auto 0;
+	padding: 10px 5px;
+	text-align: center;
+   border: 1px solid black;
+	box-shadow: inset 0 0 2px 1px rgba(46,204,113,.2);
+}
+
+/*styling star rating*/
+.rating{
+	border: none;
+	float: left;
+}
+
+.rating > input{
+	display: none;
+}
+
+.rating > label:before{
+	content: '\f005';
+	font-family: FontAwesome;
+	margin: 5px;
+	font-size: 1.5rem;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.rating > .half:before{
+	content: '\f089';
+	position: absolute;
+	cursor: pointer;
+}
+
+
+.rating > label{
+	color: #0a0101;
+	float: right;
+	cursor: pointer;
+}
+
+.rating > input:checked ~ label,
+.rating:not(:checked) > label:hover, 
+.rating:not(:checked) > label:hover ~ label{
+	color: #b5f069;
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label{
+	color: #cef046;
 }

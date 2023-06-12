@@ -50,22 +50,19 @@ do {
 <body>
    <?php
    if ($searchValue) { ?>
-
-
       <ul class="navbar">
          <form action="search.php" method="post">
             <input type="text" name="search" class="search-bars" placeholder="Search . . . " id="search" /><i
                class="fa-solid fa-magnifying-glass"></i>
          </form>
       </ul>
-
       <h2 class="result">Found results.</h2>
       <?php
       echo '<div class="searchcontainer">';
       foreach ($value as $item) {
          echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-item">';
          echo "<img class='pro_img' src='image/product/{$item[0]['gimage']}' alt='Gadget Image'>";
-         echo '<p class="pro-name">' . $item[0]['gname'] . '</p>';
+         echo '<p class="pro_name">' . $item[0]['gname'] . '</p>';
          echo '</a>';
       }
       echo '</div>';
@@ -92,24 +89,23 @@ do {
 
          <div id="my-modal" class="modal">
             <form action="" method="POST" class="login-form">
+               <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
                <div id="username" class="container">
                   <?php echo $_SESSION['username'] ?>
+               </div>
+               <div id="username" class="container">
+                  <a href="update.php">update profile</a>
                </div>
 
                <div class="logout">
                   <a href="logout.php">logout</a>
                </div>
-               <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
             </form>
-         </div>
-         <div id="mobile">
-            <a href="#" id="close"><i id="bar" class="fa-solid fa-xmark"></i></a>
-            <i id="bar" class="fa-solid fa-bars"></i>
          </div>
       </header>
       <main>
          <div id="hero">
-            <img src="image/backgrounds/background.png" alt="" class="background1" />
+            <img src="image/backgrounds/My project.png" alt="" class="background1" />
             <div class="cont-text">
                <h3>Search has ended</h3>
                <h1>GadgetSearch</h1>
@@ -143,47 +139,42 @@ do {
          <section id="newarival">
             <h1>latest gadgets</h1>
             <p>new gadgets reviews</p>
-               <div class="latest-container">
-                  <?php
-                  $sql = "SELECT * FROM gadget_details order by g_id desc limit 4";
-                  $stmt = $pdo->query($sql);
+            <div class="latest-container">
+               <?php
+               $sql = "SELECT * FROM gadget_details order by g_id desc limit 4";
+               $stmt = $pdo->query($sql);
 
-                  if ($stmt->rowCount() > 0) {
+               if ($stmt->rowCount() > 0) {
 
-                     while ($row = $stmt->fetch()) {
-                        echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="detailes">';
-                        echo '<div class="latest">';
-                        echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-                        echo '<h5 class="gadget-name">' . $row['gname'] . '</h5>';
-                        echo '<p class="gadget-price">' . $row['gprice'] . '</p>';
-                        echo '</div>';
-                        echo '</a>';
+                  while ($row = $stmt->fetch()) {
+                     echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="detailes">';
+                     echo "<img class='g-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+                     echo '<h5 class="g-name">' . $row['gname'] . '</h5>';
+                     echo '<p class="g-price">' . $row['gprice'] . '</p>';
+                     echo '</a>';
 
-                     }
-                  } else {
-                     echo "No courses found.";
                   }
-                  ?>
-               </div>
+               } else {
+                  echo "No courses found.";
+               }
+               ?>
+            </div>
+            <div class="banner">
+               <a href="banner.php"><img src="image/product/acer.png" alt=""></a>
+
+            </div>
          </section>
          <section class="brands">
             <h2 class="brand1">Brands</h2>
             <div class="container-brands">
-               <a class="item-brands" href="https://www.mi.com/np/phone"><img src="image/brands/mi.png" alt=""
-                     class="image-brands" /></a>
-               <a class="item-brands" href="https://www.acer.com/us-en"><img src="image/brands/Acer.png" alt=""
-                     class="image-brands" /></a>
-               <a class="item-brands" href="https://www.apple.com/"><img src="image/brands/apple.png" alt=""
-                     class="image-brands" /></a>
-               <a class="item-brands" href="https://www.samsung.com/us/"><img src="image/brands/Samsung.png" alt=""
-                     class="image-brands" /></a>
-               <a class="item-brands" href="https://www.dell.com/en-us"><img src="image/brands/dell.png" alt=""
-                     class="image-brands" /></a>
-               <a class="item-brands" href="https://www.asus.com/np/"><img src="image/brands/asus.png" alt=""
-                     class="image-brands" /></a>
-               <a class="item-brands" href="https://www.msi.com/index.php"><img src="image/brands/msi.png" alt=""
-                     class="image-brands" /></a>
-               <a class="item-brands" href="https://www.hp.com/us-en/home.html"><img src="image/brands/hp.png" alt=""
+               <a href="https://www.mi.com/np/phone"><img src="image/brands/mi.png" alt="" class="image-brands" /></a>
+               <a href="https://www.acer.com/us-en"><img src="image/brands/Acer.png" alt="" class="image-brands" /></a>
+               <a href="https://www.apple.com/"><img src="image/brands/APPLE.png" alt="" class="image-brands" /></a>
+               <a href="https://www.samsung.com/us/"><img src="image/brands/Samsung.png" alt="" class="image-brands" /></a>
+               <a href="https://www.dell.com/en-us"><img src="image/brands/dell.png" alt="" class="image-brands" /></a>
+               <a href="https://www.asus.com/np/"><img src="image/brands/asus.png" alt="" class="image-brands" /></a>
+               <a href="https://www.msi.com/index.php"><img src="image/brands/msi.png" alt="" class="image-brands" /></a>
+               <a href="https://www.hp.com/us-en/home.html"><img src="image/brands/hp.png" alt=""
                      class="image-brands" /></a>
             </div>
          </section>

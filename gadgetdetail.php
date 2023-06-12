@@ -190,7 +190,8 @@ if (isset($_POST['update-submit'])) {
                                         class="full"></label>
                                     <input type="radio" id="star0.5" name="rating" value="0.5" /><label for="star0.5"
                                         class="half"></label>
-                                    <h4 id="rating-value"></h4>
+                                    <h4 id="rating-value">
+                                    </h4>
                                 </div>
                             </div>
                             <input type="text" class="abbreviation" name="gname" id="gname" placeholder="Gadget Name"
@@ -249,6 +250,44 @@ if (isset($_POST['update-submit'])) {
                             </select>
                             <div class="container11">
                                 <div class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5" <?php echo ($rating == '5') ? 'checked' : ''; ?> />
+                                    <label for="star5" class="full" title="Awesome"></label>
+
+                                    <input type="radio" id="star4.5" name="rating" value="4.5" <?php echo ($rating == '4.5') ? 'checked' : ''; ?> />
+                                    <label for="star4.5" class="half"></label>
+
+                                    <input type="radio" id="star4" name="rating" value="4" <?php echo ($rating == '4') ? 'checked' : ''; ?> />
+                                    <label for="star4" class="full"></label>
+
+                                    <input type="radio" id="star3.5" name="rating" value="3.5" <?php echo ($rating == '3.5') ? 'checked' : ''; ?> />
+                                    <label for="star3.5" class="half"></label>
+
+                                    <input type="radio" id="star3" name="rating" value="3" <?php echo ($rating == '3') ? 'checked' : ''; ?> />
+                                    <label for="star3" class="full"></label>
+
+                                    <input type="radio" id="star2.5" name="rating" value="2.5" <?php echo ($rating == '2.5') ? 'checked' : ''; ?> />
+                                    <label for="star2.5" class="half"></label>
+
+                                    <input type="radio" id="star2" name="rating" value="2" <?php echo ($rating == '2') ? 'checked' : ''; ?> />
+                                    <label for="star2" class="full"></label>
+
+                                    <input type="radio" id="star1.5" name="rating" value="1.5" <?php echo ($rating == '1.5') ? 'checked' : ''; ?> />
+                                    <label for="star1.5" class="half"></label>
+
+                                    <input type="radio" id="star1" name="rating" value="1" <?php echo ($rating == '1') ? 'checked' : ''; ?> />
+                                    <label for="star1" class="full"></label>
+
+                                    <input type="radio" id="star0.5" name="rating" value="0.5" <?php echo ($rating == '0.5') ? 'checked' : ''; ?> />
+                                    <label for="star0.5" class="half"></label>
+
+                                    <h4 id="rating-value">
+                                        <?php echo $rating; ?>
+                                    </h4>
+                                </div>
+                            </div>
+
+                            <!-- <div class="container11">
+                                <div class="rating">
                                     <input type="radio" id="star5" name="rating" value="5" <?php echo ($rating == '5') ? 'checked' : ''; ?> /><label for="star5" class="full" title="Awesome"></label>
                                     <input type="radio" id="star4.5" name="rating" value="4.5" <?php echo ($rating == '4.5') ? 'checked' : ''; ?> /><label for="star4.5"
                                         class="half"></label>
@@ -264,7 +303,7 @@ if (isset($_POST['update-submit'])) {
                                     <input type="radio" id="star1" name="rating" value="1" <?php echo ($rating == '1') ? 'checked' : ''; ?> /><label for="star1" class="full"></label>
                                     <input type="hidden" name="original_rating" value="<?php echo $rating; ?>">
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="container11">
                                 <div class="rating">
                                     <input type="radio" id="star5" name="rating" value="<?php echo $rating ?>" /><label

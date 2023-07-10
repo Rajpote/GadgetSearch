@@ -24,7 +24,7 @@ if (!isset($_SESSION['adminname'])) {
 <body>
     <header>
         <div>
-            <a class="logo" href="admin.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
+            <a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
         </div>
         <ul class="navbar">
             <li><a href="admin.php">Admin</a></li>
@@ -32,9 +32,7 @@ if (!isset($_SESSION['adminname'])) {
             <li><a class="active" href="userdata.php">User data</a></li>
             <li><a href="feedback.php">User Feedback</a></li>
         </ul>
-        <div class="container">
-            <?php echo $_SESSION['adminname'] ?> <br>
-        </div>
+        
         <a href="home.php" class="logout">logout</a>
     </header>
     <main>

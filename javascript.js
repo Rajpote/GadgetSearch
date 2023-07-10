@@ -1,3 +1,52 @@
+function alertPopup(msg) {
+   alert("login first", 3000);
+   
+}
+
+window.alert = function(message, timeout=null){
+   const alert = document.createElement('div');
+   const alertButton = document.createElement('button');
+   alertButton.innerText = 'ok';
+   alert.classList.add('alert');
+   alert.setAttribute('style', `
+   position:fixed;
+   top:200px;
+   left:50%;
+   color:white;
+   background:rgb(49, 65, 57);
+   height:150px;
+   width:15%;
+   text-align:center;
+   font-size:30px;
+   text-transform: capitalize;
+   padding: 20px;
+   border-radius: 10px;
+   box-shadow: 5px 10px 5px 10px #00000022;
+   display: flex;
+   flex-direction:column;
+   `);
+   alertButton.setAttribute('style', `
+   border: 1px solid #333;
+   background: white;
+   margin:10px 45px;
+   padding: 5px;
+   border-radius: 5px;
+   cursor: pointer;
+
+   `);
+   alert.innerHTML = `<span style="padding:10px">${message}</span>`;
+   alert.appendChild(alertButton);
+   alert.addEventListener('click', (e)=>{
+      alert.remove();
+   });
+   if(timeout != null){
+      setTimeout(()=>{
+         alert.remove();
+      }, Number(timeout))
+   }
+   document.body.appendChild(alert);
+}
+
 
 
 function loginPassword() {
@@ -25,9 +74,6 @@ function closeModal() {
    modal.style.display = "none";
 }
 
-function alertPopup() {
-   alert("Login First");
-}
 
 let star = document.querySelectorAll('input');
 let showValue = document.querySelector('#rating-value');

@@ -24,19 +24,19 @@ header {
    align-items: center;
    justify-content: left;
    padding: 0px 20px;
-   background-color:rgb(1, 16, 11);
+   background-color:rgb(49, 65, 57);
    border-radius: 0 0 25px 25px;
    position: sticky;
    top: 0;
    left: 0;
    width: 100%;
-   opacity: 0.75;
+   opacity: 1;
    overflow: hidden;
    z-index: 999;
 }
 
 img {
-   height: 75px;
+   height: 80px;
    width: 100px;
 }
 .navbar {
@@ -181,7 +181,7 @@ i.fa-magnifying-glass {
 }
 
 form.login-form {
-   background-color: rgb(1, 16, 11);
+   background-color: rgb(49, 65, 57);
    position: fixed;
    top: 0vh;
    right: 0vw;
@@ -189,6 +189,7 @@ form.login-form {
    height: 47vh;
    padding: 20px;
    border-radius: 25px;
+   opacity: 0.75;
 }
 
 .checkbox-login {
@@ -227,7 +228,7 @@ form.login-form {
 #username.container {
    text-align: center;
    color: #f8f3f3;
-   margin: 15px 0px;
+   margin: 0 0 100px 0px;
    font-size: 20px;
    font-weight: 300;
 }
@@ -236,7 +237,7 @@ form.login-form {
    border: 1px solid black;
    text-decoration: none;
    color: red;
-   margin-top: 15px;
+   margin: 10px 100px;
    padding: 10px 15px;
    font-size: 15px;
    background-color: white;
@@ -339,11 +340,21 @@ main {
    transform: scale(1.1);
 }
 .pro-img {
+   margin: 5px 5px;
+   padding: 10px;
    width: 200px;
    height: 200px;
    object-fit: cover;
 }
+img.ratingstar1 {
+   margin: 0px 30px 0px 10px;
+   width: 50%;
+   height: 20%;
+   border-radius: 30px;
+
+}
 .pro-name,
+.ratingstar,
 .pro-price{
    padding: 0px 10px 5px 10px;
    color: #000;
@@ -365,31 +376,40 @@ main {
    width: 80%;
 }
 .g-name {
-   top: 25px;
+   top: 10px;
    left: 155px;
    font-size: 30px;
 }
 .g-price {
-   top: 65px;
-   left: 145px;
+   top: 55px;
+   left: 160px;
    font-size: 20px;
 }
 .g-img {
    height: 115px;
    width: 180px;
-   top: 15px;
+   top: 0px;
    left: 5px;
 }
+img.ratingstar2 {
+   margin: 20px 40px 0px 100px;
+   width: 20%;
+   height: 30%;
+   border-radius: 60px;
+
+}
 .g-img, 
-.g-name, 
-.g-price{
+.g-name,
+.g-price,
+.ratingstar2{
    position: absolute;
-   padding: 5px 35px 2px 20px;
+   margin: 15px;
+   padding: 5px 35px 5px 20px;
    
 }
 .detailes {
    position: relative;
-   background-color: rgb(135, 76, 76);
+   background-color: rgb(148, 190, 223);
    color: #232426;
    padding: 10vh;
    width: 75%;
@@ -403,6 +423,7 @@ main {
 }
 .detailes:hover .g-img, 
 .detailes:hover .g-name, 
+.detailes:hover .ratingstar2, 
 .detailes:hover .g-price {
    transform: scale(1.2);
 }
@@ -480,7 +501,7 @@ li a {
 
 /* gadgets */
 .title {
-   margin: -5vh 5vw 1vh 7vw;
+   margin: 5vh 5vw 1vh 7vw;
    font-weight: 500;
    font-size: 1.7rem;
    color: #101213;
@@ -488,10 +509,10 @@ li a {
    width: 40%;
 }
 .gadget-grid-container {
-   margin: -35vh 5vw 10vh 5vw;
+   margin: 0vh 5vw 10vh 5vw;
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(45vw, 1fr));
-   grid-gap: 1vw;
+   grid-gap: 2vw;
    width: 60%;
 }
 a.g-item {
@@ -507,33 +528,47 @@ a.g-item {
 p.gadget-name {
    position: absolute;
    top: 35px;
-   left: 125px;
+   left: 175px;
    font-size: 30px;
 }
 p.gadget-price {
    position: absolute;
    top: 65px;
-   left: 125px;
+   left: 175px;
    font-size: 20px;
    padding: 10px 0 0 0;
 }
 img.gadget-img {
-   height: 100px;
-   width: 100px;
+   padding: 10px;
+   height: 150px;
+   width: 150px;
    position: absolute;
-   top: 30px;
+   top: 18px;
    left: 10px;
+}
+img.ratingstar3 {
+   position: absolute;
+   margin: 10px 30px 0px 70px;
+   width: 20%;
+   height: 30%;
+   border-radius: 30px;
+
 }
 /* filter */
 #gadget-category {
    position: sticky;
    top: 11%;
    left: 85%;
+   margin: 0px 0px 0px 0px;
    border: 1px solid black;
-   padding: 1rem;
-   border-radius: 0 0 0 15px;
-   width: 15%;
+   width: 20%;
    z-index: 1;
+}
+.filter{
+   position: absolute;
+   border: 1px solid black;
+   border-radius: 0 0 0 15px;
+   padding: 1rem;
 }
 
 .category-item {
@@ -545,27 +580,22 @@ img.gadget-img {
    color: black;
    cursor: pointer;
 }
-
+#filtericon{
+   font-size: 35px;
+   margin: 10px;
+}
 .category-item i {
-   font-size: 25px;
+   font-size: 30px;
    padding: 0 10px 0 10px;
    margin: 5px;
 
 }
 
-#base_price,
-#upper_price {
-   width: 100%;
-   margin: 5px 0px 5px 0px;
-   padding: 5px;
-   border-radius: 15px;
-   color: #082465;
+button.pricerange1{
+   margin: 5px 10px;
+   z-index: 1;
 }
 
-#inc-dic {
-   justify-content: center;
-   align-items: center;
-}
 
 /* about us */
 .information{

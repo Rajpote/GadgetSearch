@@ -12,6 +12,7 @@ if (!isset($_SESSION['adminname'])) {
 if (isset($_POST['submit'])) {
     $g_id = $_POST['g_id'];
     $type = $_POST['type'];
+    $pricerange = $_POST['pricerange'];
     $gname = $_POST['gname'];
     $rating = $_POST['rating'];
     $gdis = $_POST['gdis'];
@@ -33,15 +34,16 @@ if (isset($_POST['submit'])) {
         echo '<script> alert("Gadget already exists."); </script>';
     } else {
         if (
-            empty($g_id) || empty($type) || empty($gname) || empty($rating) || empty($gdis) || empty($gspecification) || empty($gcomprasion) || empty($gimage) || empty($imageone) || empty($imagetwo) || empty($glink) || empty($gprice)
+            empty($g_id) || empty($type) || empty($pricerange) || empty($gname) || empty($rating) || empty($gdis) || empty($gspecification) || empty($gcomprasion) || empty($gimage) || empty($imageone) || empty($imagetwo) || empty($glink) || empty($gprice)
         ) {
             echo '<script> alert("Please fill all the fields."); window.location.href = "gadgetdetail.php"; </script>';
         } else {
-            $sql = "INSERT INTO gadget_details (g_id, type, gname, rating, gdis, gspecification, gcomprasion, gimage, imageone, imagetwo, glink, gprice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO gadget_details (g_id, type, pricerange , gname, rating, gdis, gspecification, gcomprasion, gimage, imageone, imagetwo, glink, gprice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 $g_id,
                 $type,
+                $pricerange,
                 $gname,
                 $rating,
                 $gdis,
@@ -71,6 +73,7 @@ $g_id = isset($value['g_id']) ? $value['g_id'] : '';
 $gname = isset($value['gname']) ? $value['gname'] : '';
 $rating = isset($value['rating']) ? $value['rating'] : '';
 $type = isset($value['type']) ? $value['type'] : '';
+$pricerange = isset($value['pricerange']) ? $value['pricerange'] : '';
 $gdis = isset($value['gdis']) ? $value['gdis'] : '';
 $gspecification = isset($value['gspecification']) ? $value['gspecification'] : '';
 $gcomprasion = isset($value['gcomprasion']) ? $value['gcomprasion'] : '';
@@ -83,6 +86,7 @@ $gprice = isset($value['gprice']) ? $value['gprice'] : '';
 if (isset($_POST['update-submit'])) {
     $g_id = $_POST['g_id'];
     $type = $_POST['type'];
+    $pricerange = $_POST['pricerange'];
     $gname = $_POST['gname'];
     $rating = $_POST['rating'];
     $gdis = $_POST['gdis'];
@@ -94,30 +98,28 @@ if (isset($_POST['update-submit'])) {
     $glink = $_POST['glink'];
     $gprice = $_POST['gprice'];
 
-    if (empty($_POST['g_id']) || empty($_POST['type']) || empty($_POST['gname']) || empty($_POST['rating']) || empty($_POST['gdis']) || empty($_POST['gspecification']) || empty($_POST['gcomprasion']) || empty($_POST['gimage']) || empty($_POST['imageone']) || empty($_POST['imagetwo']) || empty($_POST['glink']) || empty($_POST['gprice'])) {
+    if (empty($_POST['g_id']) || empty($_POST['type']) || empty($_POST['pricerange']) || empty($_POST['gname']) || empty($_POST['rating']) || empty($_POST['gdis']) || empty($_POST['gspecification']) || empty($_POST['gcomprasion']) || empty($_POST['gimage']) || empty($_POST['imageone']) || empty($_POST['imagetwo']) || empty($_POST['glink']) || empty($_POST['gprice'])) {
         echo '<script> alert("Please fill all the fields."); window.location.href = "gadgetdetail.php"; </script>';
     } else {
-        $sql = "UPDATE gadget_details SET g_id=:g_id, type = :type, gname = :gname, rating = :rating, gdis = :gdis, gspecification = :gspecification, gcomprasion = :gcomprasion, gimage = :gimage, imageone = :imageone, imagetwo = :imagetwo, glink = :glink, gprice = :gprice WHERE g_id = :g_id";
+        $sql = "UPDATE gadget_details SET g_id=:g_id, type=:type, pricerange=:pricerange, gname=:gname, rating=:rating, gdis=:gdis, gspecification=:gspecification, gcomprasion=:gcomprasion, gimage=:gimage, imageone=:imageone, imagetwo=:imagetwo, glink=:glink, gprice=:gprice WHERE g_id=:g_id";
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam("g_id", $g_id);
-        $stmt->bindParam("type", $type);
-        $stmt->bindParam("gname", $gname);
-        $stmt->bindParam("rating", $rating);
-        $stmt->bindParam("gdis", $gdis);
-        $stmt->bindParam("gspecification", $gspecification);
-        $stmt->bindParam("gcomprasion", $gcomprasion);
-        $stmt->bindParam("gimage", $gimage);
-        $stmt->bindParam("imageone", $imageone);
-        $stmt->bindParam("imagetwo", $imagetwo);
-        $stmt->bindParam("glink", $glink);
-        $stmt->bindParam("gprice", $gprice);
+        $stmt->bindParam(":g_id", $g_id);
+        $stmt->bindParam(":type", $type);
+        $stmt->bindParam(":pricerange", $pricerange);
+        $stmt->bindParam(":gname", $gname);
+        $stmt->bindParam(":rating", $rating);
+        $stmt->bindParam(":gdis", $gdis);
+        $stmt->bindParam(":gspecification", $gspecification);
+        $stmt->bindParam(":gcomprasion", $gcomprasion);
+        $stmt->bindParam(":gimage", $gimage);
+        $stmt->bindParam(":imageone", $imageone);
+        $stmt->bindParam(":imagetwo", $imagetwo);
+        $stmt->bindParam(":glink", $glink);
+        $stmt->bindParam(":gprice", $gprice);
         $stmt->execute();
         echo '<script> alert("Gadget updated successfully."); window.location.href = "gadgetdetail.php"; </script>';
     }
 }
-
-
-
 
 ?>
 
@@ -135,12 +137,14 @@ if (isset($_POST['update-submit'])) {
     <link rel="stylesheet" href="admin.css" />
 
     <title>GadgetSearch</title>
+    <script src="javascript.js" defer></script>
+
 </head>
 
 <body>
     <header>
         <div>
-            <a class="logo" href="admin.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
+            <a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
         </div>
         <ul class="navbar">
             <li><a href="admin.php">Admin</a></li>
@@ -163,37 +167,18 @@ if (isset($_POST['update-submit'])) {
                             <h1 class="addtitle">ADD GADGET</h1>
                             <input type="number" class="id" name="g_id" id="g_id" placeholder="Gadget ID" required>
                             <select name="type" id="type">
+                                <option value="bestbuy">best buy</option>
                                 <option value="laptop">laptop</option>
-                                <option value="phone">best buy</option>
                                 <option value="phone">phone</option>
                                 <option value="deals">deals</option>
                             </select>
-                            <div class="container11">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5"
-                                        class="full" title="Awesome"></label>
-                                    <input type="radio" id="star4.5" name="rating" value="4.5" /><label for="star4.5"
-                                        class="half"></label>
-                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4"
-                                        class="full"></label>
-                                    <input type="radio" id="star3.5" name="rating" value="3.5" /><label for="star3.5"
-                                        class="half"></label>
-                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3"
-                                        class="full"></label>
-                                    <input type="radio" id="star2.5" name="rating" value="2.5" /><label for="star2.5"
-                                        class="half"></label>
-                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2"
-                                        class="full"></label>
-                                    <input type="radio" id="star1.5" name="rating" value="1.5" /><label for="star1.5"
-                                        class="half"></label>
-                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1"
-                                        class="full"></label>
-                                    <input type="radio" id="star0.5" name="rating" value="0.5" /><label for="star0.5"
-                                        class="half"></label>
-                                    <h4 id="rating-value">
-                                    </h4>
-                                </div>
-                            </div>
+                            <select name="pricerange" id="pricerange">
+                                <option value="10000-50000">10000-50000</option>
+                                <option value="50000-100000">50000-100000</option>
+                                <option value="100000-150000">100000-150000</option>
+                                <option value="150000-200000">150000-200000</option>
+                            </select>
+                            <input type="file" class="rating" name="rating" id="rating" required>
                             <input type="text" class="abbreviation" name="gname" id="gname" placeholder="Gadget Name"
                                 required>
                             <input type="file" class="image" name="gimage" id="gimage" placeholder="Gadget Image URL"
@@ -244,91 +229,19 @@ if (isset($_POST['update-submit'])) {
                                 ?>
                             </select>
                             <select name="type" id="type">
+                                <option value="bestbuy">best buy</option>
                                 <option value="laptop">laptop</option>
                                 <option value="phone">phone</option>
                                 <option value="deals">deals</option>
                             </select>
-                            <div class="container11">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" <?php echo ($rating == '5') ? 'checked' : ''; ?> />
-                                    <label for="star5" class="full" title="Awesome"></label>
-
-                                    <input type="radio" id="star4.5" name="rating" value="4.5" <?php echo ($rating == '4.5') ? 'checked' : ''; ?> />
-                                    <label for="star4.5" class="half"></label>
-
-                                    <input type="radio" id="star4" name="rating" value="4" <?php echo ($rating == '4') ? 'checked' : ''; ?> />
-                                    <label for="star4" class="full"></label>
-
-                                    <input type="radio" id="star3.5" name="rating" value="3.5" <?php echo ($rating == '3.5') ? 'checked' : ''; ?> />
-                                    <label for="star3.5" class="half"></label>
-
-                                    <input type="radio" id="star3" name="rating" value="3" <?php echo ($rating == '3') ? 'checked' : ''; ?> />
-                                    <label for="star3" class="full"></label>
-
-                                    <input type="radio" id="star2.5" name="rating" value="2.5" <?php echo ($rating == '2.5') ? 'checked' : ''; ?> />
-                                    <label for="star2.5" class="half"></label>
-
-                                    <input type="radio" id="star2" name="rating" value="2" <?php echo ($rating == '2') ? 'checked' : ''; ?> />
-                                    <label for="star2" class="full"></label>
-
-                                    <input type="radio" id="star1.5" name="rating" value="1.5" <?php echo ($rating == '1.5') ? 'checked' : ''; ?> />
-                                    <label for="star1.5" class="half"></label>
-
-                                    <input type="radio" id="star1" name="rating" value="1" <?php echo ($rating == '1') ? 'checked' : ''; ?> />
-                                    <label for="star1" class="full"></label>
-
-                                    <input type="radio" id="star0.5" name="rating" value="0.5" <?php echo ($rating == '0.5') ? 'checked' : ''; ?> />
-                                    <label for="star0.5" class="half"></label>
-
-                                    <h4 id="rating-value">
-                                        <?php echo $rating; ?>
-                                    </h4>
-                                </div>
-                            </div>
-
-                            <!-- <div class="container11">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="5" <?php echo ($rating == '5') ? 'checked' : ''; ?> /><label for="star5" class="full" title="Awesome"></label>
-                                    <input type="radio" id="star4.5" name="rating" value="4.5" <?php echo ($rating == '4.5') ? 'checked' : ''; ?> /><label for="star4.5"
-                                        class="half"></label>
-                                    <input type="radio" id="star4.5" name="rating" value="4" <?php echo ($rating == '4') ? 'checked' : ''; ?> /><label for="star4" class="full"></label>
-                                    <input type="radio" id="star3.5" name="rating" value="3.5" <?php echo ($rating == '3.5') ? 'checked' : ''; ?> /><label for="star3.5"
-                                        class="half"></label>
-                                    <input type="radio" id="star3" name="rating" value="3" <?php echo ($rating == '3') ? 'checked' : ''; ?> /><label for="star3" class="full"></label>
-                                    <input type="radio" id="star2.5" name="rating" value="2.5" <?php echo ($rating == '2.5') ? 'checked' : ''; ?> /><label for="star2.5"
-                                        class="half"></label>
-                                    <input type="radio" id="star2" name="rating" value="2" <?php echo ($rating == '2') ? 'checked' : ''; ?> /><label for="star2" class="half"></label>
-                                    <input type="radio" id="star1.5" name="rating" value="1.5" <?php echo ($rating == '1.5') ? 'checked' : ''; ?> /><label for="star1.5"
-                                        class="half"></label>
-                                    <input type="radio" id="star1" name="rating" value="1" <?php echo ($rating == '1') ? 'checked' : ''; ?> /><label for="star1" class="full"></label>
-                                    <input type="hidden" name="original_rating" value="<?php echo $rating; ?>">
-                                </div>
-                            </div> -->
-                            <!-- <div class="container11">
-                                <div class="rating">
-                                    <input type="radio" id="star5" name="rating" value="<?php echo $rating ?>" /><label
-                                        for="star5" class="full" title="Awesome"></label>
-                                    <input type="radio" id="star4.5" name="rating" value="<?php echo $rating ?>" /><label
-                                        for="star4.5" class="half"></label>
-                                    <input type="radio" id="star4" name="rating" value="<?php echo $rating ?>" /><label
-                                        for="star4" class="full"></label>
-                                    <input type="radio" id="star3.5" name="rating" value="<?php echo $rating ?>" /><label
-                                        for="star3.5" class="half"></label>
-                                    <input type="radio" id="star3" name="rating" value="<?php echo $rating ?>" /><label
-                                        for="star3" class="full"></label>
-                                    <input type="radio" id="star2.5" name="rating" value="<?php echo $rating ?>" /><label
-                                        for="star2.5" class="half"></label>
-                                    <input type="radio" id="star2" name="rating" value="<?php echo $rating ?>" /><label
-                                        for="star2" class="full"></label>
-                                    <input type="radio" id="star1.5" name="rating" value="<?php echo $rating ?>" /><label
-                                        for="star1.5" class="half"></label>
-                                    <input type="radio" id="star1" name="rating" value="<?php echo $rating ?>" /><label
-                                        for="star1" class="full"></label>
-                                    <input type="radio" id="star0.5" name="rating" value="<?php echo $rating ?>" /><label
-                                        for="star0.5" class="half"></label>
-                                    <h4 id="rating-value"></h4>
-                                </div>
-                            </div> -->
+                            <select name="pricerange" id="pricerange">
+                                <option value="10000-50000">10000-50000</option>
+                                <option value="50000-100000">50000-100000</option>
+                                <option value="100000-150000">100000-150000</option>
+                                <option value="150000-200000">150000-200000</option>
+                            </select>
+                            <input type="file" class="rating" name="rating" id="rating" value="<?php echo $rating ?>"
+                                required>
                             <input type="text" class="gname" name="gname" id="gname" placeholder="Gadget Name"
                                 value="<?php echo $gname ?>" required>
                             <input type="file" class="image" name="gimage" id="gimage" placeholder="Gadget Image URL"
@@ -364,7 +277,6 @@ if (isset($_POST['update-submit'])) {
 
         </div>
     </main>
-    <script src="script.js"></script>
 </body>
 
 </html>

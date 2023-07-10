@@ -46,12 +46,12 @@ if (isset($_POST['login-submit'])) {
 
    <header>
       <div>
-         <a class="logo" href="home.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
+         <a class="logo" href="home.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
       </div>
       <ul class="navbar">
          <li><a class="active" href="home.php">Home</a></li>
-         <li><a href="#" onclick="alertPopup()">Gadget</a></li>
-         <li><a href="#" onclick="alertPopup()">About Us</a></li>
+         <li><a href="#" onclick="alertPopup('login first')">Gadget</a></li>
+         <li><a href="#" onclick="alertPopup('login first')">About Us</a></li>
       </ul>
 
       <ul class="navbar">
@@ -105,6 +105,7 @@ if (isset($_POST['login-submit'])) {
                      echo "<img class='pro-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
                      echo '<p class="pro-name">' . $row['gname'] . '</p>';
                      echo '<p class="pro-name">' . $row['gprice'] . '</p>';
+                     echo "<img class='ratingstar1' src='image/rating/{$row['rating']}' alt='rating Image'>";
                      echo '</a>';
                   }
                } else {
@@ -130,6 +131,7 @@ if (isset($_POST['login-submit'])) {
                   echo "<img class='g-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
                   echo '<h5 class="g-name">' . $row['gname'] . '</h5>';
                   echo '<p class="g-price">' . $row['gprice'] . '</p>';
+                  echo "<img class='ratingstar2' src='image/rating/{$row['rating']}' alt='rating Image'>";
                   echo '</a>';
 
                }

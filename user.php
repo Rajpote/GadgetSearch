@@ -71,7 +71,7 @@ do {
    } else { ?>
       <header>
          <div>
-            <a class="logo" href="user.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
+            <a class="logo" href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
          </div>
          <ul class="navbar">
             <li><a class="active" href="user.php">Home</a></li>
@@ -93,10 +93,6 @@ do {
                <div id="username" class="container">
                   <?php echo $_SESSION['username'] ?>
                </div>
-               <div id="username" class="container">
-                  <a href="update.php">update profile</a>
-               </div>
-
                <div class="logout">
                   <a href="logout.php">logout</a>
                </div>
@@ -125,7 +121,8 @@ do {
                         echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="slider-card">';
                         echo "<img class='pro-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
                         echo '<p class="pro-name">' . $row['gname'] . '</p>';
-                        echo '<p class="pro-name">' . $row['gprice'] . '</p>';
+                        echo '<p class="pro-price">' . $row['gprice'] . '</p>';
+                        echo "<img class='ratingstar1' src='image/rating/{$row['rating']}' alt='rating Image'>";
                         echo '</a>';
                      }
                   } else {
@@ -151,6 +148,7 @@ do {
                      echo "<img class='g-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
                      echo '<h5 class="g-name">' . $row['gname'] . '</h5>';
                      echo '<p class="g-price">' . $row['gprice'] . '</p>';
+                     echo "<img class='ratingstar2' src='image/rating/{$row['rating']}' alt='rating Image'>";
                      echo '</a>';
 
                   }
@@ -158,10 +156,6 @@ do {
                   echo "No courses found.";
                }
                ?>
-            </div>
-            <div class="banner">
-               <a href="banner.php"><img src="image/product/acer.png" alt=""></a>
-
             </div>
          </section>
          <section class="brands">
@@ -186,7 +180,7 @@ do {
                <h3>contact</h3>
                <ul>
                   <li>
-                     <a href="#"><i class="fa-solid fa-location-dot"></i><span class="content">Balkumari
+                     <a href="about.php"><i class="fa-solid fa-location-dot"></i><span class="content">Balkumari
                            ,lalitpur</span></a>
                   </li>
                   <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span></li>
@@ -203,16 +197,15 @@ do {
             <div class="coln">
                <h3>follow us</h3>
                <div>
-                  <a href="" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                  <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i
+                        class="fa-brands fa-facebook-f"></i></a>
                   <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
                   <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
                </div>
             </div>
          </div>
 
-
-
-         <center>copyright</center>
+         <center><i class="fa-regular fa-copyright"></i>opyright</center>
       </footer>
    <?php } ?>
 

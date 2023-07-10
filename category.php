@@ -36,7 +36,7 @@ if (isset($_GET['type'])) {
 <body>
     <header>
         <div>
-            <a class="logo" href="user.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
+            <a class="logo" href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
         </div>
         <ul class="navbar">
             <li><a href="user.php">Home</a></li>
@@ -55,8 +55,6 @@ if (isset($_GET['type'])) {
                 <div id="username" class="container">
                     <?php echo $_SESSION['username'] ?>
                 </div>
-
-
                 <div class="logout">
                     <a href="home.php">logout</a>
                 </div>
@@ -69,22 +67,31 @@ if (isset($_GET['type'])) {
         </div>
     </header>
     <div id="gadget-category">
-        <center> <i class="fa-solid fa-filter"></i> </center>
-        <a href="category.php?type=bestbuy" class="category-item"><i class="fa-duotone fa-laptop-mobile"></i>Best Buy</a>
-        <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
-        <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-        <a href="category.php?type=accories" class="category-item"><i class="fa fa-mobile-phone"></i>Accories</a>
+        <div class="filter">
+        <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
+            <a href="category.php?type=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
+                Buy</a>
+            <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
+            <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
+            <a href="category.php?type=accories" class="category-item"><i class="fa fa-mobile-phone"></i>Accories</a>
 
-        <form action="price_range.php" method="POST">
-            <input type="number" name="base_price" id="base_price">
-            <input type="number" name="upper_price" id="upper_price">
-            <center><input type="submit" value="submit" id="inc-dic"></center>
-        </form>
+            <center>
+               <h4>price range</h4>
+            </center><br>
+            <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
+                  class="category-item">10k-50k</a></button>
+            <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000"
+                  class="category-item">50k-100k</a></button>
+            <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000"
+                  class="category-item">100k-150k</a></button>
+            <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000"
+                  class="category-item">150k-200k</a></button>
+
+        </div>
     </div>
     <main class="gadget-main">
         <?php
         if (isset($type) && !empty($devices)): ?>
-
             <h1 class="title">
                 <?php echo $type; ?>
             </h1>
@@ -128,7 +135,7 @@ if (isset($_GET['type'])) {
             <div class="coln">
                 <h3>follow us</h3>
                 <div>
-                    <a href="" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
                     <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
                 </div>

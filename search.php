@@ -28,8 +28,4 @@
         header("location: user.php?count=$count&$queryString");
     }    
     ?>
-    <script>
-    //     setTimeout(function(){
-    //         window.location.href = "user.php";
-    //     }, 3000);
-    // </script>
+   

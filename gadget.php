@@ -49,7 +49,6 @@ do {
    <?php
    if ($searchValue) { ?>
 
-
       <ul class="navbar">
          <form action="search.php" method="post">
             <input type="text" name="search" class="search-bars" placeholder="Search . . . " id="search" /><i
@@ -64,6 +63,8 @@ do {
          echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-item">';
          echo "<img class='pro-img' src='image/product/{$item['gimage']}' alt='Gadget Image'>";
          echo '<p class="pro-name">' . $item[0]['gname'] . '</p>';
+         echo '<p class="gadget-price">' . $item['gprice'] . '</p>';
+         echo "<img class='ratingstar3' src='image/rating/{$item['rating']}' alt='rating Image'>";
          echo '</a>';
       }
       echo '</div>';
@@ -72,7 +73,7 @@ do {
    } else { ?>
       <header>
          <div>
-            <a class="logo" href="user.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
+            <a class="logo" href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
          </div>
          <ul class="navbar">
             <li><a href="user.php">Home</a></li>
@@ -101,21 +102,31 @@ do {
             </form>
          </div>
       </header>
+
       <div id="gadget-category">
-         <center> <i class="fa-solid fa-filter"></i> </center>
-         <a href="category.php?type=bestbuy" class="category-item"><i class="fa-duotone fa-laptop-mobile"></i>Beat Buy</a>
-         <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
-         <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-         <a href="category.php?type=accories" class="category-item"><i class="fa fa-mobile-phone"></i>Accories</a>
+         <div class="filter">
+            <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
+            <a href="category.php?type=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
+               Buy</a>
+            <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
+            <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
+            <a href="category.php?type=accories" class="category-item"><i class="fa fa-mobile-phone"></i>Accories</a>
 
+            <center>
+               <h4>price range</h4>
+            </center><br>
+            <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
+                  class="category-item">10k-50k</a></button>
+            <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000"
+                  class="category-item">50k-100k</a></button>
+            <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000"
+                  class="category-item">100k-150k</a></button>
+            <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000"
+                  class="category-item">150k-200k</a></button>
 
-         <form action="price_range.php" method="POST">
-            <input type="number" name="base_price" id="base_price">
-            <input type="number" name="upper_price" id="upper_price">
-            <center><input type="submit" value="submit" id="inc-dic"></center>
-         </form>
-
+         </div>
       </div>
+
       <main>
          <div class="gadget-grid-container">
             <h1 class="title">Gadgets</h1>
@@ -135,6 +146,7 @@ do {
                   echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
                   echo '<p class="gadget-name">' . $row['gname'] . '</p>';
                   echo '<p class="gadget-price">' . $row['gprice'] . '</p>';
+                  echo "<img class='ratingstar3' src='image/rating/{$row['rating']}' alt='rating Image'>";
                   echo '</a>';
                }
             } else {
@@ -165,7 +177,7 @@ do {
             <div class="coln">
                <h3>follow us</h3>
                <div>
-                  <a href="" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                  <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                   <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
                   <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
                </div>

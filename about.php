@@ -37,7 +37,7 @@ if (isset($_POST['login-submit'])) {
 <body>
    <header>
       <div>
-         <a class="logo" href="user.php"><img src="image/gadget search-logos/gadget search-1 (1).png" alt="" /></a>
+         <a class="logo" href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
       </div>
       <ul class="navbar">
          <li><a href="user.php">Home</a></li>
@@ -117,7 +117,7 @@ if (isset($_POST['login-submit'])) {
          <div class="coln">
             <h3>follow us</h3>
             <div>
-               <a href="" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+               <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
                <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
             </div>

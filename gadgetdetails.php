@@ -54,6 +54,21 @@ if (isset($_POST['login-submit'])) {
             image-resolution: 1080px;
         }
 
+        h4.name {
+            padding: 0px 10px;
+        }
+
+        p.gprice {
+            padding: 10px;
+        }
+
+        img.ratingstar {
+            width: 50%;
+            height: 55%;
+            border-radius: 15px;
+
+        }
+
         .title {
             position: absolute;
             top: 2%;
@@ -171,6 +186,7 @@ if (isset($_POST['login-submit'])) {
         }
 
         /*styling star rating*/
+
         .rating {
             border: none;
             float: left;
@@ -240,8 +256,7 @@ if (isset($_POST['login-submit'])) {
 
                 <header>
                     <div>
-                        <a class="logo" href="user.php"><img src="image/gadget search-logos/gadget search-1 (1).png"
-                                alt="" /></a>
+                        <a class="logo" href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
                     </div>
                     <ul class="navbar">
                         <li><a href="user.php">Home</a></li>
@@ -284,11 +299,9 @@ if (isset($_POST['login-submit'])) {
                             echo "<p class='gprice'>RS:{$row['gprice']} </p>";
                             ?>
                         </h5>
-                        <h5 class="rating">
-                            <?php
-                            echo "<p class='gprice'>{$row['rating']} </p>";
-                            ?>
-                        </h5>
+                        <?php
+                        echo "<img class='ratingstar' src='image/rating/{$row['rating']}' alt='rating Image'>";
+                        ?>
                     </div>
                     <div class="discription">
                         <?php

@@ -120,8 +120,8 @@ do {
                      while ($row = $stmt->fetch()) {
                         echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="slider-card">';
                         echo "<img class='pro-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-                        echo '<p class="pro-name">' . $row['gname'] . '</p>';
-                        echo '<p class="pro-price">' . $row['gprice'] . '</p>';
+                        echo '<div class="pro-name">' . $row['gname'] . '</div>';
+                        echo '<div class="pro-price">Rs:' . $row['gprice'] . '</div>';
                         echo "<img class='ratingstar1' src='image/rating/{$row['rating']}' alt='rating Image'>";
                         echo '</a>';
                      }
@@ -146,8 +146,8 @@ do {
                   while ($row = $stmt->fetch()) {
                      echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="detailes">';
                      echo "<img class='g-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-                     echo '<h5 class="g-name">' . $row['gname'] . '</h5>';
-                     echo '<p class="g-price">' . $row['gprice'] . '</p>';
+                     echo '<div class="g-name">' . $row['gname'] . '</div>';
+                     echo '<div class="g-price">Rs:' . $row['gprice'] . '</div>';
                      echo "<img class='ratingstar2' src='image/rating/{$row['rating']}' alt='rating Image'>";
                      echo '</a>';
 

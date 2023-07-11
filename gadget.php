@@ -144,8 +144,8 @@ do {
                while ($row = $stmt->fetch()) {
                   echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="g-item">';
                   echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-                  echo '<p class="gadget-name">' . $row['gname'] . '</p>';
-                  echo '<p class="gadget-price">' . $row['gprice'] . '</p>';
+                  echo '<div class="gadget-name">' . $row['gname'] . '</div>';
+                  echo '<div class="gadget-price">Rs:' . $row['gprice'] . '</div>';
                   echo "<img class='ratingstar3' src='image/rating/{$row['rating']}' alt='rating Image'>";
                   echo '</a>';
                }

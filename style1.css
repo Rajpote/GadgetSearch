@@ -305,7 +305,7 @@ main {
    width: 100%;
    background-color: #f9f6f6;
    margin-top: 35px;
-   padding: 30px 50px 30px 500px;
+   padding: 30px 50px 30px 770px;
    display: flex;
    align-items: center;
    justify-content: center;
@@ -372,39 +372,42 @@ img.ratingstar1 {
    margin: 5vh 7vw 10vh 5vw;
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(45vw, 1fr));
-   grid-gap: 1vw;
+   grid-gap: 2vw;
    width: 80%;
 }
-.g-name {
+div.g-name {
    top: 10px;
    left: 155px;
    font-size: 30px;
 }
-.g-price {
-   top: 55px;
-   left: 160px;
+div.g-price {
+   top: 45px;
+   left: 155px;
    font-size: 20px;
 }
 .g-img {
-   height: 115px;
-   width: 180px;
+   position: absolute;
    top: 0px;
    left: 5px;
+   margin: 10px;
+   padding: 10px;
+   height: 125px;
+   width: 150px;
 }
 img.ratingstar2 {
-   margin: 20px 40px 0px 100px;
-   width: 20%;
-   height: 30%;
+   position: absolute;
+   margin: 30px 100px 0px 120px;
+   width: 12.5%;
+   height: 17.5%;
    border-radius: 60px;
 
 }
-.g-img, 
+
 .g-name,
-.g-price,
-.ratingstar2{
+.g-price{
    position: absolute;
    margin: 15px;
-   padding: 5px 35px 5px 20px;
+   padding: 10px 35px 10px 20px;
    
 }
 .detailes {
@@ -525,13 +528,13 @@ a.g-item {
    border-radius: 15px;
    box-shadow: 0px 0px 5px 0px rgba(163, 158, 163, 1);
 }
-p.gadget-name {
+div.gadget-name {
    position: absolute;
    top: 35px;
    left: 175px;
    font-size: 30px;
 }
-p.gadget-price {
+div.gadget-price {
    position: absolute;
    top: 65px;
    left: 175px;

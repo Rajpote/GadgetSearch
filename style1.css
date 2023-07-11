@@ -366,10 +366,10 @@ img.ratingstar1 {
 #newarival p {
    text-align: center;
    text-transform: capitalize;
-   margin: 10px 0 20px 10px;
+   margin: 20px 100px 20px 100px;
 }
 .latest-container {
-   margin: 1vh 7vw 10vh 5vw;
+   margin: 5vh 7vw 10vh 5vw;
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(45vw, 1fr));
    grid-gap: 1vw;

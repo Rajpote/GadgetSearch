@@ -147,15 +147,13 @@ if (isset($_POST['update-submit'])) {
             <a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
         </div>
         <ul class="navbar">
-            <li><a href="admin.php">Admin</a></li>
+            <li><a href="admin.php">Dashboard</a></li>
             <li><a class="active" href="gadgetdetail.php">Gadget</a></li>
             <li><a href="gadgetdata.php">Gadget data</a></li>
             <li><a href="userdata.php">User data</a></li>
             <li><a href="feedback.php">User Feedback</a></li>
         </ul>
-        <div class="container">
-            <?php echo $_SESSION['adminname'] ?> <br>
-        </div>
+
         <a href="home.php" class="logout">logout</a>
     </header>
     <main>
@@ -166,21 +164,23 @@ if (isset($_POST['update-submit'])) {
                         <div class="add">
                             <h1 class="addtitle">ADD GADGET</h1>
                             <input type="number" class="id" name="g_id" id="g_id" placeholder="Gadget ID" required>
-                            <select name="type" id="type">
-                                <option value="bestbuy">best buy</option>
-                                <option value="laptop">laptop</option>
-                                <option value="phone">phone</option>
-                                <option value="deals">deals</option>
-                            </select>
-                            <select name="pricerange" id="pricerange">
-                                <option value="10000-50000">10000-50000</option>
-                                <option value="50000-100000">50000-100000</option>
-                                <option value="100000-150000">100000-150000</option>
-                                <option value="150000-200000">150000-200000</option>
-                            </select>
-                            <input type="file" class="rating" name="rating" id="rating" required>
+                            <div class="select-container">
+                                <select name="type" id="type">
+                                    <option value="bestbuy">best buy</option>
+                                    <option value="laptop">laptop</option>
+                                    <option value="phone">phone</option>
+                                    <option value="deals">deals</option>
+                                </select>
+                                <select name="pricerange" id="pricerange">
+                                    <option value="10000-50000">10000-50000</option>
+                                    <option value="50000-100000">50000-100000</option>
+                                    <option value="100000-150000">100000-150000</option>
+                                    <option value="150000-200000">150000-200000</option>
+                                </select>
+                            </div>
                             <input type="text" class="abbreviation" name="gname" id="gname" placeholder="Gadget Name"
                                 required>
+                            <input type="file" class="rating" name="rating" id="rating" required>
                             <input type="file" class="image" name="gimage" id="gimage" placeholder="Gadget Image URL"
                                 required>
                             <textarea name="gdis" id="gdis" cols="60" rows="7"
@@ -228,22 +228,24 @@ if (isset($_POST['update-submit'])) {
                                 }
                                 ?>
                             </select>
-                            <select name="type" id="type">
-                                <option value="bestbuy">best buy</option>
-                                <option value="laptop">laptop</option>
-                                <option value="phone">phone</option>
-                                <option value="deals">deals</option>
-                            </select>
-                            <select name="pricerange" id="pricerange">
-                                <option value="10000-50000">10000-50000</option>
-                                <option value="50000-100000">50000-100000</option>
-                                <option value="100000-150000">100000-150000</option>
-                                <option value="150000-200000">150000-200000</option>
-                            </select>
-                            <input type="file" class="rating" name="rating" id="rating" value="<?php echo $rating ?>"
-                                required>
+                            <div class="select-container">
+                                <select name="type" id="type">
+                                    <option value="bestbuy">best buy</option>
+                                    <option value="laptop">laptop</option>
+                                    <option value="phone">phone</option>
+                                    <option value="deals">deals</option>
+                                </select>
+                                <select name="pricerange" id="pricerange">
+                                    <option value="10000-50000">10000-50000</option>
+                                    <option value="50000-100000">50000-100000</option>
+                                    <option value="100000-150000">100000-150000</option>
+                                    <option value="150000-200000">150000-200000</option>
+                                </select>
+                            </div>
                             <input type="text" class="gname" name="gname" id="gname" placeholder="Gadget Name"
                                 value="<?php echo $gname ?>" required>
+                            <input type="file" class="rating" name="rating" id="rating" value="<?php echo $rating ?>"
+                                required>
                             <input type="file" class="image" name="gimage" id="gimage" placeholder="Gadget Image URL"
                                 value="<?php echo $gimage ?>" required>
                             <textarea name="gdis" id="gdis" cols="60" rows="7" placeholder="Gadget Description"

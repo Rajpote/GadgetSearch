@@ -11,7 +11,7 @@ window.alert = function(message, timeout=null){
    alert.setAttribute('style', `
    position:fixed;
    top:200px;
-   left:50%;
+   left:45%;
    color:white;
    background:rgb(49, 65, 57);
    height:150px;
@@ -85,3 +85,5 @@ for (let i = 0; i < star.length; i++) {
 		showValue.innerHTML = i + " out of 5";
 	});
 }
+
+

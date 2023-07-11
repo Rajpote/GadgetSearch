@@ -27,7 +27,7 @@ if (!isset($_SESSION['adminname'])) {
             <a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
         </div>
         <ul class="navbar">
-            <li><a href="admin.php">Admin</a></li>
+            <li><a href="admin.php">Dashboard</a></li>
             <li><a href="gadgetdata.php">Gadget data</a></li>
             <li><a class="active" href="userdata.php">User data</a></li>
             <li><a href="feedback.php">User Feedback</a></li>

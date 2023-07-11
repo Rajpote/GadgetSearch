@@ -32,12 +32,12 @@ $feedbackCount = $pdo->query("SELECT COUNT(Id) FROM feedback")->fetchColumn();
             <a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
         </div>
         <ul class="navbar">
-            <li><a href="admin.php">Admin</a></li>
+            <li><a href="admin.php">Dashboard</a></li>
             <li><a class="active" href="gadgetdata.php">Gadget data</a></li>
             <li><a href="userdata.php">User data</a></li>
             <li><a href="feedback.php">user feedback</a></li>
         </ul>
-        
+
         <a href="home.php" class="logout">logout</a>
     </header>
     <main id="gadgetdata">
@@ -46,8 +46,6 @@ $feedbackCount = $pdo->query("SELECT COUNT(Id) FROM feedback")->fetchColumn();
                 <h1>
                     no of gadgets
                 </h1>
-            </div>
-            <div class="table-content">
 
                 <?php
                 $query = "SELECT * FROM gadget_details";
@@ -61,13 +59,15 @@ $feedbackCount = $pdo->query("SELECT COUNT(Id) FROM feedback")->fetchColumn();
                             <th>S.N.</th>
                             <th>Gadget Name</th>
                             <th>price</th>
+                            <th>image</th>
                         </tr>
                         <?php
                         while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
                             echo "<tr>
                         <td>" . $count++ . "</td>
                         <td>" . $result["gname"] . "</td>
-                        <td>" . $result["gprice"] . "</td>
+                        <td>RS:" . $result["gprice"] . "</td>
+                        <td><img src='image/product/" . $result["gimage"] . "' alt=''></td>
                         </tr>";
                         }
                 }

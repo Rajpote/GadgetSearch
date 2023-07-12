@@ -2,12 +2,12 @@
 session_start();
 include('connect.php');
 
-if (isset($_GET['type'])) {
-    $type = $_GET['type'];
+if (isset($_GET['buy'])) {
+    $buy = $_GET['buy'];
 
-    $sql = "SELECT * FROM gadget_details WHERE type = :type";
+    $sql = "SELECT * FROM gadget_details WHERE buy = :buy";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':type', $type);
+    $stmt->bindParam(':buy', $buy);
     $stmt->execute();
     $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

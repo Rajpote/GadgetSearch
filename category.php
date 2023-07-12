@@ -21,16 +21,22 @@ if (isset($_GET['type'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GadgetSearch</title>
-    <link rel="stylesheet" href="user-admin.css">
-    <script src="https://kit.fontawesome.com/296ff2fa8f.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="Favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="Favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="Favicon/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    
     <link rel="stylesheet" href="style1.css">
+    <title>GadgetSearch</title>
 </head>
 
 <body>
@@ -68,7 +74,7 @@ if (isset($_GET['type'])) {
     </header>
     <div id="gadget-category">
         <div class="filter">
-        <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
+            <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
             <a href="category.php?type=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
                 Buy</a>
             <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
@@ -76,16 +82,16 @@ if (isset($_GET['type'])) {
             <a href="category.php?type=accories" class="category-item"><i class="fa fa-mobile-phone"></i>Accories</a>
 
             <center>
-               <h4>price range</h4>
+                <h4>price range</h4>
             </center><br>
             <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
-                  class="category-item">10k-50k</a></button>
+                    class="category-item">10k-50k</a></button>
             <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000"
-                  class="category-item">50k-100k</a></button>
+                    class="category-item">50k-100k</a></button>
             <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000"
-                  class="category-item">100k-150k</a></button>
+                    class="category-item">100k-150k</a></button>
             <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000"
-                  class="category-item">150k-200k</a></button>
+                    class="category-item">150k-200k</a></button>
 
         </div>
     </div>
@@ -135,7 +141,8 @@ if (isset($_GET['type'])) {
             <div class="coln">
                 <h3>follow us</h3>
                 <div>
-                    <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i
+                            class="fa-brands fa-facebook-f"></i></a>
                     <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
                     <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
                 </div>

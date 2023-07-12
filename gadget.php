@@ -132,7 +132,6 @@ do {
                   class="category-item">100k-150k</a></button>
             <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000"
                   class="category-item">150k-200k</a></button>
-
          </div>
       </div>
 

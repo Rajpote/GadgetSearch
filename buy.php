@@ -97,9 +97,9 @@ if (isset($_GET['type'])) {
     </div>
     <main class="gadget-main">
         <?php
-        if (isset($type) && !empty($devices)): ?>
+        if (isset($buy) && !empty($devices)): ?>
             <h1 class="title">
-                <?php echo $type; ?>
+                <?php echo $buy; ?>
             </h1>
             <div class="gadget-grid-container">
                 <?php

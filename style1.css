@@ -296,14 +296,16 @@ main {
 .product-category {
    font-size: 30px;
    font-weight: 700;
-   margin-top: 50px;
-   margin-bottom: 10px;
+   margin: 25px 40%;
    text-transform: capitalize;
    text-align: center;
+   width: 20%;
+   background-color: #b0dcdc;
 }
 .product-details {
    width: 100%;
-   background-color: #f9f6f6;
+border-radius: 15px;
+   background-color: #59d2d0;
    margin-top: 35px;
    padding: 30px 50px 30px 770px;
    display: flex;
@@ -314,6 +316,7 @@ main {
 }
 
 .pro-container {
+   background-color: #59d2d0;
    display: flex;
    align-items: center;
    justify-content: center;

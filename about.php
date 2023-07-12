@@ -136,7 +136,7 @@ if (isset($_POST['login-submit'])) {
 
 
 
-      <center>copyright</center>
+      <center><i class="fa-regular fa-copyright"></i>opyright</center>
    </footer>
    <script src="javascript.js"></script>
 </body>

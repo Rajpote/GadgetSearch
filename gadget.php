@@ -115,11 +115,11 @@ do {
       <div id="gadget-category">
          <div class="filter">
             <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
-            <a href="category.php?type=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
+            <a href="buy.php?buy=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
                Buy</a>
             <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
             <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-            <a href="category.php?type=accories" class="category-item"><i class="fa fa-mobile-phone"></i>Accories</a>
+            <a href="category.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories </a>
 
             <center>
                <h4>price range</h4>
@@ -192,7 +192,7 @@ do {
                </div>
             </div>
          </div>
-         <center>copyright</center>
+         <center><i class="fa-regular fa-copyright"></i>opyright</center>
       </footer>
    <?php } ?>
 

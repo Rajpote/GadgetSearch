@@ -23,7 +23,7 @@ if (isset($_GET['pricerange'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GadgetSearch</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
+
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
@@ -31,11 +31,11 @@ if (isset($_GET['pricerange'])) {
     <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
-    
+
     <link rel="stylesheet" href="style1.css">
 </head>
 
@@ -107,12 +107,14 @@ if (isset($_GET['pricerange'])) {
                     ?>
                     <a href="gadgetdetails.php?g_id=<?php echo $device['g_id']; ?>" class="g-item">
                         <img class='gadget-img' src="./image/product/<?php echo $device['gimage']; ?>">
-                        <p class="gadget-name">
+                        <div class="gadget-name">
                             <?php echo $device['gname']; ?>
-                        </p>
-                        <p class="gadget-price">
+                        </div>
+                        <div class="gadget-price">
                             <?php echo $device['gprice']; ?>
-                        </p>
+                        </div>
+                        <img class='ratingstar3' src='image/rating/<?php echo $device['rating']; ?>' alt='rating Image'>
+
                     </a>
                 <?php endforeach; ?>
             </div>
@@ -141,7 +143,8 @@ if (isset($_GET['pricerange'])) {
             <div class="coln">
                 <h3>follow us</h3>
                 <div>
-                    <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i
+                            class="fa-brands fa-facebook-f"></i></a>
                     <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
                     <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
                 </div>

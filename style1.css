@@ -602,6 +602,38 @@ button.pricerange1{
    z-index: 1;
 }
 
+/* pagination */
+.pagination {
+   margin-top: 20px;
+   text-align: center;
+}
+
+.pagination .page-link {
+   display: inline-block;
+   padding: 8px 16px;
+   text-decoration: none;
+   color: #000;
+   border: 1px solid #ddd;
+   margin-right: 4px;
+}
+
+.pagination .page-link.active {
+   background-color: #000;
+   color: #fff;
+}
+
+.pagination .page-link:hover {
+   background-color: #ddd;
+}
+
+.pagination .page-link:first-child {
+   margin-left: 0;
+}
+
+.pagination .page-link:last-child {
+   margin-right: 0;
+}
+
 
 /* about us */
 .information{

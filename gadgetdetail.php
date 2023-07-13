@@ -191,6 +191,7 @@ if (isset($_POST['update-submit'])) {
                                     <option value="deals">deals</option>
                                 </select>
                                 <select name="pricerange" id="pricerange">
+                                    <option value="1000-10000">1000-10000</option>
                                     <option value="10000-50000">10000-50000</option>
                                     <option value="50000-100000">50000-100000</option>
                                     <option value="100000-150000">100000-150000</option>
@@ -260,6 +261,7 @@ if (isset($_POST['update-submit'])) {
                                     <option value="deals">deals</option>
                                 </select>
                                 <select name="pricerange" id="pricerange">
+                                    <option value="1000-10000">1000-10000</option>
                                     <option value="10000-50000">10000-50000</option>
                                     <option value="50000-100000">50000-100000</option>
                                     <option value="100000-150000">100000-150000</option>

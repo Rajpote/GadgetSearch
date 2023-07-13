@@ -2,12 +2,36 @@
 session_start();
 include('connect.php');
 
+$perPage = 5; // Number of gadgets to display per page
+
 if (isset($_GET['type'])) {
     $type = $_GET['type'];
+    $priceRange = isset($_GET['pricerange']) ? $_GET['pricerange'] : '0-9999999';
 
-    $sql = "SELECT * FROM gadget_details WHERE type = :type";
+    // Extract the minimum and maximum prices from the price range
+    $priceValues = explode('-', $priceRange);
+    $minPrice = intval($priceValues[0]);
+    $maxPrice = intval($priceValues[1]);
+
+    $sql = "SELECT COUNT(*) AS total FROM gadget_details WHERE type = :type AND gprice BETWEEN :minPrice AND :maxPrice";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':type', $type);
+    $stmt->bindParam(':minPrice', $minPrice);
+    $stmt->bindParam(':maxPrice', $maxPrice);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $totalGadgets = $result['total'];
+
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+    $offset = ($currentPage - 1) * $perPage;
+
+    $sql = "SELECT * FROM gadget_details WHERE type = :type AND gprice BETWEEN :minPrice AND :maxPrice LIMIT :offset, :perPage";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':type', $type);
+    $stmt->bindParam(':minPrice', $minPrice);
+    $stmt->bindParam(':maxPrice', $maxPrice);
+    $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+    $stmt->bindParam(':perPage', $perPage, PDO::PARAM_INT);
     $stmt->execute();
     $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -67,23 +91,21 @@ if (isset($_GET['type'])) {
                 <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
             </form>
         </div>
-        <div id="mobile">
-            <a href="#" id="close"><i id="bar" class="fa-solid fa-xmark"></i></a>
-            <i id="bar" class="fa-solid fa-bars"></i>
-        </div>
     </header>
     <div id="gadget-category">
         <div class="filter">
             <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
             <a href="buy.php?buy=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
-               Buy</a>
+                Buy</a>
             <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
             <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-            <a href="category.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories </a>
+            <a href="category.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories
+            </a>
 
-            <center>
-                <h4>price range</h4>
-            </center><br>
+            
+            <h4>price range</h4>
+            <button class="pricerange1"><a href="price_range.php?pricerange=1000-10000"
+            class="category-item">1k-10k</a></button>
             <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
                     class="category-item">10k-50k</a></button>
             <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000"
@@ -96,15 +118,12 @@ if (isset($_GET['type'])) {
         </div>
     </div>
     <main class="gadget-main">
-        <?php
-        if (isset($type) && !empty($devices)): ?>
+    <?php if (isset($type) && !empty($devices)): ?>
             <h1 class="title">
                 <?php echo $type; ?>
             </h1>
             <div class="gadget-grid-container">
-                <?php
-                foreach ($devices as $device):
-                    ?>
+                <?php foreach ($devices as $device): ?>
                     <a href="gadgetdetails.php?g_id=<?php echo $device['g_id']; ?>" class="g-item">
                         <img class='gadget-img' src="./image/product/<?php echo $device['gimage']; ?>">
                         <div class="gadget-name">
@@ -114,11 +133,31 @@ if (isset($_GET['type'])) {
                             <?php echo $device['gprice']; ?>
                         </div>
                         <img class='ratingstar3' src='image/rating/<?php echo $device['rating']; ?>' alt='rating Image'>
-
                     </a>
                 <?php endforeach; ?>
             </div>
 
+            <!-- Pagination -->
+            <div class="pagination">
+                <?php
+                $totalPages = ceil($totalGadgets / $perPage);
+                $prevPage = $currentPage - 1;
+                $nextPage = $currentPage + 1;
+
+                if ($currentPage > 1) {
+                    echo "<a href='gadget.php?type=$type&page=$prevPage' class='page-link'>&#171; Previous</a>";
+                }
+
+                for ($i = 1; $i <= $totalPages; $i++) {
+                    $activeClass = ($i == $currentPage) ? 'active' : '';
+                    echo "<a href='gadget.php?type=$type&page=$i' class='page-link $activeClass'>$i</a>";
+                }
+
+                if ($currentPage < $totalPages) {
+                    echo "<a href='gadget.php?type=$type&page=$nextPage' class='page-link'>Next &#187;</a>";
+                }
+                ?>
+            </div>
         <?php endif; ?>
     </main>
     <footer>
@@ -156,5 +195,5 @@ if (isset($_GET['type'])) {
 
 
 </body>
-
 </html>
+            

@@ -5,6 +5,14 @@ include 'connect.php';
 if (!isset($_SESSION['username'])) {
    header('location: home.php');
 }
+
+// Determine the current page number
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+// Calculate the offset based on the page number and limit
+$limit = 5;
+$offset = ($page - 1) * $limit;
+
 $g_id;
 $i = 0;
 $searchValue;
@@ -14,7 +22,7 @@ do {
    @$g_id = $_GET[$i];
 
    if ($g_id != null) {
-      $stmt = $pdo->prepare("SELECT * FROM gadget_details WHERE g_id = :g_id");
+      $stmt = $pdo->prepare("SELECT * FROM gadget_details WHERE g_id = :g_id LIMIT $limit OFFSET $offset");
       $stmt->bindParam(':g_id', $g_id);
 
       $stmt->execute();
@@ -34,7 +42,7 @@ do {
 <html lang="en">
 
 <head>
-   <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -55,7 +63,7 @@ do {
 </head>
 
 <body>
-   <?php
+  <?php
    if ($searchValue) { ?>
 
       <ul class="navbar">
@@ -121,11 +129,12 @@ do {
             <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
             <a href="category.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories </a>
 
-            <center>
+           
                <h4>price range</h4>
-            </center><br>
+            <button class="pricerange1"><a href="price_range.php?pricerange=1000-10000"
+            class="category-item">1k-10k</a></button>
             <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
-                  class="category-item">10k-50k</a></button>
+            class="category-item">10k-50k</a></button>
             <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000"
                   class="category-item">50k-100k</a></button>
             <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000"
@@ -135,35 +144,68 @@ do {
          </div>
       </div>
 
-      <main>
-         <div class="gadget-grid-container">
-            <h1 class="title">Gadgets</h1>
+   <main>
+      <div class="gadget-grid-container">
+         <h1 class="title">Gadgets</h1>
+         <?php
+         $sql = "SELECT * FROM gadget_details";
+
+         if (isset($_GET['type'])) {
+            $type = $_GET['type'];
+            $sql .= " WHERE type = '$type'";
+         }
+
+         // Get the total count of rows without limit and offset
+         $totalRows = $pdo->query($sql)->rowCount();
+
+         // Calculate the total number of pages
+         $totalPages = ceil($totalRows / $limit);
+
+         // Modify the SQL query to include the limit and offset
+         $sql .= " LIMIT $limit OFFSET $offset";
+
+         $stmt = $pdo->query($sql);
+
+         if ($stmt->rowCount() > 0) {
+            while ($row = $stmt->fetch()) {
+               echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="g-item">';
+               echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+               echo '<div class="gadget-name">' . $row['gname'] . '</div>';
+               echo '<div class="gadget-price">Rs:' . $row['gprice'] . '</div>';
+               echo "<img class='ratingstar3' src='image/rating/{$row['rating']}' alt='rating Image'>";
+               echo '</a>';
+            }
+         } else {
+            echo "No gadgets found.";
+         }
+         ?>
+      </div>
+
+      <!-- Pagination links -->
+      <center>
+
+         <div class="pagination">
             <?php
-            $sql = "SELECT * FROM gadget_details";
+         // Previous page link
+         if ($page > 1) {
+            echo '<a class="page-link" href="?page=' . ($page - 1) . '">&laquo; Previous</a>';
+         }
 
-            if (isset($_GET['type'])) {
-               $type = $_GET['type'];
-               $sql .= " WHERE type = '$type'";
-            }
+         for ($i = 1; $i <= $totalPages; $i++) {
+            $activeClass = ($i === $page) ? "active" : "";
+            echo '<a class="page-link ' . $activeClass . '" href="?page=' . $i . '">' . $i . '</a>';
+         }
 
-            $stmt = $pdo->query($sql);
+         // Next page link
+         if ($page < $totalPages) {
+            echo '<a class="page-link" href="?page=' . ($page + 1) . '">Next &raquo;</a>';
+         }
+         ?>
+      </div>
+   </center>
+   </main>
 
-            if ($stmt->rowCount() > 0) {
-               while ($row = $stmt->fetch()) {
-                  echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="g-item">';
-                  echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-                  echo '<div class="gadget-name">' . $row['gname'] . '</div>';
-                  echo '<div class="gadget-price">Rs:' . $row['gprice'] . '</div>';
-                  echo "<img class='ratingstar3' src='image/rating/{$row['rating']}' alt='rating Image'>";
-                  echo '</a>';
-               }
-            } else {
-               echo "No courses found.";
-            }
-            ?>
-         </div>
-      </main>
-      <footer>
+    <footer>
          <div class="row">
             <div class="coln">
                <h3>contact</h3>

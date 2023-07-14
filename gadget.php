@@ -112,6 +112,7 @@ do {
                <div id="username" class="container">
                   <?php echo $_SESSION['username'] ?>
                </div>
+
                <div class="logout">
                   <a href="logout.php">logout</a>
                </div>

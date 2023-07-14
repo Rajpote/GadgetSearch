@@ -17,14 +17,20 @@ if (isset($_POST['submit'])) {
     $email = ($_POST['email']);
     $address = ($_POST['address']);
 
-    $sql = "UPDATE register SET uname = '$uname', email = '$email', gender = '$gender', phnumber = '$phnumber', address = '$address' WHERE id = '$id'";
+    $sql = "UPDATE register SET uname = :uname, email = :email, gender = :gender, phnumber = :phnumber, address = :address WHERE id = :id";
     $stmt = $pdo->prepare($sql);
-    if ($sql) {
-        echo '<script> alert("User registered successfully."); window.location.href = "userdata.php"; </script>';
-
+    $stmt->bindParam(':uname', $uname);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':gender', $gender);
+    $stmt->bindParam(':phnumber', $phnumber);
+    $stmt->bindParam(':address', $address);
+    $stmt->bindParam(':id', $id);
+    if ($stmt->execute()) {
+        echo '<script> alert("User updated successfully."); window.location.href = "userdata.php"; </script>';
+    } else {
+        echo "Error updating user: " . $stmt->errorInfo()[2];
     }
 }
-// }
 ?>
 
 <!DOCTYPE html>

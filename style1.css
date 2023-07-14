@@ -135,28 +135,29 @@ i.fa-magnifying-glass {
    margin: 1rem 0 1rem 0;
 }
 .searchcontainer {
-   margin: 7vh 0 0 7vw;
-   display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
-   grid-gap: 1vw;
-   width: 85.97vw;
+   margin: 7vh 0 0 25vw;
+   padding: 10px;
+   width: 50vw;
 }
 .pro_img {
-   height: 100px;
-   width: 100px;
+   height: 110px;
+   width: 110px;
+   border-radius: 5px;
 }
 .search-item {
    display: flex;
    align-items: center;
-   background-color: white;
-   width: 50%;
+   justify-content: left;
+   color: #000;
+   background-color: rgb(152, 152, 186);
+   width: 100%;
    text-decoration: none;
    text-transform: capitalize;
    font-size: 2rem;
    border-radius: 15px;
    text-align: left;
    padding: 1vw;
-   margin: 0vh 0vw 0.7vh 0vw;
+   margin: 0vh 0vw 5vh 0vw;
 }
 /* login popup */
 .container {
@@ -612,18 +613,19 @@ button.pricerange1{
    display: inline-block;
    padding: 8px 16px;
    text-decoration: none;
-   color: #000;
+   color: #010300;
    border: 1px solid #ddd;
+   border-radius: 25px;
    margin-right: 4px;
 }
 
 .pagination .page-link.active {
-   background-color: #000;
+   background-color: #385c1095;
    color: #fff;
 }
 
 .pagination .page-link:hover {
-   background-color: #ddd;
+   background-color: #86a383;
 }
 
 .pagination .page-link:first-child {

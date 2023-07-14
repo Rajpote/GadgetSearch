@@ -12,6 +12,26 @@ if (isset($_GET['buy'])) {
     $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+$g_id;
+$i = 0;
+$searchValue;
+@$count = $_GET['count'];
+
+do {
+    @$g_id = $_GET[$i];
+
+    if ($g_id != null) {
+        $stmt = $pdo->prepare("SELECT * FROM gadget_details WHERE g_id = :g_id");
+        $stmt->bindParam(':g_id', $g_id);
+        $stmt->execute();
+        $value[$i] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $searchValue = true;
+    } else {
+        $searchValue = false;
+    }
+    $i++;
+} while ($i < $count);
+
 ?>
 
 <!DOCTYPE html>
@@ -40,121 +60,146 @@ if (isset($_GET['buy'])) {
 </head>
 
 <body>
-    <header>
-        <div>
-            <a class="logo" href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
-        </div>
-        <ul class="navbar">
-            <li><a href="user.php">Home</a></li>
-            <li><a class="active" href="gadget.php">Gadget</a></li>
-            <li><a href="about.php">About Us</a></li>
-        </ul>
+    <?php
+    if ($searchValue) {
+        ?>
 
         <ul class="navbar">
-            <input type="search" class="search-bar" placeholder="Search . . . " id="search" /><i
-                class="fa-solid fa-magnifying-glass"></i>
-            <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
-        </ul>
-
-        <div id="my-modal" class="modal">
-            <form action="" method="POST" class="login-form">
-                <div id="username" class="container">
-                    <?php echo $_SESSION['username'] ?>
-                </div>
-                <div class="logout">
-                    <a href="home.php">logout</a>
-                </div>
-                <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
+            <form action="search.php" method="post">
+                <input type="text" name="search" class="search-bars" placeholder="Search . . . " id="search" /><i
+                    class="fa-solid fa-magnifying-glass"></i>
             </form>
-        </div>
-        <div id="mobile">
-            <a href="#" id="close"><i id="bar" class="fa-solid fa-xmark"></i></a>
-            <i id="bar" class="fa-solid fa-bars"></i>
-        </div>
-    </header>
-    <div id="gadget-category">
-        <div class="filter">
-            <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
-            <a href="buy.php?buy=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
-               Buy</a>
-            <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
-            <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-            <a href="category.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories </a>
+        </ul>
 
-            <center>
-                <h4>price range</h4>
-            </center><br>
-            <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
-                    class="category-item">10k-50k</a></button>
-            <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000"
-                    class="category-item">50k-100k</a></button>
-            <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000"
-                    class="category-item">100k-150k</a></button>
-            <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000"
-                    class="category-item">150k-200k</a></button>
-
-        </div>
-    </div>
-    <main class="gadget-main">
+        <h2 class="result">Found results.</h2>
         <?php
-        if (isset($buy) && !empty($devices)): ?>
-            <h1 class="title">
-                <?php echo $buy; ?>
-            </h1>
-            <div class="gadget-grid-container">
-                <?php
-                foreach ($devices as $device):
+        echo '<div class="searchcontainer">';
+        foreach ($value as $item) {
+            echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-item">';
+            echo "<img class='pro-img' src='image/product/{$item[0]['gimage']}' alt='Gadget Image'>";
+            echo '<p class="pro-name">' . $item[0]['gname'] . '</p>';
+            echo '<p class="gadget-price">' . $item[0]['gprice'] . '</p>';
+            echo "<img class='ratingstar3' src='image/rating/{$item[0]['rating']}' alt='rating Image'>";
+            echo '</a>';
+        }
+        echo '</div>';
+    } else {
+        ?>
+        <header>
+            <div>
+                <a class="logo" href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
+            </div>
+            <ul class="navbar">
+                <li><a href="user.php">Home</a></li>
+                <li><a class="active" href="gadget.php">Gadget</a></li>
+                <li><a href="about.php">About Us</a></li>
+            </ul>
+
+            <ul class="navbar">
+                <form action="search.php" method="post">
+                    <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" /><i
+                        id="search-icon" class="fa-solid fa-magnifying-glass"></i>
+                </form>
+                <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
+            </ul>
+
+            <div id="my-modal" class="modal">
+                <form action="" method="POST" class="login-form">
+                    <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
+                    <div id="username" class="container">
+                        <?php echo $_SESSION['username'] ?>
+                    </div>
+
+                    <div class="logout">
+                        <a href="logout.php">logout</a>
+                    </div>
+                </form>
+            </div>
+        </header>
+        <div id="gadget-category">
+            <div class="filter">
+                <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
+                <a href="buy.php?buy=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat Buy</a>
+                <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
+                <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
+                <a href="category.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories </a>
+
+                <center>
+                    <h4>price range</h4>
+                </center><br>
+                <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
+                        class="category-item">10k-50k</a></button>
+                <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000"
+                        class="category-item">50k-100k</a></button>
+                <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000"
+                        class="category-item">100k-150k</a></button>
+                <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000"
+                        class="category-item">150k-200k</a></button>
+
+            </div>
+        </div>
+        <main class="gadget-main">
+            <?php
+            if (isset($buy) && !empty($devices)) {
+                ?>
+                <h1 class="title">
+                    <?php echo $buy; ?>
+                </h1>
+                <div class="gadget-grid-container">
+                    <?php
+                    foreach ($devices as $device) {
+                        ?>
+                        <a href="gadgetdetails.php?g_id=<?php echo $device['g_id']; ?>" class="g-item">
+                            <img class='gadget-img' src="./image/product/<?php echo $device['gimage']; ?>">
+                            <div class="gadget-name">
+                                <?php echo $device['gname']; ?>
+                            </div>
+                            <div class="gadget-price">
+                                <?php echo $device['gprice']; ?>
+                            </div>
+                            <img class='ratingstar3' src='image/rating/<?php echo $device['rating']; ?>' alt='rating Image'>
+                        </a>
+                    <?php
+                    }
                     ?>
-                    <a href="gadgetdetails.php?g_id=<?php echo $device['g_id']; ?>" class="g-item">
-                        <img class='gadget-img' src="./image/product/<?php echo $device['gimage']; ?>">
-                        <div class="gadget-name">
-                            <?php echo $device['gname']; ?>
-                        </div>
-                        <div class="gadget-price">
-                            <?php echo $device['gprice']; ?>
-                        </div>
-                        <img class='ratingstar3' src='image/rating/<?php echo $device['rating']; ?>' alt='rating Image'>
-
-                    </a>
-                <?php endforeach; ?>
-            </div>
-
-        <?php endif; ?>
-    </main>
-    <footer>
-        <div class="row">
-            <div class="coln">
-                <h3>contact</h3>
-                <ul>
-                    <li>
-                        <i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span>
-                    </li>
-                    <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span></li>
-                    <li><i class="fa-solid fa-envelope"></i><span class="content">gadgetsearch@gmail.com</span></li>
-                </ul>
-            </div>
-            <div class="coln">
-                <h3>About</h3>
-                <ul>
-                    <li><a href="about.php">About us</a></li>
-                    <li><a href="#">Term & Condition</a></li>
-                </ul>
-            </div>
-            <div class="coln">
-                <h3>follow us</h3>
-                <div>
-                    <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i
-                            class="fa-brands fa-facebook-f"></i></a>
-                    <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            <?php
+            }
+            ?>
+        </main>
+        <footer>
+            <div class="row">
+                <div class="coln">
+                    <h3>contact</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span></li>
+                        <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span></li>
+                        <li><i class="fa-solid fa-envelope"></i><span class="content">gadgetsearch@gmail.com</span></li>
+                    </ul>
+                </div>
+                <div class="coln">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="about.php">About us</a></li>
+                        <li><a href="#">Term & Condition</a></li>
+                    </ul>
+                </div>
+                <div class="coln">
+                    <h3>follow us</h3>
+                    <div>
+                        <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i
+                                class="fa-brands fa-facebook-f"></i></a>
+                        <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <center><i class="fa-regular fa-copyright"></i>opyright</center>
-    </footer>
-    <script src="javascript.js"></script>
-
-
+            <center><i class="fa-regular fa-copyright"></i>opyright</center>
+        </footer>
+        <script src="javascript.js"></script>
+    <?php
+    }
+    ?>
 </body>
 
 </html>

@@ -24,7 +24,7 @@ if (isset($_POST['login-submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GadgetSearch</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
+
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
@@ -32,11 +32,11 @@ if (isset($_POST['login-submit'])) {
     <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
-    
+
     <link rel="stylesheet" href="style1.css">
 
     <style>
@@ -274,25 +274,6 @@ if (isset($_POST['login-submit'])) {
                         <li><a href="about.php">About Us</a></li>
                     </ul>
 
-                    <ul class="navbar">
-                        <input type="search" class="search-bar" placeholder="Search . . . " id="search" /><i
-                            class="fa-solid fa-magnifying-glass"></i>
-                        <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
-                    </ul>
-
-                    <div id="my-modal" class="modal">
-                        <form action="" method="POST" class="login-form">
-                            <div id="username" class="container">
-                                <?php echo $_SESSION['username'] ?>
-                            </div>
-
-
-                            <div class="logout">
-                                <a href="home.php">logout</a>
-                            </div>
-                            <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
-                        </form>
-                    </div>
                 </header>
                 <main>
                     <div class="image-pro">

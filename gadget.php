@@ -42,7 +42,7 @@ do {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
+   <meta charset="UTF-8" />
    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -54,7 +54,7 @@ do {
    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
    <meta name="msapplication-TileColor" content="#da532c">
    <meta name="theme-color" content="#ffffff">
-   
+
    <link rel="preconnect" href="https://fonts.googleapis.com" />
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
@@ -63,7 +63,7 @@ do {
 </head>
 
 <body>
-  <?php
+   <?php
    if ($searchValue) { ?>
 
       <ul class="navbar">
@@ -112,7 +112,6 @@ do {
                <div id="username" class="container">
                   <?php echo $_SESSION['username'] ?>
                </div>
-
                <div class="logout">
                   <a href="logout.php">logout</a>
                </div>
@@ -127,14 +126,15 @@ do {
                Buy</a>
             <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
             <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-            <a href="category.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories </a>
+            <a href="category.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories
+            </a>
 
-           
-               <h4>price range</h4>
+
+            <h4>price range</h4>
             <button class="pricerange1"><a href="price_range.php?pricerange=1000-10000"
-            class="category-item">1k-10k</a></button>
+                  class="category-item">1k-10k</a></button>
             <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
-            class="category-item">10k-50k</a></button>
+                  class="category-item">10k-50k</a></button>
             <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000"
                   class="category-item">50k-100k</a></button>
             <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000"
@@ -144,68 +144,68 @@ do {
          </div>
       </div>
 
-   <main>
-      <div class="gadget-grid-container">
-         <h1 class="title">Gadgets</h1>
-         <?php
-         $sql = "SELECT * FROM gadget_details";
-
-         if (isset($_GET['type'])) {
-            $type = $_GET['type'];
-            $sql .= " WHERE type = '$type'";
-         }
-
-         // Get the total count of rows without limit and offset
-         $totalRows = $pdo->query($sql)->rowCount();
-
-         // Calculate the total number of pages
-         $totalPages = ceil($totalRows / $limit);
-
-         // Modify the SQL query to include the limit and offset
-         $sql .= " LIMIT $limit OFFSET $offset";
-
-         $stmt = $pdo->query($sql);
-
-         if ($stmt->rowCount() > 0) {
-            while ($row = $stmt->fetch()) {
-               echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="g-item">';
-               echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-               echo '<div class="gadget-name">' . $row['gname'] . '</div>';
-               echo '<div class="gadget-price">Rs:' . $row['gprice'] . '</div>';
-               echo "<img class='ratingstar3' src='image/rating/{$row['rating']}' alt='rating Image'>";
-               echo '</a>';
-            }
-         } else {
-            echo "No gadgets found.";
-         }
-         ?>
-      </div>
-
-      <!-- Pagination links -->
-      <center>
-
-         <div class="pagination">
+      <main>
+         <div class="gadget-grid-container">
+            <h1 class="title">Gadgets</h1>
             <?php
-         // Previous page link
-         if ($page > 1) {
-            echo '<a class="page-link" href="?page=' . ($page - 1) . '">&laquo; Previous</a>';
-         }
+            $sql = "SELECT * FROM gadget_details";
 
-         for ($i = 1; $i <= $totalPages; $i++) {
-            $activeClass = ($i === $page) ? "active" : "";
-            echo '<a class="page-link ' . $activeClass . '" href="?page=' . $i . '">' . $i . '</a>';
-         }
+            if (isset($_GET['type'])) {
+               $type = $_GET['type'];
+               $sql .= " WHERE type = '$type'";
+            }
 
-         // Next page link
-         if ($page < $totalPages) {
-            echo '<a class="page-link" href="?page=' . ($page + 1) . '">Next &raquo;</a>';
-         }
-         ?>
-      </div>
-   </center>
-   </main>
+            // Get the total count of rows without limit and offset
+            $totalRows = $pdo->query($sql)->rowCount();
 
-    <footer>
+            // Calculate the total number of pages
+            $totalPages = ceil($totalRows / $limit);
+
+            // Modify the SQL query to include the limit and offset
+            $sql .= " LIMIT $limit OFFSET $offset";
+
+            $stmt = $pdo->query($sql);
+
+            if ($stmt->rowCount() > 0) {
+               while ($row = $stmt->fetch()) {
+                  echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="g-item">';
+                  echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+                  echo '<div class="gadget-name">' . $row['gname'] . '</div>';
+                  echo '<div class="gadget-price">Rs:' . $row['gprice'] . '</div>';
+                  echo "<img class='ratingstar3' src='image/rating/{$row['rating']}' alt='rating Image'>";
+                  echo '</a>';
+               }
+            } else {
+               echo "No gadgets found.";
+            }
+            ?>
+         </div>
+
+         <!-- Pagination links -->
+         <center>
+
+            <div class="pagination">
+               <?php
+               // Previous page link
+               if ($page > 1) {
+                  echo '<a class="page-link" href="?page=' . ($page - 1) . '">&laquo; Previous</a>';
+               }
+
+               for ($i = 1; $i <= $totalPages; $i++) {
+                  $activeClass = ($i === $page) ? "active" : "";
+                  echo '<a class="page-link ' . $activeClass . '" href="?page=' . $i . '">' . $i . '</a>';
+               }
+
+               // Next page link
+               if ($page < $totalPages) {
+                  echo '<a class="page-link" href="?page=' . ($page + 1) . '">Next &raquo;</a>';
+               }
+               ?>
+            </div>
+         </center>
+      </main>
+
+      <footer>
          <div class="row">
             <div class="coln">
                <h3>contact</h3>
@@ -227,7 +227,8 @@ do {
             <div class="coln">
                <h3>follow us</h3>
                <div>
-                  <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                  <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i
+                        class="fa-brands fa-facebook-f"></i></a>
                   <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
                   <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
                </div>

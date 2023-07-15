@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
     $g_id = $_POST['g_id'];
     $type = $_POST['type'];
     $pricerange = $_POST['pricerange'];
-    $buy = $_POST['buy'];
+    $category = $_POST['category'];
     $gname = $_POST['gname'];
     $rating = $_POST['rating'];
     $gdis = $_POST['gdis'];
@@ -35,17 +35,17 @@ if (isset($_POST['submit'])) {
         echo '<script> alert("Gadget already exists."); </script>';
     } else {
         if (
-            empty($g_id) || empty($type) || empty($pricerange) || empty($buy) || empty($gname) || empty($rating) || empty($gdis) || empty($gspecification) || empty($gcomprasion) || empty($gimage) || empty($imageone) || empty($imagetwo) || empty($glink) || empty($gprice)
+            empty($g_id) || empty($type) || empty($pricerange) || empty($category) || empty($gname) || empty($rating) || empty($gdis) || empty($gspecification) || empty($gcomprasion) || empty($gimage) || empty($imageone) || empty($imagetwo) || empty($glink) || empty($gprice)
         ) {
             echo '<script> alert("Please fill all the fields."); window.location.href = "gadgetdetail.php"; </script>';
         } else {
-            $sql = "INSERT INTO gadget_details (g_id, type, pricerange, buy, gname, rating, gdis, gspecification, gcomprasion, gimage, imageone, imagetwo, glink, gprice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO gadget_details (g_id, type, pricerange, category, gname, rating, gdis, gspecification, gcomprasion, gimage, imageone, imagetwo, glink, gprice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 $g_id,
                 $type,
                 $pricerange,
-                $buy,
+                $category,
                 $gname,
                 $rating,
                 $gdis,
@@ -76,7 +76,7 @@ $gname = isset($value['gname']) ? $value['gname'] : '';
 $rating = isset($value['rating']) ? $value['rating'] : '';
 $type = isset($value['type']) ? $value['type'] : '';
 $pricerange = isset($value['pricerange']) ? $value['pricerange'] : '';
-$buy = isset($value['buy']) ? $value['buy'] : '';
+$category = isset($value['category']) ? $value['category'] : '';
 $gdis = isset($value['gdis']) ? $value['gdis'] : '';
 $gspecification = isset($value['gspecification']) ? $value['gspecification'] : '';
 $gcomprasion = isset($value['gcomprasion']) ? $value['gcomprasion'] : '';
@@ -90,7 +90,7 @@ if (isset($_POST['update-submit'])) {
     $g_id = $_POST['g_id'];
     $type = $_POST['type'];
     $pricerange = $_POST['pricerange'];
-    $buy = $_POST['buy'];
+    $category = $_POST['category'];
     $gname = $_POST['gname'];
     $rating = $_POST['rating'];
     $gdis = $_POST['gdis'];
@@ -102,15 +102,15 @@ if (isset($_POST['update-submit'])) {
     $glink = $_POST['glink'];
     $gprice = $_POST['gprice'];
 
-    if (empty($_POST['g_id']) || empty($_POST['type']) || empty($_POST['pricerange']) || empty($_POST['buy']) || empty($_POST['gname']) || empty($_POST['rating']) || empty($_POST['gdis']) || empty($_POST['gspecification']) || empty($_POST['gcomprasion']) || empty($_POST['gimage']) || empty($_POST['imageone']) || empty($_POST['imagetwo']) || empty($_POST['glink']) || empty($_POST['gprice'])) {
+    if (empty($_POST['g_id']) || empty($_POST['type']) || empty($_POST['pricerange']) || empty($_POST['category']) || empty($_POST['gname']) || empty($_POST['rating']) || empty($_POST['gdis']) || empty($_POST['gspecification']) || empty($_POST['gcomprasion']) || empty($_POST['gimage']) || empty($_POST['imageone']) || empty($_POST['imagetwo']) || empty($_POST['glink']) || empty($_POST['gprice'])) {
         echo '<script> alert("Please fill all the fields."); window.location.href = "gadgetdetail.php"; </script>';
     } else {
-        $sql = "UPDATE gadget_details SET g_id=:g_id, type=:type, pricerange=:pricerange, buy=:buy, gname=:gname, rating=:rating, gdis=:gdis, gspecification=:gspecification, gcomprasion=:gcomprasion, gimage=:gimage, imageone=:imageone, imagetwo=:imagetwo, glink=:glink, gprice=:gprice WHERE g_id=:g_id";
+        $sql = "UPDATE gadget_details SET g_id=:g_id, type=:type, pricerange=:pricerange, category=:category, gname=:gname, rating=:rating, gdis=:gdis, gspecification=:gspecification, gcomprasion=:gcomprasion, gimage=:gimage, imageone=:imageone, imagetwo=:imagetwo, glink=:glink, gprice=:gprice WHERE g_id=:g_id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":g_id", $g_id);
         $stmt->bindParam(":type", $type);
         $stmt->bindParam(":pricerange", $pricerange);
-        $stmt->bindParam(":buy", $buy);
+        $stmt->bindParam(":category", $category);
         $stmt->bindParam(":gname", $gname);
         $stmt->bindParam(":rating", $rating);
         $stmt->bindParam(":gdis", $gdis);
@@ -185,7 +185,7 @@ if (isset($_POST['update-submit'])) {
                                     <option value="phone">phone</option>
                                     <option value="accessories">Accessories</option>
                                 </select>
-                                <select name="buy" id="buy">
+                                <select name="category" id="category">
                                     <option value="select">select</option>
                                     <option value="bestbuy">best buy</option>
                                     <option value="deals">deals</option>
@@ -255,7 +255,7 @@ if (isset($_POST['update-submit'])) {
                                     <option value="phone">phone</option>
                                     <option value="accessories">Accessories</option>
                                 </select>
-                                <select name="buy" id="buy">
+                                <select name="category" id="category">
                                     <option value="select">select</option>
                                     <option value="bestbuy">best buy</option>
                                     <option value="deals">deals</option>

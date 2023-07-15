@@ -191,7 +191,7 @@ h1.updatetitle{
    
 }
 select#type,
-select#buy,
+select#category,
 select#pricerange{
    padding: 5px;
    margin: 5px 50px 0 5px;

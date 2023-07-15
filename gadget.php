@@ -123,11 +123,11 @@ do {
       <div id="gadget-category">
          <div class="filter">
             <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
-            <a href="buy.php?buy=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
+            <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
                Buy</a>
-            <a href="category.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
-            <a href="category.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-            <a href="category.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories
+            <a href="type.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
+            <a href="type.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
+            <a href="type.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories
             </a>
 
 

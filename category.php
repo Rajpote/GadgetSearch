@@ -77,8 +77,8 @@ do {
         foreach ($value as $item) {
             echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-item">';
             echo "<img class='pro-img' src='image/product/{$item[0]['gimage']}' alt='Gadget Image'>";
-            echo '<p class="pro-name">' . $item[0]['gname'] . '</p>';
-            echo '<p class="gadget-price">' . $item[0]['gprice'] . '</p>';
+            echo '<div class="pro-name">' . $item[0]['gname'] . '</div>';
+            echo '<div class="gadget-price">' . $item[0]['gprice'] . '</div>';
             echo "<img class='ratingstar3' src='image/rating/{$item[0]['rating']}' alt='rating Image'>";
             echo '</a>';
         }
@@ -119,24 +119,29 @@ do {
         <div id="gadget-category">
             <div class="filter">
                 <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
-                <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat Buy</a>
-                <a href="type.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
-                <a href="type.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-                <a href="type.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories </a>
+                <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
+                    Buy</a>
+                <a href="type.php?type=laptop&category=bestbuy" class="category-item"><i
+                        class="fa-solid fa-laptop"></i>Laptop</a>
+                <a href="type.php?type=phone&category=bestbuy" class="category-item"><i
+                        class="fa fa-mobile-phone"></i>Phone</a>
+                <a href="type.php?type=accessories&category=bestbuy" class="category-item"><i
+                        class="fa fa-mobile-phone"></i>Accessories
+                </a>
 
-                <center>
+                <!-- <center>
                     <h4>price range</h4>
                 </center><br>
-                <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
+                <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000&category=bestbuy"
                         class="category-item">1k-10k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
+                <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000&category=bestbuy"
                         class="category-item">10k-50k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000"
+                <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000&category=bestbuy"
                         class="category-item">50k-100k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000"
+                <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000&category=bestbuy"
                         class="category-item">100k-150k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000"
-                        class="category-item">150k-200k</a></button>
+                <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000&category=bestbuy"
+                        class="category-item">150k-200k</a></button> -->
 
             </div>
         </div>
@@ -161,11 +166,11 @@ do {
                             </div>
                             <img class='ratingstar3' src='image/rating/<?php echo $device['rating']; ?>' alt='rating Image'>
                         </a>
-                    <?php
+                        <?php
                     }
                     ?>
                 </div>
-            <?php
+                <?php
             }
             ?>
         </main>
@@ -199,7 +204,7 @@ do {
             <center><i class="fa-regular fa-copyright"></i>opyright</center>
         </footer>
         <script src="javascript.js"></script>
-    <?php
+        <?php
     }
     ?>
 </body>

@@ -4,7 +4,29 @@ include('connect.php');
 
 $perPage = 5; // Number of gadgets to display per page
 
-if (isset($_GET['pricerange'])) {
+if (isset($_GET['pricerange']) && isset($_GET['type'])) {
+    $pricerange = $_GET['pricerange'];
+    $type = $_GET['type'];
+    @$category = $_GET['category'];
+
+
+    $sql = "SELECT COUNT(*) AS total FROM gadget_details WHERE pricerange = :pricerange";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':pricerange', $pricerange);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $totalGadgets = $result['total'];
+
+    $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+    $offset = ($currentPage - 1) * $perPage;
+
+    $sql = "SELECT * FROM gadget_details WHERE pricerange = :pricerange AND type = :type LIMIT $offset, $perPage";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':pricerange', $pricerange);
+    $stmt->bindParam(':type', $type);
+    $stmt->execute();
+    $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} elseif (isset($_GET['pricerange'])) {
     $pricerange = $_GET['pricerange'];
 
     $sql = "SELECT COUNT(*) AS total FROM gadget_details WHERE pricerange = :pricerange";
@@ -17,18 +39,17 @@ if (isset($_GET['pricerange'])) {
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
     $offset = ($currentPage - 1) * $perPage;
 
-    $sql = "SELECT * FROM gadget_details WHERE pricerange = :pricerange LIMIT :offset, :perPage";
+    $sql = "SELECT * FROM gadget_details WHERE pricerange = :pricerange LIMIT $offset, $perPage";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':pricerange', $pricerange);
-    $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
-    $stmt->bindParam(':perPage', $perPage, PDO::PARAM_INT);
     $stmt->execute();
     $devices = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-$g_id;
+
+$g_id = null;
 $i = 0;
-$searchValue;
-@$count = $_GET['count'];
+$searchValue = false;
+@$count = isset($_GET['count']) ? $_GET['count'] : 0;
 
 do {
     @$g_id = $_GET[$i];
@@ -39,12 +60,9 @@ do {
         $stmt->execute();
         $value[$i] = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $searchValue = true;
-    } else {
-        $searchValue = false;
     }
     $i++;
 } while ($i < $count);
-
 ?>
 
 
@@ -77,7 +95,6 @@ do {
     <?php
     if ($searchValue) {
         ?>
-
         <ul class="navbar">
             <form action="search.php" method="post">
                 <input type="text" name="search" class="search-bars" placeholder="Search . . . " id="search" /><i
@@ -86,17 +103,19 @@ do {
         </ul>
 
         <h2 class="result">Found results.</h2>
+        <div class="searchcontainer">
+            <?php
+            foreach ($value as $item) {
+                echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-item">';
+                echo "<img class='pro-img' src='image/product/{$item[0]['gimage']}' alt='Gadget Image'>";
+                echo '<div class="pro-name">' . $item[0]['gname'] . '</div>';
+                echo '<div class="gadget-price">Rs:' . $item[0]['gprice'] . '</div>';
+                echo "<img class='ratingstar3' src='image/rating/{$item[0]['rating']}' alt='rating Image'>";
+                echo '</a>';
+            }
+            ?>
+        </div>
         <?php
-        echo '<div class="searchcontainer">';
-        foreach ($value as $item) {
-            echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-item">';
-            echo "<img class='pro-img' src='image/product/{$item[0]['gimage']}' alt='Gadget Image'>";
-            echo '<p class="pro-name">' . $item[0]['gname'] . '</p>';
-            echo '<p class="gadget-price">' . $item[0]['gprice'] . '</p>';
-            echo "<img class='ratingstar3' src='image/rating/{$item[0]['rating']}' alt='rating Image'>";
-            echo '</a>';
-        }
-        echo '</div>';
     } else {
         ?>
         <header>
@@ -121,7 +140,7 @@ do {
                 <form action="" method="POST" class="login-form">
                     <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
                     <div id="username" class="container">
-                        <?php echo $_SESSION['username'] ?>
+                        <?php echo $_SESSION['username']; ?>
                     </div>
 
                     <div class="logout">
@@ -137,20 +156,29 @@ do {
                     Buy</a>
                 <a href="type.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
                 <a href="type.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-                <a href="catetypegory.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories
-                </a>
+                <a href="type.php?type=accessories" class="category-item"><i class="fa fa-mobile-phone"></i>Accessories</a>
 
                 <h4>price range</h4>
-                <button class="pricerange1"><a href="price_range.php?pricerange=1000-10000"
-                        class="category-item">1k-10k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
-                        class="category-item">10k-50k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000"
-                        class="category-item">50k-100k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000"
-                        class="category-item">100k-150k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000"
-                        class="category-item">150k-200k</a></button>
+                <button class="pricerange1"><a href="price_range.php?pricerange=1000-10000&<?php if (isset($_GET['type'])) {
+                    echo "type=";
+                    echo $type;
+                } ?>" class="category-item">1k-10k</a></button>
+                <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000&<?php if (isset($_GET['type'])) {
+                    echo "type=";
+                    echo $type;
+                } ?>" class="category-item">10k-50k</a></button>
+                <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000&<?php if (isset($_GET['type'])) {
+                    echo "type=";
+                    echo $type;
+                } ?>" class="category-item">50k-100k</a></button>
+                <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000<?php if (isset($_GET['type'])) {
+                    echo "type=";
+                    echo $type;
+                } ?>" class="category-item">100k-150k</a></button>
+                <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000&<?php if (isset($_GET['type'])) {
+                    echo "type=";
+                    echo $type;
+                } ?>" class="category-item">150k-200k</a></button>
             </div>
         </div>
         <main class="gadget-main">
@@ -229,8 +257,6 @@ do {
         <center><i class="fa-regular fa-copyright"></i>opyright</center>
     </footer>
     <script src="javascript.js"></script>
-
-
 </body>
 
 </html>

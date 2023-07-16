@@ -6,6 +6,7 @@ $perPage = 5; // Number of gadgets to display per page
 
 if (isset($_GET['type'])) {
     $type = $_GET['type'];
+    // $category = $_GET['category'];
 
     $sql = "SELECT COUNT(*) AS total FROM gadget_details WHERE type = :type";
     $stmt = $pdo->prepare($sql);
@@ -20,6 +21,7 @@ if (isset($_GET['type'])) {
     $sql = "SELECT * FROM gadget_details WHERE type = :type LIMIT :offset, :perPage";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':type', $type);
+    // $stmt->bindParam(':category', $category);
     $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
     $stmt->bindParam(':perPage', $perPage, PDO::PARAM_INT);
     $stmt->execute();
@@ -135,21 +137,25 @@ do {
                 <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
                 <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
                     Buy</a>
-                <a href="type.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
-                <a href="type.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-                <a href="type.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories
+                <a href="type.php?type=laptop&category=bestbuy
+
+" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
+                <a href="type.php?type=phone&category=bestbuy" class="category-item"><i
+                        class="fa fa-mobile-phone"></i>Phone</a>
+                <a href="type.php?type=accessories&category=bestbuy " class="category-item"><i
+                        class="fa fa-mobile-phone"></i>Accessories
                 </a>
 
                 <h4>price range</h4>
-                <button class="pricerange1"><a href="price_range.php?pricerange=1000-10000"
+                <button class="pricerange1"><a href="price_range.php?pricerange=1000-10000&type=<?php echo $type; ?>"
                         class="category-item">1k-10k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
+                <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000&type=<?php echo $type; ?>"
                         class="category-item">10k-50k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000"
+                <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000&type=<?php echo $type; ?>"
                         class="category-item">50k-100k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000"
+                <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000&type=<?php echo $type; ?>"
                         class="category-item">100k-150k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000"
+                <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000&type=<?php echo $type; ?>"
                         class="category-item">150k-200k</a></button>
             </div>
         </div>
@@ -165,7 +171,7 @@ do {
                             <div class="gadget-name">
                                 <?php echo $device['gname']; ?>
                             </div>
-                            <div class="gadget-price">
+                            <div class="gadget-price">Rs
                                 <?php echo $device['gprice']; ?>
                             </div>
                             <img class='ratingstar3' src='image/rating/<?php echo $device['rating']; ?>' alt='rating Image'>

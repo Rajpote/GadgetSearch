@@ -336,7 +336,7 @@ main {
    margin: 0px 50px 0px 50px;
    padding: 10px 10px 10px 10px;
    box-shadow: 2px 2px 3px rgb(26, 20, 20);
-   background-color: rgb(162, 162, 172);
+   background-color: #fff;
    transition: transform 0.5s;
    border: 1px solid black;
 }
@@ -366,6 +366,13 @@ img.ratingstar1 {
 }
 
 /* latest */
+section#newarival{
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+}
 #newarival h1,
 #newarival p {
    text-align: center;
@@ -375,9 +382,10 @@ img.ratingstar1 {
 }
 .latest-container {
    margin: 5vh 7vw 10vh 5vw;
-   display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(45vw, 1fr));
-   grid-gap: 2vw;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
    width: 80%;
 }
 div.g-name {
@@ -420,6 +428,7 @@ img.ratingstar2 {
    background-color: rgb(148, 190, 223);
    color: #232426;
    padding: 10vh;
+   margin: 20px 0 0 5rem;
    width: 75%;
    height: 10%;
    text-decoration: none;

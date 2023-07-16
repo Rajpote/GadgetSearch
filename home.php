@@ -90,7 +90,7 @@ if (isset($_POST['login-submit'])) {
    </header>
    <main>
       <div id="hero">
-         <img src="image/backgrounds/My project.png" alt="" class="background1" />
+         <img src="image/backgrounds/My project.png" alt="background image" class="background1" />
          <div class="cont-text">
             <h3>search has ended</h3>
             <h1>gadgetsearch</h1>

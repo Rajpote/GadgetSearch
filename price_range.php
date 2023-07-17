@@ -171,7 +171,7 @@ do {
                     echo "type=";
                     echo $type;
                 } ?>" class="category-item">50k-100k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000<?php if (isset($_GET['type'])) {
+                <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000&<?php if (isset($_GET['type'])) {
                     echo "type=";
                     echo $type;
                 } ?>" class="category-item">100k-150k</a></button>

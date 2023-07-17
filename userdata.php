@@ -74,9 +74,7 @@ if (!isset($_SESSION['adminname'])) {
                                 <td>" . $result["phnumber"] . "</td>
                                 <td>" . $result["email"] . "</td>
                                 <td>" . $result["address"] . "</td>
-                                <td> <a href='update.php?id=" . $result['id'] . "'><input type='submit' value='Update' class='update'></a>
-
-                                 <a href='delete.php?id=" . $result['id'] . "'><input type='submit' value='delete' class='delete' name='delete-user'></a></td>
+                                <td><a href='delete.php?id=" . $result['id'] . "'><input type='submit' value='delete' class='delete' name='delete-user'></a></td>
                             </tr>    
                             ";
                     }

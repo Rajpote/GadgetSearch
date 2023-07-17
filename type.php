@@ -137,9 +137,8 @@ do {
                 <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
                 <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
                     Buy</a>
-                <a href="type.php?type=laptop&category=bestbuy
-
-" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
+                <a href="type.php?type=laptop&category=bestbuy" class="category-item"><i
+                        class="fa-solid fa-laptop"></i>Laptop</a>
                 <a href="type.php?type=phone&category=bestbuy" class="category-item"><i
                         class="fa fa-mobile-phone"></i>Phone</a>
                 <a href="type.php?type=accessories&category=bestbuy " class="category-item"><i

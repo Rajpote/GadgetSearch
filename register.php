@@ -27,8 +27,6 @@ if (isset($_POST['submit'])) {
             // Hash the password
             $password = password_hash($password, PASSWORD_DEFAULT);
 
-            
-
             // Insert the user data into the database
             $sql = "INSERT INTO register (uname, email, password, cpassword, gender, phnumber, address) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);

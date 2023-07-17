@@ -121,27 +121,14 @@ do {
                 <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
                 <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
                     Buy</a>
-                <a href="type.php?type=laptop&category=bestbuy" class="category-item"><i
+                <!-- <a href="type.php?type=laptop&category=bestbuy" class="category-item"><i
                         class="fa-solid fa-laptop"></i>Laptop</a>
                 <a href="type.php?type=phone&category=bestbuy" class="category-item"><i
                         class="fa fa-mobile-phone"></i>Phone</a>
                 <a href="type.php?type=accessories&category=bestbuy" class="category-item"><i
                         class="fa fa-mobile-phone"></i>Accessories
-                </a>
+                </a> -->
 
-                <!-- <center>
-                    <h4>price range</h4>
-                </center><br>
-                <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000&category=bestbuy"
-                        class="category-item">1k-10k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000&category=bestbuy"
-                        class="category-item">10k-50k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000&category=bestbuy"
-                        class="category-item">50k-100k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000&category=bestbuy"
-                        class="category-item">100k-150k</a></button>
-                <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000&category=bestbuy"
-                        class="category-item">150k-200k</a></button> -->
 
             </div>
         </div>

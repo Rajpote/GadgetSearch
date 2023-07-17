@@ -11,6 +11,30 @@
         $phnumber = $_POST['phnumber'];
         $address = $_POST['address'];
 
+        // Validate form inputs with JavaScript
+        echo '<script>
+            function validateForm() {
+                var uname = document.getElementById("uname").value;
+                var pass = document.getElementById("pass").value;
+                var cpass = document.getElementById("cpass").value;
+                var gender = document.getElementById("gender").value;
+                var num = document.getElementById("num").value;
+                var email = document.getElementById("email").value;
+
+                if (uname === "" || pass === "" || cpass === "" || gender === "not-select" || num === "" || email === "") {
+                    alert("Please fill in all the fields.");
+                    return false;
+                }
+
+                if (pass !== cpass) {
+                    alert("The passwords do not match.");
+                    return false;
+                }
+
+                return true;
+            }
+        </script>';
+
         // Check if the user already exists
         $sql = "SELECT * FROM register WHERE uname = ? AND email = ?";
         $stmt = $pdo->prepare($sql);
@@ -20,19 +44,14 @@
         if($result){
             echo '<script> alert("User already exists."); </script>';
         } else {
-            // Check if the passwords match
-            if ($password !== $cpassword) {
-                echo '<script> alert("The passwords do not match."); </script>';
-            } else {
-                // Hash the password
-                $password = password_hash($password, PASSWORD_DEFAULT);
+            // Hash the password
+            $password = password_hash($password, PASSWORD_DEFAULT);
 
-                // Insert the user data into the database
-                $sql = "INSERT INTO register (uname, email, password, cpassword, gender, phnumber, address) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute([$uname, $email, $password, $cpassword, $gender, $phnumber, $address]);
-                echo '<script> alert("User registered successfully."); window.location.href = "home.php"; </script>';
-            }
+            // Insert the user data into the database
+            $sql = "INSERT INTO register (uname, email, password, cpassword, gender, phnumber, address) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$uname, $email, $password, $cpassword, $gender, $phnumber, $address]);
+            echo '<script> alert("User registered successfully."); window.location.href = "home.php"; </script>';
         }
     }
 ?>
@@ -62,7 +81,7 @@
  </head>
  <body>
   <div class="container1">
-   <form action="" method="POST" class="register-form">
+   <form action="" method="POST" class="register-form" onsubmit="return validateForm()">
     <div>
      <h1>Register</h1>
     </div>
@@ -76,11 +95,11 @@
     </div>
     <div class="container">
         <label for="C password">Confirm password:</label>
-        <input type="password" id="pass" name="cpassword" required/>
+        <input type="password" id="cpass" name="cpassword" required/>
     </div>
     <div class="container">
         <label for="gender">Gender:</label>
-        <select name="gender" id="">
+        <select name="gender" id="gender">
             <option value="not-select">Select</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -101,7 +120,7 @@
     </div>
     <div class="container0">
         <input type="checkbox" >
-        <span>I agree with all thr <strong>term & condition</strong> </span>
+        <span>I agree with all the <strong>terms & conditions</strong> </span>
     </div>
      <div class="reg-btn">
      <input type="submit" class="submit" name="submit" id="submit" value="Register">

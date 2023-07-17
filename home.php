@@ -49,6 +49,7 @@ if (isset($_POST['login-submit'])) {
     <link rel="stylesheet" href="style1.css">
 
    <title>GadgetSearch</title>
+   
 </head>
 
 <body>
@@ -138,8 +139,8 @@ if (isset($_POST['login-submit'])) {
                while ($row = $stmt->fetch()) {
                   echo '<a href="#" onclick="alertPopup()" class="detailes">';
                   echo "<img class='g-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-                  echo '<h5 class="g-name">' . $row['gname'] . '</h5>';
-                  echo '<p class="g-price">' . $row['gprice'] . '</p>';
+                  echo '<div class="g-name">' . $row['gname'] . '</div>';
+                  echo '<div class="g-price">' . $row['gprice'] . '</div>';
                   echo "<img class='ratingstar2' src='image/rating/{$row['rating']}' alt='rating Image'>";
                   echo '</a>';
 

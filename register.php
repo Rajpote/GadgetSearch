@@ -60,11 +60,12 @@ if (isset($_POST['submit'])) {
 
     <link rel="stylesheet" href="style2.css">
     <title>Register</title>
+
 </head>
 
 <body>
     <div class="container1">
-        <form action="" method="POST" class="register-form">
+        <form action="" method="POST" class="register-form" id="form">
             <div>
                 <h1>Register</h1>
             </div>
@@ -78,11 +79,11 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="container">
                 <label for="C password">Confirm password:</label>
-                <input type="password" id="pass" name="cpassword" required />
+                <input type="password" id="cpass" name="cpassword" required />
             </div>
             <div class="container">
                 <label for="gender">Gender:</label>
-                <select name="gender" id="">
+                <select name="gender" id="gender">
                     <option value="not-select">Select</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -91,7 +92,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="container">
                 <label for="phone number">Phone Number:</label>
-                <input type="number" id="num" name="phnumber" required />
+                <input type="number" id="phnumber" name="phnumber" required />
             </div>
             <div class="container">
                 <label for="email">E-mail:</label>
@@ -99,7 +100,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="container">
                 <label for="Address">Address:</label>
-                <textarea name="address" id="" cols="30" rows="2" name="address"></textarea>
+                <textarea name="address" id="address" cols="30" rows="2" name="address"></textarea>
             </div>
             <div class="container0">
                 <input type="checkbox">
@@ -109,7 +110,10 @@ if (isset($_POST['submit'])) {
                 <input type="submit" class="submit" name="submit" id="submit" value="Register">
             </div>
         </form>
+        <script src="validate_signup.js"> </script>
+
     </div>
 </body>
+
 
 </html>

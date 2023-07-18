@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
     $stmt->bindParam(':address', $address);
     $stmt->bindParam(':id', $id);
     if ($stmt->execute()) {
-        echo '<script> alert("User updated successfully."); window.location.href = "userdata.php"; </script>';
+        echo '<script> alert("User updated successfully."); window.location.href = "user.php"; </script>';
     } else {
         echo "Error updating user: " . $stmt->errorInfo()[2];
     }

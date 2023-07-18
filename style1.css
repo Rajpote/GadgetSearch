@@ -190,7 +190,6 @@ form.login-form {
    height: 47vh;
    padding: 20px;
    border-radius: 25px;
-   opacity: 0.75;
 }
 
 .checkbox-login {
@@ -233,15 +232,33 @@ form.login-form {
    font-size: 20px;
    font-weight: 300;
 }
-.logout a {
+.user-fun{
+   display: flex;
    align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   gap: 2rem;
+
+}
+.update-user a{
    border: 1px solid black;
    text-decoration: none;
-   color: red;
+   color: white;
+   margin: 0px 100px;
+   padding: 10px 15px;
+   font-size: 15px;
+   background-color: yellowgreen;
+   border-radius: 15px;
+}
+.logout a {
+   border: 1px solid black;
+   text-decoration: none;
+   color: white;
+   column-gap: 150px;
    margin: 10px 100px;
    padding: 10px 15px;
    font-size: 15px;
-   background-color: white;
+   background-color: red;
    border-radius: 15px;
 }
 /* main body */

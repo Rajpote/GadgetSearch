@@ -10,6 +10,12 @@ $g_id;
 $i = 0;
 $searchValue;
 @$count = $_GET['count'];
+$username = $_SESSION['username'];
+
+$stmt = $pdo->prepare("SELECT id FROM register WHERE uname = :username");
+$stmt->bindParam(':username', $username);
+$stmt->execute();
+$uid = $stmt->fetch(PDO::FETCH_COLUMN);
 
 do {
    @$g_id = $_GET[$i];
@@ -102,8 +108,13 @@ do {
                <div id="username" class="container">
                   <?php echo $_SESSION['username'] ?>
                </div>
-               <div class="logout">
-                  <a href="logout.php">logout</a>
+               <div class="user-fun">
+                  <div class="update-user">
+                     <a href="update.php?id=<?php echo $uid; ?>">update</a>
+                  </div>
+                  <div class="logout">
+                     <a href="logout.php">logout</a>
+                  </div>
                </div>
             </form>
          </div>

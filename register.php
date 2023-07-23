@@ -79,23 +79,23 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="container">
                 <!-- <span class="toggle-password" id="toggle-pass"> -->
-                    <label for="password">Password</label>
-                    <input type="password" id="pass" name="password" placeholder="Password" />
-                    <span class="eye" onclick="togglePassword()">
-                        <i id="hideopen" class="fa-solid fa-eye" style="color: #849a9a;"></i>
-                        <i id="hideclose" class="fa-solid fa-eye-slash" style="color: #849a9a;"></i>
-                    </span>
+                <label for="password">Password</label>
+                <input type="password" id="pass" name="password" placeholder="Password" />
+                <span class="eye" onclick="togglePassword()">
+                    <i id="hideopen" class="fa-solid fa-eye" style="color: #849a9a;"></i>
+                    <i id="hideclose" class="fa-solid fa-eye-slash" style="color: #849a9a;"></i>
+                </span>
                 <!-- </span> -->
                 <div id="password-error" class="error-message"></div>
             </div>
             <div class="container">
                 <!-- <span class="toggle-password" id="toggle-cpass"> -->
-                    <label for="cpassword">Confirm Password</label>
-                    <input type="password" id="cpass" name="cpassword" placeholder="Confirm Password" />
-                    <span class="eye" onclick="toggleCPassword()">
-                        <i id="Chideopen" class="fa-solid fa-eye" style="color: #849a9a;"></i>
-                        <i id="Chideclose" class="fa-solid fa-eye-slash" style="color: #849a9a;"></i>
-                    </span>
+                <label for="cpassword">Confirm Password</label>
+                <input type="password" id="cpass" name="cpassword" placeholder="Confirm Password" />
+                <span class="eye" onclick="toggleCPassword()">
+                    <i id="Chideopen" class="fa-solid fa-eye" style="color: #849a9a;"></i>
+                    <i id="Chideclose" class="fa-solid fa-eye-slash" style="color: #849a9a;"></i>
+                </span>
                 <!-- </span> -->
                 <div id="confirm-password-error" class="error-message"></div>
             </div>
@@ -130,6 +130,7 @@ if (isset($_POST['submit'])) {
                 <input type="submit" class="submit" name="submit" id="submit" value="Register">
             </div>
         </form>
+        
         <script src="validate_signup.js"> </script>
     </div>
 

@@ -16,8 +16,6 @@ form.addEventListener('submit', function (event) {
 
 });
 
-
-
 function validateName(){
   const namevalue = nameInput.value.trim();
   const nameregex = /^[a-zA-Z\s]+$/;

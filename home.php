@@ -88,17 +88,17 @@ if (isset($_POST['login-submit'])) {
             </div>
          </form>
       </div>
+      <button class="signup">
+         <a href="register.php">signup</a>
+      </button>
    </header>
    <main>
       <div id="hero">
          <img src="image/backgrounds/My project.png" alt="background image" class="background1" />
          <div class="cont-text">
-            <h3>search has ended</h3>
+            <h3>Your search is here</h3>
             <h1>gadgetsearch</h1>
             <p>make your life easy & happy</p>
-            <button class="signup">
-               <a href="register.php">signup</a>
-            </button>
          </div>
       </div>
       <section id="slider">

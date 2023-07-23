@@ -123,7 +123,7 @@ do {
          <div id="hero">
             <img src="image/backgrounds/My project.png" alt="" class="background1" />
             <div class="cont-text">
-               <h3>Search has ended</h3>
+               <h3>Your search is here</h3> 
                <h1>GadgetSearch</h1>
                <p>Make your life easy & happy</p>
             </div>

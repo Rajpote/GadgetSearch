@@ -73,12 +73,22 @@ img {
 }
 /* login-btn */
 button#modal-btn.login-btn {
-   margin-left: 4vw;
-   background-color: white;
-   width: 15%;
-   padding: 0.1vw;
+   position: absolute;
+   top: 18%;
+   left: 92%;
+   height: 35px;
+   width: 6%;
    font-size: 1rem;
    border-radius: 25px;
+   background-color: white;
+   cursor: pointer;
+   font-size: 15px;
+   text-transform: capitalize;
+   margin: 10px 0px;
+}
+button#modal-btn.login-btn:hover {
+   transform: scale(1.2);
+
 }
 .modal {
    position: relative;
@@ -105,8 +115,11 @@ i#xmark.fa-xmark {
 
 /* search */
 input#search.search-bar {
+   position: absolute;
+   top: 15%;
+   left: 53%;
    width: 300px;
-   margin: 10px 17vw 0 0;
+   margin: 10px 0 ;
    padding: 10px 0px 10px 30px;
    font-size: 16px;
    border: 1px solid #f8f5f5;
@@ -284,18 +297,32 @@ main {
    flex-direction: column;
    align-items: flex-start;
    justify-content: center;
+   text-transform: capitalize;
+}
+.cont-text h3{
+   color: #082465;
+   font-size: 25px;
+}
+.cont-text h1{
+   font-size: 45px;
+}
+.cont-text p{
+   font-size: 20px;
 }
 /* home page */
 .signup {
    position: absolute;
-   top: 100%;
-   left: 20%;
-   height: 40px;
-   width: 100px;
-   border-radius: 55px 0;
-   background-color: transparent;
+   top: 18%;
+   left: 85%;
+   height: 35px;
+   width: 6%;
+   font-size: 1rem;
+   border-radius: 25px;
+   background-color: white;
    cursor: pointer;
    font-size: 15px;
+   text-transform: capitalize;
+   margin: 10px 0px;
 }
 .signup:hover {
    transform: scale(1.2);
@@ -303,6 +330,9 @@ main {
 .signup a {
    text-decoration: none;
    color: black;
+}
+.signup:hover a{
+   color: #16b7b4;
 }
 
 /* silder */

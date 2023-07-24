@@ -106,11 +106,11 @@ do {
         <div class="searchcontainer">
             <?php
             foreach ($value as $item) {
-                echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-item">';
-                echo "<img class='pro-img' src='image/product/{$item[0]['gimage']}' alt='Gadget Image'>";
-                echo '<div class="pro-name">' . $item[0]['gname'] . '</div>';
-                echo '<div class="gadget-price">Rs:' . $item[0]['gprice'] . '</div>';
-                echo "<img class='ratingstar3' src='image/rating/{$item[0]['rating']}' alt='rating Image'>";
+                echo '<a href="gadgetdetails.php?g_id=' . $item['g_id'] . '" class="search-item">';
+                echo "<img class='pro-img' src='image/product/{$item['gimage']}' alt='Gadget Image'>";
+                echo '<div class="pro-name">' . $item['gname'] . '</div>';
+                echo '<div class="gadget-price">' . $item['gprice'] . '</div>';
+                echo "<img class='ratingstar3' src='image/rating/{$item['rating']}' alt='rating Image'>";
                 echo '</a>';
             }
             ?>
@@ -193,7 +193,7 @@ do {
                             <div class="gadget-name">
                                 <?php echo $device['gname']; ?>
                             </div>
-                            <div class="gadget-price">
+                            <div class="gadget-price">Rs:
                                 <?php echo $device['gprice']; ?>
                             </div>
                             <img class='ratingstar3' src='image/rating/<?php echo $device['rating']; ?>' alt='rating Image'>

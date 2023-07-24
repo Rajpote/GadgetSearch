@@ -50,25 +50,32 @@ if (isset($_POST['login-submit'])) {
         main {
             margin: 9px 0px 0px 40px;
             background-color: transparent;
-            width: 60%;
+            width: 70%;
         }
 
         img.gadget {
-            height: 25%;
+            height: 10%;
             width: 35%;
+            margin: 10px 10px 10px 0px;
         }
 
         img.gadget-full {
             height: 35%;
-            width: 100%;
+            width: 90%;
+            margin: 1rem 5% 0 5%;
             image-resolution: 1080px;
         }
 
         h4.name {
+            font-size: 25px;
+            font-weight: 500;
+            color: #0a0101;
             padding: 0px 10px;
         }
 
         p.gprice {
+            font-size: 20px;
+            font-weight: 400;
             padding: 10px;
         }
 
@@ -107,6 +114,7 @@ if (isset($_POST['login-submit'])) {
             padding: 10px 10px;
             border-radius: 12px;
             color: blue;
+            cursor: pointer;
         }
 
         .feedback {
@@ -117,10 +125,10 @@ if (isset($_POST['login-submit'])) {
         }
 
         #submit-btn.feedback {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            margin: 0 0 0 25%;
+            width: 50%;
             color: red;
+            cursor: pointer;
         }
 
         table th td {
@@ -134,14 +142,22 @@ if (isset($_POST['login-submit'])) {
             margin: 15px;
         }
 
-        input {
+        #feedback-btn {
             width: 90%;
-            padding: 5px 5px 5px 18px;
+            height: 20%;
+            padding: 5px 5px 5px 5px;
+        }
+
+        .feedback input {
+            width: 90%;
+            height: 20%;
+            padding: 5px 5px 5px 20px;
         }
 
         i#feedbackuser {
             position: absolute;
             left: 25px;
+            color: #0a0101;
 
         }
 
@@ -163,16 +179,21 @@ if (isset($_POST['login-submit'])) {
         .table-body {
             border: 1px solid black;
             padding: 5px 25px 5px 25px;
+            text-transform: capitalize;
         }
 
         .point {
             list-style: square;
+            font-size: 20px;
+            font-weight: 400;
         }
 
         .points {
             list-style: none;
             text-align: justify;
             font-style: capitalize;
+            font-size: 20px;
+            font-weight: 400;
         }
 
         @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css);
@@ -200,6 +221,7 @@ if (isset($_POST['login-submit'])) {
         .rating {
             border: none;
             float: left;
+            margin: 10px 10px 10px 10px;
         }
 
         .rating>input {
@@ -384,7 +406,7 @@ if (isset($_POST['login-submit'])) {
                 <textarea name="feedback" id="" cols="20" rows="3" class="feedback"></textarea>
 
                 <div class="feedback" id="submit-btn">
-                    <input type="submit" name="login-submit" id="login-submit" value="submit" />
+                    <input type="submit" name="login-submit" id="feedback-btn" value="submit" />
                 </div>
             </form>
         </main>

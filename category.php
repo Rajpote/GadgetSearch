@@ -148,7 +148,7 @@ do {
                             <div class="gadget-name">
                                 <?php echo $device['gname']; ?>
                             </div>
-                            <div class="gadget-price">
+                            <div class="gadget-price">Rs:
                                 <?php echo $device['gprice']; ?>
                             </div>
                             <img class='ratingstar3' src='image/rating/<?php echo $device['rating']; ?>' alt='rating Image'>

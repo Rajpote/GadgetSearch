@@ -92,32 +92,6 @@ do {
 </head>
 
 <body>
-    <?php
-    if ($searchValue) {
-        ?>
-        <ul class="navbar">
-            <form action="search.php" method="post">
-                <input type="text" name="search" class="search-bars" placeholder="Search . . . " id="search" /><i
-                    class="fa-solid fa-magnifying-glass"></i>
-            </form>
-        </ul>
-
-        <h2 class="result">Found results.</h2>
-        <div class="searchcontainer">
-            <?php
-            foreach ($value as $item) {
-                echo '<a href="gadgetdetails.php?g_id=' . $item['g_id'] . '" class="search-item">';
-                echo "<img class='pro-img' src='image/product/{$item['gimage']}' alt='Gadget Image'>";
-                echo '<div class="pro-name">' . $item['gname'] . '</div>';
-                echo '<div class="gadget-price">' . $item['gprice'] . '</div>';
-                echo "<img class='ratingstar3' src='image/rating/{$item['rating']}' alt='rating Image'>";
-                echo '</a>';
-            }
-            ?>
-        </div>
-        <?php
-    } else {
-        ?>
         <header>
             <div>
                 <a class="logo" href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
@@ -224,9 +198,6 @@ do {
                 </div>
             <?php endif; ?>
         </main>
-        <?php
-    }
-    ?>
     <footer>
         <div class="row">
             <div class="coln">

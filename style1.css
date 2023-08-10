@@ -160,17 +160,19 @@ i.fa-magnifying-glass {
 .search-item {
    display: flex;
    align-items: center;
-   justify-content: left;
+   justify-content: center;
    color: #000;
    background-color: rgb(152, 152, 186);
    width: 100%;
-   text-decoration: none;
-   text-transform: capitalize;
-   font-size: 2rem;
    border-radius: 15px;
    text-align: left;
    padding: 1vw;
    margin: 0vh 0vw 5vh 0vw;
+}
+p.pro_name{
+   font-size: 1.5rem;
+   text-decoration: none;
+   text-transform: capitalize;
 }
 /* login popup */
 .container {
@@ -424,7 +426,8 @@ section#newarival{
 #newarival p {
    text-align: center;
    text-transform: capitalize;
-   margin: 10px 50px 10px 100px;
+   text-decoration: 1px solid underline blue;
+   margin: 10px 50px 0px 100px;
    width: 50%;
 }
 .latest-container {
@@ -496,6 +499,7 @@ img.ratingstar2 {
 .brand1 {
    font-size: 2.3rem;
    font-weight: 1000;
+   text-decoration: 3px solid underline red;
    margin-top: 10vh;
    text-align: center;
 }
@@ -569,6 +573,7 @@ li a {
    font-weight: 500;
    font-size: 1.7rem;
    color: #101213;
+   text-decoration: 2px solid underline black;
    text-transform: capitalize;
    width: 40%;
 }

@@ -204,7 +204,7 @@ input#gprice.price{
    margin: 10px 0;
    padding: 5px;
    border-radius: 5px;
-   background-color: rgb(136, 218, 218);
+   background-color: rgb(217, 236, 236);
 }
 
 input#imageone.image,
@@ -221,7 +221,7 @@ textarea#gdis,
 textarea#gspecification,
 textarea#gcomprasion{
    font-size: 15px;
-   background-color: rgb(136, 218, 218);
+   background-color: rgb(217, 232, 232);
    color: black;
    border-radius: 12px;
    margin: 10px 0 10px 0;

@@ -33,27 +33,26 @@ if (isset($_POST['login-submit'])) {
    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="manifest" href="favicon/site.webmanifest">
-    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
-    
-    <link rel="stylesheet" href="style1.css">
+
+   <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+   <link rel="manifest" href="favicon/site.webmanifest">
+   <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+   <meta name="msapplication-TileColor" content="#da532c">
+   <meta name="theme-color" content="#ffffff">
+
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+
+   <link rel="stylesheet" href="style1.css">
 
    <title>GadgetSearch</title>
-   
+
 </head>
 
 <body>
-
    <header>
       <div>
          <a class="logo" href="home.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
@@ -114,7 +113,7 @@ if (isset($_POST['login-submit'])) {
                      echo '<a href="#" onclick="alertPopup()" class="slider-card">';
                      echo "<img class='pro-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
                      echo '<p class="pro-name">' . $row['gname'] . '</p>';
-                     echo '<p class="pro-name">' . $row['gprice'] . '</p>';
+                     echo '<p class="pro-name">Rs:' . $row['gprice'] . '</p>';
                      echo "<img class='ratingstar1' src='image/rating/{$row['rating']}' alt='rating Image'>";
                      echo '</a>';
                   }
@@ -140,7 +139,7 @@ if (isset($_POST['login-submit'])) {
                   echo '<a href="#" onclick="alertPopup()" class="detailes">';
                   echo "<img class='g-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
                   echo '<div class="g-name">' . $row['gname'] . '</div>';
-                  echo '<div class="g-price">' . $row['gprice'] . '</div>';
+                  echo '<div class="g-price">Rs:' . $row['gprice'] . '</div>';
                   echo "<img class='ratingstar2' src='image/rating/{$row['rating']}' alt='rating Image'>";
                   echo '</a>';
 

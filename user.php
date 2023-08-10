@@ -77,7 +77,8 @@ do {
       foreach ($value as $item) {
          echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-item">';
          echo "<img class='pro_img' src='image/product/{$item[0]['gimage']}' alt='Gadget Image'>";
-         echo '<p class="pro_name">' . $item[0]['gname'] . '</p>';
+         echo '<div class="pro_name">' . $item[0]['gname'] . '</div>';
+         echo '<div class="pro_price">Rs:' . $item[0]['gprice'] . '</div>';
          echo '</a>';
       }
       echo '</div>';
@@ -123,7 +124,7 @@ do {
          <div id="hero">
             <img src="image/backgrounds/My project.png" alt="" class="background1" />
             <div class="cont-text">
-               <h3>Your search is here</h3> 
+               <h3>Your search is here</h3>
                <h1>GadgetSearch</h1>
                <p>Make your life easy & happy</p>
             </div>

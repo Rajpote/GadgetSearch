@@ -158,21 +158,42 @@ i.fa-magnifying-glass {
    border-radius: 5px;
 }
 .search-item {
+   position: relative;
    display: flex;
-   align-items: center;
-   justify-content: center;
+   align-items: left;
+   justify-content: left;
    color: #000;
-   background-color: rgb(152, 152, 186);
+   background-color: rgb(199, 199, 200);
    width: 100%;
+   text-decoration: none;
    border-radius: 15px;
    text-align: left;
    padding: 1vw;
    margin: 0vh 0vw 5vh 0vw;
 }
-p.pro_name{
-   font-size: 1.5rem;
-   text-decoration: none;
+.pro_name{
+   position: absolute;
+   top: 0vh;
+   left: 8vw;
+   margin: 1rem 2rem;
+   font-size: 1.8rem;
    text-transform: capitalize;
+}
+.pro_price{
+   position: absolute;
+   top: 4.5vh;
+   left: 8vw;
+   margin: 1rem 2rem;
+   font-size: 1.2rem;
+   text-transform: capitalize;
+}
+.pro_ratingstar{
+   position: absolute;
+   top: 10.5vh;
+   left: 10vw;
+   height: 35px;
+   width: 125px;
+   border-radius: 15px;
 }
 /* login popup */
 .container {

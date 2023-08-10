@@ -79,6 +79,7 @@ do {
          echo "<img class='pro_img' src='image/product/{$item[0]['gimage']}' alt='Gadget Image'>";
          echo '<div class="pro_name">' . $item[0]['gname'] . '</div>';
          echo '<div class="pro_price">Rs:' . $item[0]['gprice'] . '</div>';
+         echo "<img class='pro_ratingstar' src='image/rating/{$item[0]['rating']}' alt='rating Image'>";
          echo '</a>';
       }
       echo '</div>';

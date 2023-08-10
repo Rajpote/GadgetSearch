@@ -45,7 +45,7 @@ $feedbackCount = $pdo->query("SELECT COUNT(Id) FROM feedback")->fetchColumn();
          <li><a class="active" href="admin.php">Dashboard</a></li>
          <li><a href="gadgetdata.php">Gadget data</a></li>
          <li><a href="userdata.php">User data</a></li>
-         <li><a href="feedback.php">user feedback</a></li>
+         <li><a href="feedback.php">User feedback</a></li>
       </ul>
 
       <a href="home.php" class="logout">logout</a>

@@ -94,7 +94,7 @@ do {
         <div id="gadget-category">
             <div class="filter">
                 <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
-                <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
+                <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Best
                     Buy</a>
                 <!-- <a href="type.php?type=laptop&category=bestbuy" class="category-item"><i
                         class="fa-solid fa-laptop"></i>Laptop</a>

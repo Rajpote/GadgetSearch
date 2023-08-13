@@ -403,7 +403,7 @@ if (isset($_POST['login-submit'])) {
                             class="half"></label>
                     </div>
                 </div>
-                <textarea name="feedback" id="" cols="20" rows="3" class="feedback"></textarea>
+                <textarea name="feedback" id="" cols="20" rows="3" class="feedback" required></textarea>
 
                 <div class="feedback" id="submit-btn">
                     <input type="submit" name="login-submit" id="feedback-btn" value="submit" />
@@ -433,9 +433,9 @@ if (isset($_POST['login-submit'])) {
                 <div class="coln">
                     <h3>follow us</h3>
                     <div>
-                        <a href="" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="" target="_blank" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="" target="_blank" class="icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="" target="_blank" class="icon"><i class="fa-brands fa-twitter"></i></a>
                     </div>
                 </div>
             </div>

@@ -98,7 +98,7 @@ do {
    <div id="gadget-category">
       <div class="filter">
          <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
-         <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Beat
+         <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Best
             Buy</a>
          <a href="type.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
          <a href="type.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
@@ -202,10 +202,10 @@ do {
          <div class="coln">
             <h3>follow us</h3>
             <div>
-               <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i
+               <a href="https://www.facebook.com/profile.php?id=100092486893685" target="_blank" class="icon"><i
                      class="fa-brands fa-facebook-f"></i></a>
-               <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
-               <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
+               <a href="" target="_blank" class="icon"><i class="fa-brands fa-instagram"></i></a>
+               <a href="" target="_blank" class="icon"><i class="fa-brands fa-twitter"></i></a>
             </div>
          </div>
       </div>

@@ -183,14 +183,14 @@ do {
          <section class="brands">
             <h2 class="brand1">Brands</h2>
             <div class="container-brands">
-               <a href="https://www.mi.com/np/phone"><img src="image/brands/mi.png" alt="" class="image-brands" /></a>
-               <a href="https://www.acer.com/us-en"><img src="image/brands/Acer.png" alt="" class="image-brands" /></a>
-               <a href="https://www.apple.com/"><img src="image/brands/APPLE.png" alt="" class="image-brands" /></a>
-               <a href="https://www.samsung.com/us/"><img src="image/brands/Samsung.png" alt="" class="image-brands" /></a>
-               <a href="https://www.dell.com/en-us"><img src="image/brands/dell.png" alt="" class="image-brands" /></a>
-               <a href="https://www.asus.com/np/"><img src="image/brands/asus.png" alt="" class="image-brands" /></a>
-               <a href="https://www.msi.com/index.php"><img src="image/brands/msi.png" alt="" class="image-brands" /></a>
-               <a href="https://www.hp.com/us-en/home.html"><img src="image/brands/hp.png" alt=""
+               <a href="https://www.mi.com/np/phone"><img src="image/brands/mi.png" target="_blank" alt="" class="image-brands" /></a>
+               <a href="https://www.acer.com/us-en"><img src="image/brands/Acer.png" target="_blank" alt="" class="image-brands" /></a>
+               <a href="https://www.apple.com/"><img src="image/brands/APPLE.png"target="_blank" alt="" class="image-brands" /></a>
+               <a href="https://www.samsung.com/us/"><img src="image/brands/Samsung.png"target="_blank" alt="" class="image-brands" /></a>
+               <a href="https://www.dell.com/en-us"><img src="image/brands/dell.png"target="_blank" alt="" class="image-brands" /></a>
+               <a href="https://www.asus.com/np/"><img src="image/brands/asus.png"target="_blank" alt="" class="image-brands" /></a>
+               <a href="https://www.msi.com/index.php"><img src="image/brands/msi.png"target="_blank" alt="" class="image-brands" /></a>
+               <a href="https://www.hp.com/us-en/home.html"><img src="image/brands/hp.png"target="_blank" alt=""
                      class="image-brands" /></a>
             </div>
          </section>
@@ -219,10 +219,10 @@ do {
             <div class="coln">
                <h3>follow us</h3>
                <div>
-                  <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i
+                  <a href="https://www.facebook.com/profile.php?id=100092486893685" target="_blank" class="icon"><i
                         class="fa-brands fa-facebook-f"></i></a>
-                  <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
-                  <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
+                  <a href="" target="_blank" class="icon"><i class="fa-brands fa-instagram"></i></a>
+                  <a href="" target="_blank" class="icon"><i class="fa-brands fa-twitter"></i></a>
                </div>
             </div>
          </div>

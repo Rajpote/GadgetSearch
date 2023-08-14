@@ -3,14 +3,17 @@ session_start();
 include 'connect.php';
 
 if (isset($_POST['login-submit'])) {
-    $uname = $_POST['uname'];
+    $uname = $_SESSION['username'];
     $feedback = $_POST['feedback'];
     $rating = $_POST['rating'];
 
-    $sql = "INSERT INTO feedback (uname, feedback, rating) VALUES (?, ?, ?)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$uname, $feedback, $rating]);
 
+    $sql = "INSERT INTO feedback (uname, feedback, rating) VALUES (:uname, :feedback, :rating)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':uname', $uname);
+    $stmt->bindParam(':feedback', $feedback);
+    $stmt->bindParam(':rating', $rating);
+    $stmt->execute();
     echo '<script>alert("Feedback submitted successfully.");</script>';
 }
 ?>
@@ -373,11 +376,12 @@ if (isset($_POST['login-submit'])) {
     } else {
         echo "No content available!";
     }
+
+    $username = $_SESSION['username'];
     ?>
-            <form action="" method="post">
+            <form action="" method="POST">
                 <div class="feedback">
-                    <i id="feedbackuser" class="fa-solid fa-user"></i>
-                    <input type="text" class="" placeholder="User-name" name="uname" required />
+                    <?php echo $_SESSION['username'] ?>
                 </div>
                 <div class="container">
                     <div class="rating">

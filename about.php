@@ -140,16 +140,6 @@ do {
                   width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"></iframe></p>
          </div>
-         <form class="about-form" action="" method="post">
-            <div class="feedback">
-               <i id="feedbackuser" class="fa-solid fa-user"></i>
-               <input type="text" class="u-name" placeholder="User-name" name="uname" required />
-            </div>
-            <textarea name="feedback" id="" cols="30" rows="5" class="feed-text"></textarea>
-            <div class="feedback" id="submit-btn">
-               <input type="submit" name="login-submit" id="login-submit" value="submit" />
-            </div>
-         </form>
       </main>
       <footer>
          <div class="row">

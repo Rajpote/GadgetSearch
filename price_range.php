@@ -220,8 +220,8 @@ do {
                 <div>
                     <a href="https://www.facebook.com/profile.php?id=100092486893685" target="_blank" class="icon"><i
                             class="fa-brands fa-facebook-f"></i></a>
-                    <a href="" target="_blank"class="icon"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="" target="_blank"class="icon"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="" target="_blank" class="icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="" target="_blank" class="icon"><i class="fa-brands fa-twitter"></i></a>
                 </div>
             </div>
         </div>

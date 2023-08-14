@@ -183,14 +183,21 @@ do {
          <section class="brands">
             <h2 class="brand1">Brands</h2>
             <div class="container-brands">
-               <a href="https://www.mi.com/np/phone"><img src="image/brands/mi.png" target="_blank" alt="" class="image-brands" /></a>
-               <a href="https://www.acer.com/us-en"><img src="image/brands/Acer.png" target="_blank" alt="" class="image-brands" /></a>
-               <a href="https://www.apple.com/"><img src="image/brands/APPLE.png"target="_blank" alt="" class="image-brands" /></a>
-               <a href="https://www.samsung.com/us/"><img src="image/brands/Samsung.png"target="_blank" alt="" class="image-brands" /></a>
-               <a href="https://www.dell.com/en-us"><img src="image/brands/dell.png"target="_blank" alt="" class="image-brands" /></a>
-               <a href="https://www.asus.com/np/"><img src="image/brands/asus.png"target="_blank" alt="" class="image-brands" /></a>
-               <a href="https://www.msi.com/index.php"><img src="image/brands/msi.png"target="_blank" alt="" class="image-brands" /></a>
-               <a href="https://www.hp.com/us-en/home.html"><img src="image/brands/hp.png"target="_blank" alt=""
+               <a href="https://www.acer.com/us-en" target="_blank"><img src="image/brands/Acer.png" alt=""
+                     class="image-brands" /></a>
+               <a href="https://www.apple.com/" target="_blank"><img src="image/brands/APPLE.png" alt=""
+                     class="image-brands" /></a>
+               <a href="https://www.mi.com/np/phone" target="_blank"><img src="image/brands/mi.png" alt=""
+                     class="image-brands" /></a>
+               <a href="https://www.samsung.com/us/" target="_blank"><img src="image/brands/Samsung.png" alt=""
+                     class="image-brands" /></a>
+               <a href="https://www.dell.com/en-us" target="_blank"><img src="image/brands/dell.png" alt=""
+                     class="image-brands" /></a>
+               <a href="https://www.asus.com/np/" target="_blank"><img src="image/brands/asus.png" alt=""
+                     class="image-brands" /></a>
+               <a href="https://www.msi.com/index.php" target="_blank"><img src="image/brands/msi.png alt="" class="
+                     image-brands" /></a>
+               <a href="https://www.hp.com/us-en/home.html" target="_blank"><img src="image/brands/hp.png" alt=""
                      class="image-brands" /></a>
             </div>
          </section>

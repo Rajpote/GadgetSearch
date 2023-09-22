@@ -4,12 +4,13 @@ include 'connect.php';
 
 if (!isset($_SESSION['username'])) {
    header('location: home.php');
+   exit(); // Ensure that the script stops here if the user is not logged in.
 }
 
 $g_id;
 $i = 0;
 $searchValue;
-@$count = $_GET['count'];
+$count = isset($_GET['count']) ? (int) $_GET['count'] : 0; // Ensure that $count is an integer.
 $username = $_SESSION['username'];
 
 $stmt = $pdo->prepare("SELECT id FROM register WHERE uname = :username");
@@ -17,10 +18,22 @@ $stmt->bindParam(':username', $username);
 $stmt->execute();
 $uid = $stmt->fetch(PDO::FETCH_COLUMN);
 
-do {
-   @$g_id = $_GET[$i];
+function calculateAverageRating($pdo, $gadgetID)
+{
+   $query = "SELECT AVG(rating) AS average_rating FROM feedback WHERE g_id = :gadgetID";
+   $stmt = $pdo->prepare($query);
+   $stmt->bindParam(':gadgetID', $gadgetID);
+   $stmt->execute();
+   $result = $stmt->fetch(PDO::FETCH_ASSOC);
+   return isset($result['average_rating']) ? $result['average_rating'] : 0;
+}
 
-   if ($g_id != null) {
+$value = array(); // Initialize the $value array.
+
+do {
+   $g_id = isset($_GET[$i]) ? (int) $_GET[$i] : null; // Ensure that $g_id is an integer.
+
+   if ($g_id !== null) {
       $stmt = $pdo->prepare("SELECT * FROM gadget_details WHERE g_id = :g_id");
       $stmt->bindParam(':g_id', $g_id);
 
@@ -56,6 +69,7 @@ do {
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
    <link rel="stylesheet" href="style1.css" />
+   <link rel="stylesheet" href="gadget.css">
 
    <title>GadgetSearch</title>
    <script src="javascript.js" defer></script>
@@ -71,15 +85,31 @@ do {
                class="fa-solid fa-magnifying-glass"></i>
          </form>
       </ul>
+      <a href="user.php">&LeftArrow;</a>
       <h2 class="result">Found results.</h2>
       <?php
       echo '<div class="searchcontainer">';
       foreach ($value as $item) {
          echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-item">';
          echo "<img class='pro_img' src='image/product/{$item[0]['gimage']}' alt='Gadget Image'>";
-         echo '<div class="pro_name">' . $item[0]['gname'] . '</div>';
-         echo '<div class="pro_price">Rs:' . $item[0]['gprice'] . '</div>';
-         echo "<img class='pro_ratingstar' src='image/rating/{$item[0]['rating']}' alt='rating Image'>";
+         echo '<div class="gadget-section">';
+         echo '<div class="gadget-name">' . $item[0]['gname'] . '</div>';
+         echo '<div class="gadget-price">Rs:' . $item[0]['gprice'] . '</div>';
+         echo '<div class="gadget-rating">';
+         $averageRating = calculateAverageRating($pdo, $item[0]['g_id']); // Corrected variable name here.
+         $rating = round($averageRating * 2) / 2; // Round to nearest half
+         for ($i = 1; $i <= 5; $i++) {
+            if ($i <= $rating) {
+               echo '<i class="fas fa-star" style="color: gold;"></i>';
+            } elseif ($i - 0.5 == $rating) {
+               echo '<i class="fas fa-star-half-alt" style="color: gold;"></i>';
+            } else {
+               echo '<i class="far fa-star" style="color: gold;"></i>';
+            }
+         }
+         echo ' ' . number_format($averageRating, 1);
+         echo '</div>';
+         echo '</div>';
          echo '</a>';
       }
       echo '</div>';
@@ -98,8 +128,8 @@ do {
 
          <ul class="navbar">
             <form action="search.php" method="post">
-               <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" /><i
-                  id="search-icon" class="fa-solid fa-magnifying-glass"></i>
+               <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" />
+               <i id="search-icon" class="fa-solid fa-magnifying-glass"></i>
             </form>
             <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
          </ul>
@@ -122,14 +152,14 @@ do {
          </div>
       </header>
       <main>
-         <div id="hero">
+         <section id="hero">
             <img src="image/backgrounds/My project.png" alt="" class="background1" />
             <div class="cont-text">
                <h3>Your search is here</h3>
                <h1>GadgetSearch</h1>
                <p>Make your life easy & happy</p>
             </div>
-         </div>
+         </section>
          <section id="slider">
             <h2 class="product-category">best gadget Deals</h2>
             <div class="product-details">
@@ -142,9 +172,24 @@ do {
                      while ($row = $stmt->fetch()) {
                         echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="slider-card">';
                         echo "<img class='pro-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+                        echo '<div class="gadget-section">';
                         echo '<div class="pro-name">' . $row['gname'] . '</div>';
                         echo '<div class="pro-price">Rs:' . $row['gprice'] . '</div>';
-                        echo "<img class='ratingstar1' src='image/rating/{$row['rating']}' alt='rating Image'>";
+                        echo '<div class="gadget-rating">';
+                        $averageRating = calculateAverageRating($pdo, $row['g_id']); // Corrected variable name here.
+                        $rating = round($averageRating * 2) / 2; // Round to nearest half
+                        for ($i = 1; $i <= 5; $i++) {
+                           if ($i <= $rating) {
+                              echo '<i class="fas fa-star" style="color: gold;"></i>';
+                           } elseif ($i - 0.5 == $rating) {
+                              echo '<i class="fas fa-star-half-alt" style="color: gold;"></i>';
+                           } else {
+                              echo '<i class="far fa-star" style="color: gold;"></i>';
+                           }
+                        }
+                        echo ' ' . number_format($averageRating, 1);
+                        echo '</div>';
+                        echo '</div>';
                         echo '</a>';
                      }
                   } else {
@@ -152,12 +197,10 @@ do {
                   }
                   ?>
                </div>
-
             </div>
          </section>
          <section id="newarival">
-            <h1>latest gadgets</h1>
-            <p>new gadgets reviews</p>
+            <h2 class="product-category">latest gadgets</h2>
             <div class="latest-container">
                <?php
                $sql = "SELECT * FROM gadget_details order by g_id desc limit 4";
@@ -166,13 +209,29 @@ do {
                if ($stmt->rowCount() > 0) {
 
                   while ($row = $stmt->fetch()) {
-                     echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="detailes">';
-                     echo "<img class='g-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-                     echo '<div class="g-name">' . $row['gname'] . '</div>';
-                     echo '<div class="g-price">Rs:' . $row['gprice'] . '</div>';
-                     echo "<img class='ratingstar2' src='image/rating/{$row['rating']}' alt='rating Image'>";
-                     echo '</a>';
+                     echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="g-new">';
 
+                     echo "<img class='g-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+
+                     echo '<div class="gadget-section">';
+                     echo '<div class="gadget-name">' . $row['gname'] . '</div>';
+                     echo '<div class="gadget-price">Rs:' . $row['gprice'] . '</div>';
+                     echo '<div class="gadget-rating">';
+                     $averageRating = calculateAverageRating($pdo, $row['g_id']); // Corrected variable name here.
+                     $rating = round($averageRating * 2) / 2; // Round to nearest half
+                     for ($i = 1; $i <= 5; $i++) {
+                        if ($i <= $rating) {
+                           echo '<i class="fas fa-star" style="color: gold;"></i>';
+                        } elseif ($i - 0.5 == $rating) {
+                           echo '<i class="fas fa-star-half-alt" style="color: gold;"></i>';
+                        } else {
+                           echo '<i class="far fa-star" style="color: gold;"></i>';
+                        }
+                     }
+                     echo ' ' . number_format($averageRating, 1);
+                     echo '</div>';
+                     echo '</div>';
+                     echo '</a>';
                   }
                } else {
                   echo "No courses found.";
@@ -195,14 +254,14 @@ do {
                      class="image-brands" /></a>
                <a href="https://www.asus.com/np/" target="_blank"><img src="image/brands/asus.png" alt=""
                      class="image-brands" /></a>
-               <a href="https://www.msi.com/index.php" target="_blank"><img src="image/brands/msi.png alt="" class="
-                     image-brands" /></a>
+               <a href="https://www.msi.com/index.php" target="_blank"><img src="image/brands/msi.png" alt=""
+                     class="image-brands" /></a>
                <a href="https://www.hp.com/us-en/home.html" target="_blank"><img src="image/brands/hp.png" alt=""
                      class="image-brands" /></a>
             </div>
          </section>
-
       </main>
+      <a class="top" href="#">top</a>
       <footer>
          <div class="row">
             <div class="coln">
@@ -233,7 +292,6 @@ do {
                </div>
             </div>
          </div>
-
          <center><i class="fa-regular fa-copyright"></i>opyright</center>
       </footer>
    <?php } ?>

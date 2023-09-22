@@ -64,116 +64,94 @@ do {
 </head>
 
 <body>
-   <?php
-   if ($searchValue) { ?>
+   <header>
+      <div>
+         <a class="logo" href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
+      </div>
+      <ul class="navbar">
+         <li><a href="user.php">Home</a></li>
+         <li><a href="gadget.php">Gadget</a></li>
+         <li><a class="active" href="about.php">About Us</a></li>
+      </ul>
 
       <ul class="navbar">
          <form action="search.php" method="post">
-            <input type="text" name="search" class="search-bars" placeholder="Search . . . " id="search" /><i
-               class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" /><i
+               id="search-icon" class="fa-solid fa-magnifying-glass"></i>
          </form>
+         <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
       </ul>
 
-      <h2 class="result">Found results.</h2>
-      <?php
-      echo '<div class="searchcontainer">';
-      foreach ($value as $item) {
-         echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-item">';
-         echo "<img class='pro-img' src='image/product/{$item['gimage']}' alt='Gadget Image'>";
-         echo '<p class="pro-name">' . $item[0]['gname'] . '</p>';
-         echo '<p class="gadget-price">' . $item['gprice'] . '</p>';
-         echo "<img class='ratingstar3' src='image/rating/{$item['rating']}' alt='rating Image'>";
-         echo '</a>';
-      }
-      echo '</div>';
-      ?>
-      <?php
-   } else { ?>
-      <header>
-         <div>
-            <a class="logo" href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
-         </div>
-         <ul class="navbar">
-            <li><a href="user.php">Home</a></li>
-            <li><a href="gadget.php">Gadget</a></li>
-            <li><a class="active" href="about.php">About Us</a></li>
-         </ul>
-
-         <ul class="navbar">
-            <form action="search.php" method="post">
-               <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" /><i
-                  id="search-icon" class="fa-solid fa-magnifying-glass"></i>
-            </form>
-            <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
-         </ul>
-
-         <div id="my-modal" class="modal">
-            <form action="" method="POST" class="login-form">
-               <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
-               <div id="username" class="container">
-                  <?php echo $_SESSION['username'] ?>
-               </div>
+      <div id="my-modal" class="modal">
+         <form action="" method="POST" class="login-form">
+            <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
+            <div id="username" class="container">
+               <?php echo $_SESSION['username'] ?>
+            </div>
 
 
-               <div class="logout">
-                  <a href="home.php">logout</a>
-               </div>
-            </form>
-         </div>
-      </header>
-      <main>
-         <div class="about">
-            <h2 id="title-about">gadgetsearch</h2>
+            <div class="logout">
+               <a href="home.php">logout</a>
+            </div>
+         </form>
+      </div>
+   </header>
+   <main>
+      <article class="about-gadgetsearch">
+         <section class="about">
+            <h2>gadgetsearch</h2>
             <p class="information">With the growing number of gadgets in the market people are more confused than ever
                about buying new gadgets
-               from the market. Many people don't know about the features and functionality of the gadget that they want to
+               from the market. Many people don't know about the features and functionality of the gadget that they want
+               to
                purchase. </p> <br>
-            <p class="information">GadgetSearch a web platform that will allow users to see reviews and rating of various
+            <p class="information">GadgetSearch a web platform that will allow users to see reviews and rating of
+               various
                gadgets such as
                smartphones, laptops, tablets and other tech related devices and provide a clear concept about the gadget
                they want to purchase. </p>
-         </div>
-         <div class="map">
+         </section>
+         <section class="map">
             <h1>Location on map</h1>
             <p><iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15408.017013533878!2d85.32454960702925!3d27.6702355634462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19e8d9058ce3%3A0x5f9f01647e956594!2z4KSV4KWN4KSv4KS-4KSl4KSr4KWL4KSw4KWN4KShIOCkh-CkqOCljeCkn-CksOCkqOCljeCkr-CkvuCkuOCkqOCksiDgpJXgpLLgpYfgpJw!5e0!3m2!1sne!2snp!4v1683545778767!5m2!1sne!2snp"
                   width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+         </section>
+      </article>
+   </main>
+   <footer>
+      <div class="row">
+         <div class="coln">
+            <h3>contact</h3>
+            <ul>
+               <li>
+                  <i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span>
+               </li>
+               <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span></li>
+               <li><i class="fa-solid fa-envelope"></i><span class="content">gadgetsearch@gmail.com</span></li>
+            </ul>
          </div>
-      </main>
-      <footer>
-         <div class="row">
-            <div class="coln">
-               <h3>contact</h3>
-               <ul>
-                  <li>
-                     <i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span>
-                  </li>
-                  <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span></li>
-                  <li><i class="fa-solid fa-envelope"></i><span class="content">gadgetsearch@gmail.com</span></li>
-               </ul>
-            </div>
-            <div class="coln">
-               <h3>About</h3>
-               <ul>
-                  <li><a href="about.php">About us</a></li>
-                  <li><a href="#">Term & Condition</a></li>
-               </ul>
-            </div>
-            <div class="coln">
-               <h3>follow us</h3>
-               <div>
-                  <a href="https://www.facebook.com/profile.php?id=100092486893685" target="_blank" class="icon"><i
-                        class="fa-brands fa-facebook-f"></i></a>
-                  <a href="" target="_blank" class="icon"><i class="fa-brands fa-instagram"></i></a>
-                  <a href="" target="_blank" class="icon"><i class="fa-brands fa-twitter"></i></a>
-               </div>
+         <div class="coln">
+            <h3>About</h3>
+            <ul>
+               <li><a href="about.php">About us</a></li>
+               <li><a href="#">Term & Condition</a></li>
+            </ul>
+         </div>
+         <div class="coln">
+            <h3>follow us</h3>
+            <div>
+               <a href="https://www.facebook.com/profile.php?id=100092486893685" target="_blank" class="icon"><i
+                     class="fa-brands fa-facebook-f"></i></a>
+               <a href="" target="_blank" class="icon"><i class="fa-brands fa-instagram"></i></a>
+               <a href="" target="_blank" class="icon"><i class="fa-brands fa-twitter"></i></a>
             </div>
          </div>
+      </div>
 
-         <center><i class="fa-regular fa-copyright"></i>opyright</center>
-      </footer>
-   <?php } ?>
+      <center><i class="fa-regular fa-copyright"></i>opyright</center>
+   </footer>
 
    <script src="javascript.js"></script>
 </body>

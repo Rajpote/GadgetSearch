@@ -5,7 +5,11 @@ include('connect.php');
 if (isset($_GET['category'])) {
     $category = $_GET['category'];
 
-    $sql = "SELECT * FROM gadget_details WHERE category = :category";
+    $sql = "SELECT gadget_details.*, AVG(feedback.rating) AS average_rating
+            FROM gadget_details
+            LEFT JOIN feedback ON gadget_details.g_id = feedback.g_id
+            WHERE gadget_details.category = :category
+            GROUP BY gadget_details.g_id";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':category', $category);
     $stmt->execute();
@@ -56,116 +60,139 @@ do {
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="gadget.css">
     <title>GadgetSearch</title>
 </head>
 
 <body>
-        <header>
-            <div>
-                <a class="logo" href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
-            </div>
-            <ul class="navbar">
-                <li><a href="user.php">Home</a></li>
-                <li><a class="active" href="gadget.php">Gadget</a></li>
-                <li><a href="about.php">About Us</a></li>
-            </ul>
-
-            <ul class="navbar">
-                <form action="search.php" method="post">
-                    <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" /><i
-                        id="search-icon" class="fa-solid fa-magnifying-glass"></i>
-                </form>
-                <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
-            </ul>
-
-            <div id="my-modal" class="modal">
-                <form action="" method="POST" class="login-form">
-                    <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
-                    <div id="username" class="container">
-                        <?php echo $_SESSION['username'] ?>
-                    </div>
-
-                    <div class="logout">
-                        <a href="logout.php">logout</a>
-                    </div>
-                </form>
-            </div>
-        </header>
-        <div id="gadget-category">
-            <div class="filter">
-                <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
-                <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Best
-                    Buy</a>
-                <!-- <a href="type.php?type=laptop&category=bestbuy" class="category-item"><i
-                        class="fa-solid fa-laptop"></i>Laptop</a>
-                <a href="type.php?type=phone&category=bestbuy" class="category-item"><i
-                        class="fa fa-mobile-phone"></i>Phone</a>
-                <a href="type.php?type=accessories&category=bestbuy" class="category-item"><i
-                        class="fa fa-mobile-phone"></i>Accessories
-                </a> -->
-
-
-            </div>
+    <header>
+        <div>
+            <a class="logo" href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
         </div>
-        <main class="gadget-main">
-            <?php
-            if (isset($category) && !empty($devices)) {
-                ?>
+        <ul class="navbar">
+            <li><a href="user.php">Home</a></li>
+            <li><a class="active" href="gadget.php">Gadget</a></li>
+            <li><a href="about.php">About Us</a></li>
+        </ul>
+
+        <ul class="navbar">
+            <form action="search.php" method="post">
+                <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" /><i
+                    id="search-icon" class="fa-solid fa-magnifying-glass"></i>
+            </form>
+            <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
+        </ul>
+
+        <div id="my-modal" class="modal">
+            <form action="" method="POST" class="login-form">
+                <i id="xmark" class="fa-solid fa-xmark fa-lg"></i>
+                <div id="username" class="container">
+                    <?php echo $_SESSION['username'] ?>
+                </div>
+
+                <div class="logout">
+                    <a href="logout.php">logout</a>
+                </div>
+            </form>
+        </div>
+    </header>
+    <main class="gadget-main">
+        <aside id="gadget-category">
+            <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
+            <section>
+                <a href="category.php?category=bestbuy" class="category-item"><i
+                        class="fa-solid fa-cart-shopping"></i>Best
+                    Buy</a>
+            </section>
+        </aside>
+        <?php
+        if (isset($category) && !empty($devices)) {
+            ?>
+            <div class="gadget-grid-container">
                 <h1 class="title">
                     <?php echo $category; ?>
                 </h1>
-                <div class="gadget-grid-container">
-                    <?php
-                    foreach ($devices as $device) {
-                        ?>
-                        <a href="gadgetdetails.php?g_id=<?php echo $device['g_id']; ?>" class="g-item">
-                            <img class='gadget-img' src="./image/product/<?php echo $device['gimage']; ?>">
+                <?php
+                foreach ($devices as $device) {
+                    ?>
+                    <a href="gadgetdetails.php?g_id=<?php echo $device['g_id']; ?>" class="g-item">
+                        <img class='gadget-img' src="./image/product/<?php echo $device['gimage']; ?>">
+                        <section class="gadget-section">
                             <div class="gadget-name">
                                 <?php echo $device['gname']; ?>
                             </div>
                             <div class="gadget-price">Rs:
                                 <?php echo $device['gprice']; ?>
                             </div>
-                            <img class='ratingstar3' src='image/rating/<?php echo $device['rating']; ?>' alt='rating Image'>
-                        </a>
-                        <?php
-                    }
-                    ?>
-                </div>
-                <?php
-            }
-            ?>
-        </main>
-        <footer>
-            <div class="row">
-                <div class="coln">
-                    <h3>contact</h3>
-                    <ul>
-                        <li><i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span></li>
-                        <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span></li>
-                        <li><i class="fa-solid fa-envelope"></i><span class="content">gadgetsearch@gmail.com</span></li>
-                    </ul>
-                </div>
-                <div class="coln">
-                    <h3>About</h3>
-                    <ul>
-                        <li><a href="about.php">About us</a></li>
-                        <li><a href="#">Term & Condition</a></li>
-                    </ul>
-                </div>
-                <div class="coln">
-                    <h3>follow us</h3>
-                    <div>
-                        <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i
-                                class="fa-brands fa-facebook-f"></i></a>
-                        <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
-                    </div>
+
+                            <div class="gadget-rating">
+                                <?php
+
+                                $average_rating_formatted = number_format($device['average_rating'], 1);
+                                $fullStars = floor($average_rating_formatted);
+                                $hasHalfStar = $average_rating_formatted - $fullStars >= 0.25;
+
+
+                                for ($i = 1; $i <= $fullStars; $i++) {
+                                    echo '<i class="fa-solid fa-star" style="color: gold;"></i>';
+                                }
+
+                                if ($hasHalfStar) {
+                                    echo '<i class="fa-solid fa-star-half-stroke" style="color: gold;"></i>';
+                                }
+
+                                $emptyStars = 5 - $fullStars - ($hasHalfStar ? 1 : 0);
+
+
+                                for ($i = 1; $i <= $emptyStars; $i++) {
+                                    echo '<i class="fa-regular fa-star" style="color: gold;"></i>'; // Empty star
+                                }
+
+                                echo " $average_rating_formatted";
+                                ?>
+                            </div>
+                        </section>
+                    </a>
+                    <?php
+                }
+                ?>
+            </div>
+            <?php
+        } else {
+            echo "<h1 class='title'>No gadgets found in this category.</h1>";
+        }
+        ?>
+    </main>
+    <footer>
+        <div class="row">
+            <div class="coln">
+                <h3>contact</h3>
+                <ul>
+                    <li><i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span></li>
+                    <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span></li>
+                    <li><i class="fa-solid fa-envelope"></i><span class="content">gadgetsearch@gmail.com</span></li>
+                </ul>
+            </div>
+            <div class="coln">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="about.php">About us</a></li>
+                    <li><a href="#">Term & Condition</a></li>
+                </ul>
+            </div>
+            <div class="coln">
+                <h3>follow us</h3>
+                <div>
+                    <a href="https://www.facebook.com/profile.php?id=100092486893685" class="icon"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="" class="icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="" class="icon"><i class="fa-brands fa-twitter"></i></a>
                 </div>
             </div>
-            <center><i class="fa-regular fa-copyright"></i>opyright</center>
-        </footer>
-        <script src="javascript.js"></script>
+        </div>
+        <center><i class="fa-regular fa-copyright"></i>opyright</center>
+    </footer>
+    <script src="javascript.js"></script>
 </body>
 
 </html>

@@ -7,7 +7,7 @@ if (!isset($_SESSION['adminname'])) {
 }
 $gadgetCount = $pdo->query("SELECT COUNT(g_id) FROM gadget_details")->fetchColumn();
 $userCount = $pdo->query("SELECT COUNT(id) FROM register")->fetchColumn();
-$feedbackCount = $pdo->query("SELECT COUNT(Id) FROM feedback")->fetchColumn();
+$feedbackCount = $pdo->query("SELECT COUNT(feedback_id) FROM feedback")->fetchColumn();
 
 ?>
 <!DOCTYPE html>

@@ -3,24 +3,39 @@ session_start();
 include('connect.php');
 
 $perPage = 5; // Number of gadgets to display per page
+$devices = []; // Initialize the $devices array
 
 if (isset($_GET['pricerange']) && isset($_GET['type'])) {
     $pricerange = $_GET['pricerange'];
     $type = $_GET['type'];
     @$category = $_GET['category'];
 
-
-    $sql = "SELECT COUNT(*) AS total FROM gadget_details WHERE pricerange = :pricerange";
+    // Calculate total gadgets matching the criteria with average rating
+    $sql = "SELECT COUNT(*) AS total
+            FROM gadget_details
+            LEFT JOIN feedback ON gadget_details.g_id = feedback.g_id
+            WHERE gadget_details.pricerange = :pricerange
+            AND gadget_details.type = :type
+            GROUP BY gadget_details.g_id";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':pricerange', $pricerange);
+    $stmt->bindParam(':type', $type);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $totalGadgets = $result['total'];
+    @$totalGadgets = $result['total'];
 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
     $offset = ($currentPage - 1) * $perPage;
 
-    $sql = "SELECT * FROM gadget_details WHERE pricerange = :pricerange AND type = :type LIMIT $offset, $perPage";
+    // Retrieve gadgets based on criteria with average rating
+    $sql = "SELECT gadget_details.*, AVG(feedback.rating) AS average_rating
+            FROM gadget_details
+            LEFT JOIN feedback ON gadget_details.g_id = feedback.g_id
+            WHERE gadget_details.pricerange = :pricerange
+            AND gadget_details.type = :type
+            GROUP BY gadget_details.g_id
+            LIMIT $offset, $perPage";
+
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':pricerange', $pricerange);
     $stmt->bindParam(':type', $type);
@@ -29,7 +44,12 @@ if (isset($_GET['pricerange']) && isset($_GET['type'])) {
 } elseif (isset($_GET['pricerange'])) {
     $pricerange = $_GET['pricerange'];
 
-    $sql = "SELECT COUNT(*) AS total FROM gadget_details WHERE pricerange = :pricerange";
+    // Calculate total gadgets matching the price range with average rating
+    $sql = "SELECT COUNT(*) AS total
+            FROM gadget_details
+            LEFT JOIN feedback ON gadget_details.g_id = feedback.g_id
+            WHERE gadget_details.pricerange = :pricerange
+            GROUP BY gadget_details.g_id";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':pricerange', $pricerange);
     $stmt->execute();
@@ -39,7 +59,14 @@ if (isset($_GET['pricerange']) && isset($_GET['type'])) {
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
     $offset = ($currentPage - 1) * $perPage;
 
-    $sql = "SELECT * FROM gadget_details WHERE pricerange = :pricerange LIMIT $offset, $perPage";
+    // Retrieve gadgets based on price range with average rating
+    $sql = "SELECT gadget_details.*, AVG(feedback.rating) AS average_rating
+            FROM gadget_details
+            LEFT JOIN feedback ON gadget_details.g_id = feedback.g_id
+            WHERE gadget_details.pricerange = :pricerange
+            GROUP BY gadget_details.g_id
+            LIMIT $offset, $perPage";
+
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':pricerange', $pricerange);
     $stmt->execute();
@@ -55,6 +82,7 @@ do {
     @$g_id = $_GET[$i];
 
     if ($g_id != null) {
+        // Retrieve gadget details based on g_id
         $stmt = $pdo->prepare("SELECT * FROM gadget_details WHERE g_id = :g_id");
         $stmt->bindParam(':g_id', $g_id);
         $stmt->execute();
@@ -64,7 +92,6 @@ do {
     $i++;
 } while ($i < $count);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,6 +115,7 @@ do {
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="gadget.css">
     <title>GadgetSearch</title>
 </head>
 
@@ -123,80 +151,121 @@ do {
             </form>
         </div>
     </header>
-    <div id="gadget-category">
-        <div class="filter">
-            <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
-            <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Best
-                Buy</a>
-            <a href="type.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
-            <a href="type.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-            <a href="type.php?type=accessories" class="category-item"><i class="fa fa-mobile-phone"></i>Accessories</a>
-
-            <h4>price range</h4>
-            <button class="pricerange1"><a href="price_range.php?pricerange=1000-10000&<?php if (isset($_GET['type'])) {
-                echo "type=";
-                echo $type;
-            } ?>" class="category-item">1k-10k</a></button>
-            <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000&<?php if (isset($_GET['type'])) {
-                echo "type=";
-                echo $type;
-            } ?>" class="category-item">10k-50k</a></button>
-            <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000&<?php if (isset($_GET['type'])) {
-                echo "type=";
-                echo $type;
-            } ?>" class="category-item">50k-100k</a></button>
-            <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000&<?php if (isset($_GET['type'])) {
-                echo "type=";
-                echo $type;
-            } ?>" class="category-item">100k-150k</a></button>
-            <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000&<?php if (isset($_GET['type'])) {
-                echo "type=";
-                echo $type;
-            } ?>" class="category-item">150k-200k</a></button>
-        </div>
-    </div>
     <main class="gadget-main">
+
+        <aside id="gadget-category">
+            <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
+            <section>
+                <a href="category.php?category=bestbuy" class="category-item"><i
+                        class="fa-solid fa-cart-shopping"></i>Best
+                    Buy</a>
+                <a href="type.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
+                <a href="type.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
+                <a href="type.php?type=accessories" class="category-item"><i
+                        class="fa fa-mobile-phone"></i>Accessories</a>
+
+            </section>
+            <hr>
+            <center>
+                <h4>price range</h4>
+            </center>
+            <section class="p-range">
+                <div class="">
+                    <button class="pricerange1"><a href="price_range.php?pricerange=1000-10000&<?php if (isset($_GET['type'])) {
+                        echo "type=";
+                        echo $type;
+                    } ?>" class="category-item">1k-10k</a></button>
+                    <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000&<?php if (isset($_GET['type'])) {
+                        echo "type=";
+                        echo $type;
+                    } ?>" class="category-item">10k-50k</a></button>
+                    <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000&<?php if (isset($_GET['type'])) {
+                        echo "type=";
+                        echo $type;
+                    } ?>" class="category-item">50k-100k</a></button>
+                </div>
+
+                <div>
+                    <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000&<?php if (isset($_GET['type'])) {
+                        echo "type=";
+                        echo $type;
+                    } ?>" class="category-item">100k-150k</a></button>
+                    <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000&<?php if (isset($_GET['type'])) {
+                        echo "type=";
+                        echo $type;
+                    } ?>" class="category-item">150k-200k</a></button>
+                </div>
+            </section>
+        </aside>
         <?php if (isset($pricerange) && !empty($devices)): ?>
-            <h1 class="title">
-                <?php echo $pricerange; ?>
-            </h1>
             <div class="gadget-grid-container">
+                <h1 class="title">
+                    <?php echo $pricerange; ?>
+                </h1>
                 <?php foreach ($devices as $device): ?>
                     <a href="gadgetdetails.php?g_id=<?php echo $device['g_id']; ?>" class="g-item">
                         <img class='gadget-img' src="./image/product/<?php echo $device['gimage']; ?>">
-                        <div class="gadget-name">
-                            <?php echo $device['gname']; ?>
-                        </div>
-                        <div class="gadget-price">Rs:
-                            <?php echo $device['gprice']; ?>
-                        </div>
-                        <img class='ratingstar3' src='image/rating/<?php echo $device['rating']; ?>' alt='rating Image'>
+                        <section class="gadget-section">
+                            <div class="gadget-name">
+                                <?php echo $device['gname']; ?>
+                            </div>
+                            <div class="gadget-price">Rs:
+                                <?php echo $device['gprice']; ?>
+                            </div>
+
+                            <div class="gadget-rating">
+                                <?php
+                                $average_rating_formatted = number_format($device['average_rating'], 1);
+                                $fullStars = floor($average_rating_formatted);
+                                $hasHalfStar = $average_rating_formatted - $fullStars >= 0.25;
+
+                                for ($i = 1; $i <= $fullStars; $i++) {
+                                    echo '<i class="fa-solid fa-star" style="color: gold;"></i>';
+                                }
+
+                                if ($hasHalfStar) {
+                                    echo '<i class="fa-solid fa-star-half-stroke" style="color: gold;"></i>';
+                                }
+
+
+                                $emptyStars = 5 - $fullStars - ($hasHalfStar ? 1 : 0);
+
+                                for ($i = 1; $i <= $emptyStars; $i++) {
+                                    echo '<i class="fa-regular fa-star" style="color: gold;"></i>';
+                                }
+
+                                echo " $average_rating_formatted";
+                                ?>
+                            </div>
+                        </section>
                     </a>
                 <?php endforeach; ?>
             </div>
-
-            <!-- Pagination -->
-            <div class="pagination">
-                <?php
-                $totalPages = ceil($totalGadgets / $perPage);
-                $prevPage = $currentPage - 1;
-                $nextPage = $currentPage + 1;
-
-                if ($currentPage > 1) {
-                    echo "<a href='gadget.php?pricerange=$pricerange&page=$prevPage' class='page-link'>&#171; Previous</a>";
-                }
-
-                for ($i = 1; $i <= $totalPages; $i++) {
-                    $activeClass = ($i == $currentPage) ? 'active' : '';
-                    echo "<a href='gadget.php?pricerange=$pricerange&page=$i' class='page-link $activeClass'>$i</a>";
-                }
-
-                if ($currentPage < $totalPages) {
-                    echo "<a href='gadget.php?pricerange=$pricerange&page=$nextPage' class='page-link'>Next &#187;</a>";
-                }
-                ?>
-            </div>
         <?php endif; ?>
+
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <?php
+            $totalPages = ceil($totalGadgets / $perPage);
+            $prevPage = $currentPage - 1;
+            $nextPage = $currentPage + 1;
+
+            if ($currentPage > 1) {
+                echo "<a href='gadget.php?pricerange=$pricerange&page=$prevPage' class='page-link'>&#171; Previous</a>";
+            }
+
+            for ($i = 1; $i <= $totalPages; $i++) {
+                $activeClass = ($i == $currentPage) ? 'active' : '';
+                echo "<a href='gadget.php?pricerange=$pricerange&page=$i' class='page-link $activeClass'>$i</a>";
+            }
+
+            if ($currentPage < $totalPages) {
+                echo "<a href='gadget.php?pricerange=$pricerange&page=$nextPage' class='page-link'>Next &#187;</a>";
+            }
+            ?>
+        </div>
+
     </main>
     <footer>
         <div class="row">

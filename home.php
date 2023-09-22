@@ -25,6 +25,7 @@ if (isset($_POST['login-submit'])) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,7 +115,6 @@ if (isset($_POST['login-submit'])) {
                      echo "<img class='pro-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
                      echo '<p class="pro-name">' . $row['gname'] . '</p>';
                      echo '<p class="pro-name">Rs:' . $row['gprice'] . '</p>';
-                     echo "<img class='ratingstar1' src='image/rating/{$row['rating']}' alt='rating Image'>";
                      echo '</a>';
                   }
                } else {
@@ -123,31 +123,6 @@ if (isset($_POST['login-submit'])) {
                ?>
             </div>
 
-         </div>
-      </section>
-      <section id="newarival">
-         <h1>latest gadgets</h1>
-         <p>new gadgets reviews</p>
-         <div class="latest-container">
-            <?php
-            $sql = "SELECT * FROM gadget_details order by g_id desc limit 4";
-            $stmt = $pdo->query($sql);
-
-            if ($stmt->rowCount() > 0) {
-
-               while ($row = $stmt->fetch()) {
-                  echo '<a href="#" onclick="alertPopup()" class="detailes">';
-                  echo "<img class='g-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-                  echo '<div class="g-name">' . $row['gname'] . '</div>';
-                  echo '<div class="g-price">Rs:' . $row['gprice'] . '</div>';
-                  echo "<img class='ratingstar2' src='image/rating/{$row['rating']}' alt='rating Image'>";
-                  echo '</a>';
-
-               }
-            } else {
-               echo "No courses found.";
-            }
-            ?>
          </div>
       </section>
       <section class="brands">

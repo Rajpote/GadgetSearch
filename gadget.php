@@ -59,7 +59,9 @@ do {
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
    <link rel="stylesheet" href="style1.css" />
+   <link rel="stylesheet" href="gadget.css">
    <title>GadgetSearch</title>
+
 </head>
 
 <body>
@@ -95,36 +97,47 @@ do {
       </div>
    </header>
 
-   <div id="gadget-category">
-      <div class="filter">
-         <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
-         <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Best
-            Buy</a>
-         <a href="type.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
-         <a href="type.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
-         <a href="type.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories
-         </a>
-
-
-         <h4>price range</h4>
-         <button class="pricerange1"><a href="price_range.php?pricerange=1000-10000"
-               class="category-item">1k-10k</a></button>
-         <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
-               class="category-item">10k-50k</a></button>
-         <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000"
-               class="category-item">50k-100k</a></button>
-         <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000"
-               class="category-item">100k-150k</a></button>
-         <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000"
-               class="category-item">150k-200k</a></button>
-      </div>
-   </div>
 
    <main>
+      <aside id="gadget-category">
+         <center> <i class="fa-solid fa-filter" id="filtericon"></i> </center>
+         <section>
+            <a href="category.php?category=bestbuy" class="category-item"><i class="fa-solid fa-cart-shopping"></i>Best
+               Buy</a>
+            <a href="type.php?type=laptop" class="category-item"><i class="fa-solid fa-laptop"></i>Laptop</a>
+            <a href="type.php?type=phone" class="category-item"><i class="fa fa-mobile-phone"></i>Phone</a>
+            <a href="type.php?type=accessories " class="category-item"><i class="fa fa-mobile-phone"></i>Accessories
+            </a>
+         </section>
+         <hr>
+         <center>
+            <h4>price range</h4>
+         </center>
+         <section class="p-range">
+            <div class="">
+               <button class="pricerange1"><a href="price_range.php?pricerange=1000-10000"
+                     class="category-item">1k-10k</a></button>
+               <button class="pricerange1"><a href="price_range.php?pricerange=10000-50000"
+                     class="category-item">10k-50k</a></button>
+               <button class="pricerange1"><a href="price_range.php?pricerange=50000-100000"
+                     class="category-item">50k-100k</a></button>
+            </div>
+
+            <div>
+               <button class="pricerange1"><a href="price_range.php?pricerange=100000-150000"
+                     class="category-item">100k-150k</a></button>
+               <button class="pricerange1"><a href="price_range.php?pricerange=150000-200000"
+                     class="category-item">150k-200k</a></button>
+            </div>
+         </section>
+      </aside>
       <div class="gadget-grid-container">
          <h1 class="title">Gadgets</h1>
          <?php
-         $sql = "SELECT * FROM gadget_details";
+         $sql = "SELECT gadget_details.*, AVG(feedback.rating) AS average_rating
+                 FROM gadget_details
+                 LEFT JOIN feedback ON gadget_details.g_id = feedback.g_id
+                 GROUP BY gadget_details.g_id";
 
          if (isset($_GET['type'])) {
             $type = $_GET['type'];
@@ -143,13 +156,61 @@ do {
          $stmt = $pdo->query($sql);
 
          if ($stmt->rowCount() > 0) {
-            while ($row = $stmt->fetch()) {
-               echo '<a href="gadgetdetails.php?g_id=' . $row['g_id'] . '" class="g-item">';
-               echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-               echo '<div class="gadget-name">' . $row['gname'] . '</div>';
-               echo '<div class="gadget-price">Rs:' . $row['gprice'] . '</div>';
-               echo "<img class='ratingstar3' src='image/rating/{$row['rating']}' alt='rating Image'>";
-               echo '</a>';
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+               $gadget_id = $row['g_id'];
+               $average_rating = $row['average_rating'];
+
+               echo '<a href="gadgetdetails.php?g_id=' . $gadget_id . '" class="g-item">';
+
+               
+               if (isset($row['gimage']) && !empty($row['gimage'])) {
+                  echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+               }
+
+               echo '<section class="gadget-section">';
+               
+               if (isset($row['gname']) && !empty($row['gname'])) {
+                  echo '<div class="gadget-name">' . $row['gname'] . '</div>';
+               }
+
+              
+               if (isset($row['gprice']) && !empty($row['gprice'])) {
+                  echo '<div class="gadget-price">Rs:' . $row['gprice'] . '</div>';
+               }
+
+
+               ?>
+               <!-- Display gadget rating with half stars -->
+               <div class="gadget-rating">
+                  <?php
+                  $average_rating_formatted = number_format($average_rating, 1);
+
+
+                  $fullStars = floor($average_rating_formatted);
+                  $hasHalfStar = $average_rating_formatted - $fullStars >= 0.25;
+
+                  for ($i = 1; $i <= $fullStars; $i++) {
+                     echo '<i class="fa-solid fa-star" style="color:gold;"></i>'; // Full star
+                  }
+
+                  if ($hasHalfStar) {
+                     echo '<i class="fa-solid fa-star-half-stroke" style="color:gold;"></i>'; // Half star
+                  }
+
+                  $emptyStars = 5 - $fullStars - ($hasHalfStar ? 1 : 0);
+
+                  for ($i = 1; $i <= $emptyStars; $i++) {
+                     echo '<i class="fa-regular fa-star" style="color:gold;"></i>'; 
+                  }
+
+                  echo " $average_rating_formatted"; 
+                  ?>
+               </div>
+
+               </section>
+            </a>
+
+            <?php
             }
          } else {
             echo "No gadgets found.";
@@ -179,6 +240,7 @@ do {
          </div>
       </center>
    </main>
+   <a class="top" href="#">top</a>
 
    <footer>
       <div class="row">

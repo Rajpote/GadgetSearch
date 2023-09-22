@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <!-- Your head content here -->
+
+      <style>
+         /* CSS for horizontal layout */
+         body {
+            overflow-x: hidden; /* Hide horizontal overflow */
+         }
+
+         main {
+            display: flex;
+            flex-direction: row; /* Display sections horizontally */
+            /* white-space: nowrap; Prevent line breaks */
+         }
+
+         article {
+            min-width: 100%; /* Ensure each section takes up the full viewport width */
+            padding: 20px; /* Add some spacing between sections */
+            box-sizing: border-box; /* Include padding in section width */
+            overflow-x: auto; /* Enable horizontal scrolling for each section */
+            scroll-snap-type: x mandatory; /* Enable snap scrolling horizontally */
+            scroll-behavior: smooth; /* Smooth scrolling between sections */
+         }
+
+         /* Style for anchor links */
+         .top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1;
+         }
+
+         /* Style for section links */
+         .section-link {
+            cursor: pointer;
+            padding: 5px 10px;
+            margin: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+         }
+      </style>
+   </head>
+   <body>
+      <?php
+    // Your PHP code here
+    ?>
+
+      <header>
+         <!-- Your header content here -->
+      </header>
+
+      <main>
+         <article id="1stpage">
+            hello raj Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur voluptatem cupiditate eaque quaerat magni consectetur debitis temporibus hic nihil dolorem. Aliquam, nemo autem?
+         </article>
+
+         <article id="2ndpage">
+            hello ragav Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus modi earum aut! Aliquam, architecto magnam! Ullam quia totam, distinctio cupiditate dicta maiores corporis ut
+            quidem esse dolorem similique quae fuga. Repellendus, incidunt, veniam nisi quod molestias id repellat mollitia fugit dolorem rerum odit facere saepe inventore? Pariatur accusantium
+            corporis reprehenderit voluptas, laborum nesciunt nam cumque!
+         </article>
+
+         <article id="3rdpage">
+            hello punit Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel et quae, dolor quaerat similique libero provident laboriosam corrupti velit, iste cum voluptates adipisci ullam
+            deserunt qui inventore aperiam asperiores corporis ab culpa amet vero? Aperiam consequatur quasi praesentium eius excepturi iure voluptate accusantium nihil!
+         </article>
+
+         <article id="4thpage">
+            hello shoya; Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea quam at praesentium quis ut, necessitatibus consectetur, ipsam, minima iste dolor et porro delectus accusamus in
+            suscipit odit alias aspernatur nostrum doloremque? Excepturi accusantium consectetur nam nobis assumenda debitis sint repudiandae expedita iusto molestias dolor, deserunt atque eligendi
+            reprehenderit minima delectus accusamus ea soluta neque quidem amet tempore. Aperiam laudantium in eius pariatur, unde vel illo quasi soluta assumenda quia fuga accusamus deserunt
+            accusantium perferendis at ea molestiae asperiores nulla distinctio deleniti, fugit dolor. Molestias magni harum asperiores quod.<!-- Content for the fourth section -->
+         </article>
+      </main>
+
+      <div class="top">Top</div>
+
+      <div>
+         <button class="section-link" data-target="1stpage">Section 1</button>
+         <button class="section-link" data-target="2ndpage">Section 2</button>
+         <button class="section-link" data-target="3rdpage">Section 3</button>
+         <button class="section-link" data-target="4thpage">Section 4</button>
+      </div>
+
+      <script>
+         // JavaScript for showing and hiding sections based on section links
+         const sectionLinks = document.querySelectorAll(".section-link");
+         const articles = document.querySelectorAll("article");
+
+         sectionLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+               const targetId = link.getAttribute("data-target");
+               articles.forEach((article) => {
+                  if (article.id === targetId) {
+                     article.style.display = "block";
+                  } else {
+                     article.style.display = "none";
+                  }
+               });
+            });
+         });
+      </script>
+   </body>
+</html>

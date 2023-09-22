@@ -1,21 +1,99 @@
 <?php
 session_start();
 include 'connect.php';
+// Function to calculate average rating
+function calculateAverageRating($pdo, $gadgetID)
+{
+    $query = "SELECT AVG(rating) AS average_rating FROM feedback WHERE g_id = :gadgetID";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':gadgetID', $gadgetID);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['average_rating'] ?? 0;
+}
 
-if (isset($_POST['login-submit'])) {
+function hasUserReviewed($pdo, $gadgetID, $username)
+{
+    $query = "SELECT COUNT(*) AS review_count FROM feedback WHERE g_id = :gadgetID AND uname = :username";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':gadgetID', $gadgetID);
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['review_count'] > 0;
+}
+
+
+$selectedGadgetDetails = [];
+
+if (isset($_POST['feedback-submit'])) {
     $uname = $_SESSION['username'];
     $feedback = $_POST['feedback'];
     $rating = $_POST['rating'];
+    $gadgetID = $_GET['g_id'];
 
-
-    $sql = "INSERT INTO feedback (uname, feedback, rating) VALUES (:uname, :feedback, :rating)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':uname', $uname);
-    $stmt->bindParam(':feedback', $feedback);
-    $stmt->bindParam(':rating', $rating);
-    $stmt->execute();
-    echo '<script>alert("Feedback submitted successfully.");</script>';
+    if (hasUserReviewed($pdo, $gadgetID, $uname)) {
+        echo '<script>alert("You have already reviewed this gadget.");</script>';
+    } else {
+        $sql = "INSERT INTO feedback (uname, feedback, rating, g_id) VALUES (:uname, :feedback, :rating, :gadgetID)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':uname', $uname);
+        $stmt->bindParam(':feedback', $feedback);
+        $stmt->bindParam(':rating', $rating);
+        $stmt->bindParam(':gadgetID', $gadgetID);
+        $stmt->execute();
+        echo '<script>alert("Feedback submitted successfully.");</script>';
+    }
 }
+
+if (isset($_GET['g_id'])) {
+    $g_id = $_GET['g_id'];
+
+    $sql = "SELECT * FROM gadget_details WHERE g_id=:g_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':g_id', $g_id);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+if (isset($_POST['compare-submit'])) {
+    // Retrieve the selected gadgets for comparison
+    $selectedGadgets = $_POST['comparison_gadgets'];
+
+    // Retrieve gadget details for selected gadgets
+    foreach ($selectedGadgets as $selectedGadgetID) {
+        $sql = "SELECT * FROM gadget_details WHERE g_id=:g_id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':g_id', $selectedGadgetID);
+        $stmt->execute();
+        $selectedGadget = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($selectedGadget) {
+            // Check if the selected gadget has the same type as the current gadget
+            if ($selectedGadget['type'] == $result[0]['type']) {
+                $selectedGadgetDetails[] = $selectedGadget;
+            }
+        }
+    }
+}
+
+// Retrieve all gadgets of the same type for the comparison select form
+$sql = "SELECT * FROM gadget_details WHERE g_id != :g_id AND type = :type";
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(':g_id', $g_id);
+$stmt->bindParam(':type', $result[0]['type']); // Filter by the type of the current gadget
+$stmt->execute();
+$comparisonGadgets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+// Query to retrieve feedback for the gadget
+$sqlFeedback = "SELECT f.*, u.uname FROM feedback f
+                JOIN register u ON f.uname = u.uname
+                WHERE f.g_id = :gadgetID";
+$stmtFeedback = $pdo->prepare($sqlFeedback);
+$stmtFeedback->bindParam(':gadgetID', $g_id);
+$stmtFeedback->execute();
+$feedbackResults = $stmtFeedback->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -39,303 +117,104 @@ if (isset($_POST['login-submit'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
-
-    <link rel="stylesheet" href="style1.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="details.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Poppins, sans-serif;
-        }
 
-        main {
-            margin: 9px 0px 0px 40px;
-            background-color: transparent;
-            width: 70%;
-        }
-
-        img.gadget {
-            height: 10%;
-            width: 35%;
-            margin: 10px 10px 10px 0px;
-        }
-
-        img.gadget-full {
-            height: 35%;
-            width: 90%;
-            margin: 1rem 5% 0 5%;
-            image-resolution: 1080px;
-        }
-
-        h4.name {
-            font-size: 25px;
-            font-weight: 500;
-            color: #0a0101;
-            padding: 0px 10px;
-        }
-
-        p.gprice {
-            font-size: 20px;
-            font-weight: 400;
-            padding: 10px;
-        }
-
-        img.ratingstar {
-            width: 50%;
-            height: 55%;
-            border-radius: 15px;
-
-        }
-
-        .title {
-            position: absolute;
-            top: 2%;
-            left: 35%;
-            margin: 10px;
-            font-size: 20px;
-        }
-
-        .elink {
-            display: flex;
-            align-items: center;
-            margin: 15px;
-        }
-
-        .elink a img {
-            margin: 10px;
-            height: 25%;
-            width: 25%;
-            cursor: pointer;
-        }
-
-        form {
-            display: block;
-            border: 1px solid black;
-            width: 25%;
-            padding: 10px 10px;
-            border-radius: 12px;
-            color: blue;
-            cursor: pointer;
-        }
-
-        .feedback {
-            display: flex;
-            align-items: center;
-            justify-content: left;
-            padding: 10px 10px;
-        }
-
-        #submit-btn.feedback {
-            margin: 0 0 0 25%;
-            width: 50%;
-            color: red;
-            cursor: pointer;
-        }
-
-        table th td {
-            margin: 20px;
-            padding: 20px;
-        }
-
-        textarea {
-            width: 90%;
-            padding: 10px;
-            margin: 15px;
-        }
-
-        #feedback-btn {
-            width: 90%;
-            height: 20%;
-            padding: 5px 5px 5px 5px;
-        }
-
-        .feedback input {
-            width: 90%;
-            height: 20%;
-            padding: 5px 5px 5px 20px;
-        }
-
-        i#feedbackuser {
-            position: absolute;
-            left: 25px;
-            color: #0a0101;
-
-        }
-
-        table {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 10px;
-        }
-
-        .table-heading {
-            border: 5px solid black;
-            width: 50%;
-            text-transform: capitalize;
-            font-size: 25px;
-        }
-
-        .table-body {
-            border: 1px solid black;
-            padding: 5px 25px 5px 25px;
-            text-transform: capitalize;
-        }
-
-        .point {
-            list-style: square;
-            font-size: 20px;
-            font-weight: 400;
-        }
-
-        .points {
-            list-style: none;
-            text-align: justify;
-            font-style: capitalize;
-            font-size: 20px;
-            font-weight: 400;
-        }
-
-        @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css);
-
-
-        .container11 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 20%;
-            width: 20%;
-        }
-
-        #rating-value {
-            width: 100px;
-            margin: 40px auto 0;
-            border: 1px solid black;
-            padding: 10px 5px;
-            text-align: center;
-            box-shadow: 0 0 2px 1px rgba(46, 204, 113, .2);
-        }
-
-        /*styling star rating*/
-
-        .rating {
-            border: none;
-            float: left;
-            margin: 10px 10px 10px 10px;
-        }
-
-        .rating>input {
-            display: none;
-        }
-
-        .rating>label:before {
-            content: '\f005';
-            font-family: FontAwesome;
-            margin: 5px;
-            font-size: 1.5rem;
-            display: inline-block;
-            cursor: pointer;
-        }
-
-        .rating>.half:before {
-            content: '\f089';
-            position: absolute;
-            cursor: pointer;
-        }
-
-
-        .rating>label {
-            color: #0a0101;
-            float: right;
-            cursor: pointer;
-        }
-
-        .rating>input:checked~label,
-        .rating:not(:checked)>label:hover,
-        .rating:not(:checked)>label:hover~label {
-            color: #b5f069;
-        }
-
-        .rating>input:checked+label:hover,
-        .rating>input:checked~label:hover,
-        .rating>label:hover~input:checked~label,
-        .rating>input:checked~label:hover~label {
-            color: #cef046;
-        }
     </style>
+
 </head>
 
 <body>
     <?php
-    if (isset($_GET['g_id'])) {
-        $g_id = $_GET['g_id'];
-
-        $sql = "SELECT * FROM gadget_details WHERE g_id=:g_id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':g_id', $g_id);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
     if (count($result) > 0) {
-        ?>
+        foreach ($result as $row) {
+            ?>
 
-        <div class="content-container">
-
-            <?php
-            $i = 0;
-            foreach ($result as $row) {
-                ?>
-
-                <header>
-                    <div>
-                        <a class="logo" href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
-                    </div>
+            <header>
+                <div class="logo">
+                    <a href="user.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
+                </div>
+                <div>
                     <ul class="navbar">
                         <li><a href="user.php">Home</a></li>
                         <li><a href="gadget.php">Gadget</a></li>
                         <li><a href="about.php">About Us</a></li>
                     </ul>
+                </div>
 
-                </header>
-                <main>
-                    <div class="image-pro">
-                        <?php
-                        echo "<img class='gadget' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
-                        ?>
-                    </div>
+            </header>
+
+            <main>
+                <section class="section1">
+                    <?php
+                    echo "<img src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+                    ?>
                     <div class="title">
                         <h4 class="name" colspan="2">
                             <?php echo $row['gname']; ?>
                         </h4>
                         <h5 class="price">
                             <?php
-                            echo "<p class='gprice'>RS:{$row['gprice']} </p>";
+                            echo "<p class='gprice'>RS: {$row['gprice']} </p>";
                             ?>
                         </h5>
-                        <?php
-                        echo "<img class='ratingstar' src='image/rating/{$row['rating']}' alt='rating Image'>";
-                        ?>
+                        <div class="displayed">
+                            <?php
+                            $averageRating = calculateAverageRating($pdo, $g_id);
+                            $rating = round($averageRating * 2) / 2;
+                            for ($i = 1; $i <= 5; $i++) {
+                                if ($i <= $rating) {
+                                    echo '<i class="fas fa-star"></i>';
+                                } elseif ($i - 0.5 == $rating) {
+                                    echo '<i class="fas fa-star-half-alt"></i>';
+                                } else {
+                                    echo '<i class="far fa-star"></i>';
+                                }
+                            }
+                            ?>
+                            <?php
+                            $averageRating = calculateAverageRating($pdo, $g_id);
+                            echo number_format($averageRating, 1);
+                            ?>
+                        </div>
+
                     </div>
-                    <div class="discription">
-                        <?php
-                        $gdis = explode("\n", $row['gdis']);
-                        echo "<ul>";
-                        foreach ($gdis as $point) {
-                            echo "<li class='points'>$point</li>";
-                        }
-                        echo "</ul>";
-                        ?>
-                    </div>
+                </section>
+                <div class="discription">
                     <?php
-                    echo "<img class='gadget-full' src='image/product/{$row['imageone']}' alt='Gadget Image'>";
+                    $gdis = explode("\n", $row['gdis']);
+                    echo "<ul>";
+                    foreach ($gdis as $point) {
+                        echo "<li class='points'>$point</li>";
+                    }
+                    echo "</ul>";
                     ?>
+                </div>
+
+                <?php
+                echo "<img class='gadget-full' src='image/product/{$row['imageone']}' alt='Gadget Image'>";
+                echo "<img class='gadget-full' src='image/product/{$row['imagetwo']}' alt='Gadget Image'>";
+                ?>
+
+                <div class="innerlink">
+                    <p class="showcomparison">Comparison</p>
+                    <p class="showlink">Buy Link</p>
+                    <p class="showfeedback">Feedback</p>
+                </div>
+
+                <articale id="2ndpage" class="comparison-container">
                     <table>
                         <tr>
-                            <th class="table-heading"> specifation </th>
-                            <th class="table-heading">comprasion</th>
+                            <th class="table-heading">
+                                <?php echo $row['gname']; ?>
+                            </th>
+                            <?php
+                            // Display the selected gadget names for comparison in table header
+                            foreach ($selectedGadgetDetails as $selectedGadget) {
+                                echo '<th class="table-heading">' . $selectedGadget['gname'] . '</th>';
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td class="table-body">
@@ -349,102 +228,147 @@ if (isset($_POST['login-submit'])) {
                                 ?>
                             </td>
                             <td class="table-body">
+                                <p>Select gadgets for comparison:</p>
+                                <form class="compare-form" action="" method="POST">
+                                    <select name="comparison_gadgets[]" multiple="3">
+                                        <?php
+                                        foreach ($comparisonGadgets as $compGadget) {
+                                            echo '<option value="' . $compGadget['g_id'] . '">' . $compGadget['gname'] . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                    <input type="submit" name="compare-submit" value="Compare">
+                                </form>
                                 <?php
-                                $gcomprasion = explode("\n", $row['gcomprasion']);
-                                echo "<ul>";
-                                foreach ($gcomprasion as $point) {
-                                    echo "<li class='point'>$point</li>";
+                                if (count($selectedGadgetDetails) > 0) {
+                                    foreach ($selectedGadgetDetails as $selectedGadget) {
+                                        $selectedSpecs = explode("\n", $selectedGadget['gspecification']);
+                                        echo "<ul>";
+                                        foreach ($selectedSpecs as $spec) {
+                                            echo "<li class='point'>$spec</li>";
+                                        }
+                                        echo "</ul>";
+                                    }
                                 }
-                                echo "</ul>";
                                 ?>
                             </td>
                         </tr>
                     </table>
-                    <?php
-                    echo "<img class='gadget' src='image/product/{$row['imagetwo']}' alt='Gadget Image'>";
-                    ?>
-                    <?php
-                    $i++;
-            }
-            ?>
-                <div class="elink">
-                    <p>Buy Here:</p>
-                    <a href="<?php echo $row['glink'] ?>" target="_blank"><img src="image/backgrounds/buy-now.png"
-                            alt=""></a>
-                </div>
-                <?php
-    } else {
-        echo "No content available!";
+                </articale>
+
+                <articale id="3rdpage" class="link-container">
+                    <table class="elink" border="1">
+                        <tr>
+                            <th>Buy Here</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <?php
+                                if (isset($row['glink']) && !empty($row['glink'])) {
+                                    echo '<a href="' . $row['glink'] . '" target="_blank">Buy Now</a>';
+                                } else {
+                                    echo 'Link not available.';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                    </table>
+                </articale>
+
+
+
+                <articale id="4thpage" class="feedback-container">
+                    <!-- Feedback Form -->
+                    <form action="" method="POST" class="feedback-link">
+                        <div class="feedback-username">
+                            <?php echo $_SESSION['username']; ?>
+                        </div>
+                        <div class="container">
+                            <div class="rating">
+                                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" class="full"
+                                    title="Awesome"></label>
+                                <input type="radio" id="star4.5" name="rating" value="4.5" /><label for="star4.5"
+                                    class="half"></label>
+                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4"
+                                    class="full"></label>
+                                <input type="radio" id="star3.5" name="rating" value="3.5" /><label for="star3.5"
+                                    class="half"></label>
+                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3"
+                                    class="full"></label>
+                                <input type="radio" id="star2.5" name="rating" value="2.5" /><label for="star2.5"
+                                    class="half"></label>
+                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2"
+                                    class="full"></label>
+                                <input type="radio" id="star1.5" name="rating" value="1.5" /><label for="star1.5"
+                                    class="half"></label>
+                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1"
+                                    class="full"></label>
+                                <input type="radio" id="star0.5" name="rating" value="0.5" /><label for="star0.5"
+                                    class="half"></label>
+                            </div>
+                        </div>
+                        <textarea name="feedback" id="" cols="20" rows="3" class="textarea" required></textarea>
+                        <div class="feedback" id="submit-btn">
+                            <input type="submit" name="feedback-submit" id="feedback-btn" value="Submit" />
+                        </div>
+                    </form>
+                    <div class="submitted-feedback">
+                        <h2>Submitted Feedback</h2>
+                        <ul>
+                            <?php
+                            foreach ($feedbackResults as $feedback) {
+                                echo '<li>';
+                                echo '<strong>Username:</strong> ' . $feedback['uname'] . '<br>';
+                                echo '<strong>Rating:</strong> ' . $feedback['rating'] . '<br>';
+                                echo '<strong>Feedback:</strong> ' . $feedback['feedback'];
+                                echo '</li>';
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                </articale>
+            </main>
+            <?php
+        }
     }
-
-    $username = $_SESSION['username'];
     ?>
-            <form action="" method="POST">
-                <div class="feedback">
-                    <?php echo $_SESSION['username'] ?>
-                </div>
-                <div class="container">
-                    <div class="rating">
-                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" class="full"
-                            title="Awesome"></label>
-                        <input type="radio" id="star4.5" name="rating" value="4.5" /><label for="star4.5"
-                            class="half"></label>
-                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4"
-                            class="full"></label>
-                        <input type="radio" id="star3.5" name="rating" value="3.5" /><label for="star3.5"
-                            class="half"></label>
-                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3"
-                            class="full"></label>
-                        <input type="radio" id="star2.5" name="rating" value="2.5" /><label for="star2.5"
-                            class="half"></label>
-                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2"
-                            class="full"></label>
-                        <input type="radio" id="star1.5" name="rating" value="1.5" /><label for="star1.5"
-                            class="half"></label>
-                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1"
-                            class="full"></label>
-                        <input type="radio" id="star0.5" name="rating" value="0.5" /><label for="star0.5"
-                            class="half"></label>
-                    </div>
-                </div>
-                <textarea name="feedback" id="" cols="20" rows="3" class="feedback" required></textarea>
+    <a class="top" href="#">top</a>
+    <!-- Your JavaScript code here -->
 
-                <div class="feedback" id="submit-btn">
-                    <input type="submit" name="login-submit" id="feedback-btn" value="submit" />
-                </div>
-            </form>
-        </main>
-        <footer>
-            <div class="row">
-                <div class="coln">
-                    <h3>contact</h3>
-                    <ul>
-                        <li>
-                            <i class="fa-solid fa-location-dot"></i><span class="content">Balkumari ,lalitpur</span>
-                        </li>
-                        <li><i class="fa-solid fa-phone"></i><span class="content">01-XXXXX ,(+977)98XXXXXXXX</span>
-                        </li>
-                        <li><i class="fa-solid fa-envelope"></i><span class="content">gadgetsearch@gmail.com</span></li>
-                    </ul>
-                </div>
-                <div class="coln">
-                    <h3>About</h3>
-                    <ul>
-                        <li><a href="about.php">About us</a></li>
-                        <li><a href="#">Term & Condition</a></li>
-                    </ul>
-                </div>
-                <div class="coln">
-                    <h3>follow us</h3>
-                    <div>
-                        <a href="" target="_blank" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="" target="_blank" class="icon"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="" target="_blank" class="icon"><i class="fa-brands fa-twitter"></i></a>
-                    </div>
-                </div>
-            </div>
-            <center>copyright</center>
-        </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const showComparison = document.querySelector(".showcomparison");
+            const showLink = document.querySelector(".showlink");
+            const showFeedback = document.querySelector(".showfeedback");
+
+
+            const comparisonContainer = document.querySelector(".comparison-container");
+            const linkContainer = document.querySelector(".link-container");
+            const feedbackContainer = document.querySelector(".feedback-container");
+
+            linkContainer.style.display = "none";
+            feedbackContainer.style.display = "none";
+
+            showComparison.addEventListener("click", function () {
+                linkContainer.style.display = "none";
+                feedbackContainer.style.display = "none";
+                comparisonContainer.style.display = "block";
+            });
+
+            showLink.addEventListener("click", function () {
+                linkContainer.style.display = "block";
+                feedbackContainer.style.display = "none";
+                comparisonContainer.style.display = "none";
+            });
+
+            showFeedback.addEventListener("click", function () {
+                linkContainer.style.display = "none";
+                feedbackContainer.style.display = "block";
+                comparisonContainer.style.display = "none";
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -24,7 +24,7 @@ if (!isset($_SESSION['adminname'])) {
    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
    <meta name="msapplication-TileColor" content="#da532c">
    <meta name="theme-color" content="#ffffff">
-   
+
    <link rel="preconnect" href="https://fonts.googleapis.com" />
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
@@ -63,6 +63,7 @@ if (!isset($_SESSION['adminname'])) {
                   <th>User Name</th>
                   <th>Feedback</th>
                   <th>Rating</th>
+                  <th>gid</th>
                   <th>Operation</th>
                </tr>
                <?php
@@ -73,9 +74,11 @@ if (!isset($_SESSION['adminname'])) {
                            <td>" . $result['uname'] . "</td>
                            <td>" . $result['feedback'] . "</td>
                            <td>" . $result['rating'] . "</td>
+                           <td>" . $result['g_id'] . "</td>
                            <td>
-                           <a href='deletefeedback.php?id=" . $result['Id'] . "'><input type='submit' value='delete' class='delete' name='delete-user'></a> 
-                           </td>
+    <a href='deletefeedback.php?id=" . $result['feedback_id'] . "'><input type='submit' value='delete' class='delete' name='delete-user'></a>
+</td>
+
                         </tr>
                      ";
                }

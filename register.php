@@ -28,9 +28,9 @@ if (isset($_POST['submit'])) {
             $password = password_hash($password, PASSWORD_DEFAULT);
 
             // Insert the user data into the database
-            $sql = "INSERT INTO register (uname, email, password, gender, phnumber, address) VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO register (uname, email, password, cpassword, gender, phnumber, address) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([$uname, $email, $password, $gender, $phnumber, $address]);
+            $stmt->execute([$uname, $email, $password, $cpassword, $gender, $phnumber, $address]);
 
             // Set success variable
             $success = 1;
@@ -130,7 +130,7 @@ if (isset($_POST['submit'])) {
                 <input type="submit" class="submit" name="submit" id="submit" value="Register">
             </div>
         </form>
-        
+
         <script src="validate_signup.js"> </script>
     </div>
 

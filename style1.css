@@ -5,6 +5,13 @@
    font-family: "Poppins", sans-serif;
    box-sizing: border-box;
 }
+:root {
+   --prcolor: white;
+   --color: black;
+   --bgcolor: transparent;
+   --hovercolor: darkblue;
+   --popup-color: rgba(0, 0, 139, 0.646);
+}
 html {
    height: auto;
    width: auto;
@@ -15,6 +22,7 @@ body {
    background-color: #fcfafa;
    background-size: cover;
    background-repeat: no-repeat;
+   background-position: center;
    height: auto;
    width: 100%;
 }
@@ -23,8 +31,7 @@ header {
    align-items: center;
    justify-content: left;
    padding: 0px 20px;
-   background-color: rgba(50, 50, 25, 0.4);
-   border-radius: 0 0 0 2rem;
+   background-color: var(--bgcolor);
    position: fixed;
    top: 0;
    left: 0;
@@ -52,19 +59,19 @@ img {
    text-decoration: none;
    font-size: 20px;
    font-weight: 600;
-   color: rgb(30, 29, 29);
+   color: var(--color);
    transition: 0.5s ease;
 }
 .navbar li a:hover,
 .navbar li a.active {
-   color: rgb(28, 28, 56);
+   color: var(--hovercolor);
 }
 .navbar li a.active::after,
 .navbar li a:hover::after {
    content: "";
    width: 30%;
    height: 2px;
-   background-color: rgb(50, 50, 129);
+   background-color: var(--hovercolor);
    position: absolute;
    bottom: -4px;
    left: 35px;
@@ -78,7 +85,8 @@ button#modal-btn.login-btn {
    width: 6%;
    font-size: 1rem;
    border-radius: 25px;
-   background-color: white;
+   background-color: var(--bgcolor);
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
    cursor: pointer;
    font-size: 15px;
    text-transform: capitalize;
@@ -102,7 +110,7 @@ button#modal-btn.login-btn:hover {
 
 i.fa-xmark,
 i#xmark.fa-xmark {
-   color: #edebeb;
+   color: var(--color);
    position: relative;
    top: -1vh;
    right: -16.5vw;
@@ -119,8 +127,9 @@ input#search.search-bar {
    margin: 10px 0;
    padding: 0.5rem 0px 0.5rem 3rem;
    font-size: 16px;
-   border: 1px solid #dededec4;
-   background-color: #dededec4;
+   border: none;
+   background-color: var(--prcolor);
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
    border-radius: 3rem;
    box-sizing: border-box;
 }
@@ -134,7 +143,7 @@ input#search.search-bars {
    box-sizing: border-box;
 }
 i.fa-magnifying-glass {
-   color: #000;
+   color: var(--color);
    position: absolute;
    top: 2.3rem;
    right: 43rem;
@@ -160,7 +169,7 @@ i.fa-magnifying-glass {
    display: flex;
    align-items: center;
    justify-content: left;
-   color: #000;
+   color: var(--color);
    background-color: rgb(199, 199, 200);
    width: 100%;
    text-decoration: none;
@@ -408,7 +417,7 @@ h2.product-category {
    margin: 0px 50px 0px 50px;
    padding: 10px 10px 10px 10px;
    box-shadow: 2px 2px 3px rgb(26, 20, 20);
-   background-color: #fff;
+   background-color: var(--prcolor);
    transition: transform 0.5s;
    border: 1px solid black;
 }
@@ -425,7 +434,7 @@ h2.product-category {
 .pro-name,
 .pro-price {
    padding: 0px 10px 5px 10px;
-   color: #000;
+   color: var(--color);
    text-transform: uppercase;
 }
 
@@ -449,7 +458,7 @@ h2.product-category {
    background-color: rgb(231, 234, 236);
    color: #232426;
    margin: 1rem;
-   border: 1px solid black;
+   border: 1px solid var(--color);
    border-radius: 10px;
    width: 80%;
    text-decoration: none;
@@ -499,7 +508,7 @@ h2.product-category {
 /* footer */
 footer {
    background-color: #333;
-   color: #fff;
+   color: var(--prcolor);
    padding: 20px 0;
    font-size: 14px;
    position: inherit;
@@ -542,7 +551,7 @@ li {
 }
 
 li a {
-   color: #fff;
+   color: var(--prcolor);
    text-decoration: none;
 }
 
@@ -553,7 +562,7 @@ li a {
 
 .coln .icon:hover {
    color: blue;
-   background-color: #fff;
+   background-color: var(--prcolor);
 }
 
 /* about us */

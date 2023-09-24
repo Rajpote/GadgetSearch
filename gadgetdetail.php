@@ -15,10 +15,8 @@ if (isset($_POST['submit'])) {
     $pricerange = $_POST['pricerange'];
     $category = $_POST['category'];
     $gname = $_POST['gname'];
-    $rating = $_POST['rating'];
     $gdis = $_POST['gdis'];
     $gspecification = $_POST['gspecification'];
-    $gcomprasion = $_POST['gcomprasion'];
     $gimage = $_POST['gimage'];
     $imageone = $_POST['imageone'];
     $imagetwo = $_POST['imagetwo'];
@@ -35,11 +33,11 @@ if (isset($_POST['submit'])) {
         echo '<script> alert("Gadget already exists."); </script>';
     } else {
         if (
-            empty($g_id) || empty($type) || empty($pricerange) || empty($category) || empty($gname) || empty($rating) || empty($gdis) || empty($gspecification) || empty($gcomprasion) || empty($gimage) || empty($imageone) || empty($imagetwo) || empty($glink) || empty($gprice)
+            empty($g_id) || empty($type) || empty($pricerange) || empty($category) || empty($gname) || empty($gdis) || empty($gspecification) || empty($gimage) || empty($imageone) || empty($imagetwo) || empty($glink) || empty($gprice)
         ) {
             echo '<script> alert("Please fill all the fields."); window.location.href = "gadgetdetail.php"; </script>';
         } else {
-            $sql = "INSERT INTO gadget_details (g_id, type, pricerange, category, gname, rating, gdis, gspecification, gcomprasion, gimage, imageone, imagetwo, glink, gprice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO gadget_details (g_id, type, pricerange, category, gname,  gdis, gspecification, gimage, imageone, imagetwo, glink, gprice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 $g_id,
@@ -47,10 +45,8 @@ if (isset($_POST['submit'])) {
                 $pricerange,
                 $category,
                 $gname,
-                $rating,
                 $gdis,
                 $gspecification,
-                $gcomprasion,
                 $gimage,
                 $imageone,
                 $imagetwo,
@@ -73,13 +69,11 @@ $value = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $g_id = isset($value['g_id']) ? $value['g_id'] : '';
 $gname = isset($value['gname']) ? $value['gname'] : '';
-$rating = isset($value['rating']) ? $value['rating'] : '';
 $type = isset($value['type']) ? $value['type'] : '';
 $pricerange = isset($value['pricerange']) ? $value['pricerange'] : '';
 $category = isset($value['category']) ? $value['category'] : '';
 $gdis = isset($value['gdis']) ? $value['gdis'] : '';
 $gspecification = isset($value['gspecification']) ? $value['gspecification'] : '';
-$gcomprasion = isset($value['gcomprasion']) ? $value['gcomprasion'] : '';
 $gimage = isset($value['gimage']) ? $value['gimage'] : '';
 $imageone = isset($value['imageone']) ? $value['imageone'] : '';
 $imagetwo = isset($value['imagetwo']) ? $value['imagetwo'] : '';
@@ -92,30 +86,26 @@ if (isset($_POST['update-submit'])) {
     $pricerange = $_POST['pricerange'];
     $category = $_POST['category'];
     $gname = $_POST['gname'];
-    $rating = $_POST['rating'];
     $gdis = $_POST['gdis'];
     $gspecification = $_POST['gspecification'];
-    $gcomprasion = $_POST['gcomprasion'];
     $gimage = $_POST['gimage'];
     $imageone = $_POST['imageone'];
     $imagetwo = $_POST['imagetwo'];
     $glink = $_POST['glink'];
     $gprice = $_POST['gprice'];
 
-    if (empty($_POST['g_id']) || empty($_POST['type']) || empty($_POST['pricerange']) || empty($_POST['category']) || empty($_POST['gname']) || empty($_POST['rating']) || empty($_POST['gdis']) || empty($_POST['gspecification']) || empty($_POST['gcomprasion']) || empty($_POST['gimage']) || empty($_POST['imageone']) || empty($_POST['imagetwo']) || empty($_POST['glink']) || empty($_POST['gprice'])) {
+    if (empty($_POST['g_id']) || empty($_POST['type']) || empty($_POST['pricerange']) || empty($_POST['category']) || empty($_POST['gname']) || empty($_POST['gdis']) || empty($_POST['gspecification']) || empty($_POST['gimage']) || empty($_POST['imageone']) || empty($_POST['imagetwo']) || empty($_POST['glink']) || empty($_POST['gprice'])) {
         echo '<script> alert("Please fill all the fields."); window.location.href = "gadgetdetail.php"; </script>';
     } else {
-        $sql = "UPDATE gadget_details SET g_id=:g_id, type=:type, pricerange=:pricerange, category=:category, gname=:gname, rating=:rating, gdis=:gdis, gspecification=:gspecification, gcomprasion=:gcomprasion, gimage=:gimage, imageone=:imageone, imagetwo=:imagetwo, glink=:glink, gprice=:gprice WHERE g_id=:g_id";
+        $sql = "UPDATE gadget_details SET g_id=:g_id, type=:type, pricerange=:pricerange, category=:category, gname=:gname, gdis=:gdis, gspecification=:gspecification, gimage=:gimage, imageone=:imageone, imagetwo=:imagetwo, glink=:glink, gprice=:gprice WHERE g_id=:g_id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(":g_id", $g_id);
         $stmt->bindParam(":type", $type);
         $stmt->bindParam(":pricerange", $pricerange);
         $stmt->bindParam(":category", $category);
         $stmt->bindParam(":gname", $gname);
-        $stmt->bindParam(":rating", $rating);
         $stmt->bindParam(":gdis", $gdis);
         $stmt->bindParam(":gspecification", $gspecification);
-        $stmt->bindParam(":gcomprasion", $gcomprasion);
         $stmt->bindParam(":gimage", $gimage);
         $stmt->bindParam(":imageone", $imageone);
         $stmt->bindParam(":imagetwo", $imagetwo);
@@ -200,7 +190,6 @@ if (isset($_POST['update-submit'])) {
                             </div>
                             <input type="text" class="abbreviation" name="gname" id="gname" placeholder="Gadget Name"
                                 required>
-                            <input type="file" class="rating" name="rating" id="rating" required>
                             <input type="file" class="image" name="gimage" id="gimage" placeholder="Gadget Image URL"
                                 required>
                             <textarea name="gdis" id="gdis" cols="60" rows="7"
@@ -221,8 +210,6 @@ if (isset($_POST['update-submit'])) {
                             </div>
                             <textarea name="gspecification" id="gspecification" cols="60" rows="7"
                                 placeholder="Gadget Specification" required></textarea>
-                            <textarea name="gcomprasion" id="gcomprasion" cols="60" rows="7"
-                                placeholder="Gadget comprasion" required></textarea>
                             <center>
                                 <input type="submit" class="submit" name="submit" id="submit" value="Add">
                             </center>
@@ -270,8 +257,6 @@ if (isset($_POST['update-submit'])) {
                             </div>
                             <input type="text" class="gname" name="gname" id="gname" placeholder="Gadget Name"
                                 value="<?php echo $gname ?>" required>
-                            <input type="file" class="rating" name="rating" id="rating" value="<?php echo $rating ?>"
-                                required>
                             <input type="file" class="image" name="gimage" id="gimage" placeholder="Gadget Image URL"
                                 value="<?php echo $gimage ?>" required>
                             <textarea name="gdis" id="gdis" cols="60" rows="7" placeholder="Gadget Description"
@@ -292,8 +277,6 @@ if (isset($_POST['update-submit'])) {
                             </div>
                             <textarea name="gspecification" id="gspecification" cols="60" rows="7"
                                 placeholder="Gadget Specification" required><?php echo $gspecification ?></textarea>
-                            <textarea name="gcomprasion" id="gcomprasion" cols="60" rows="7"
-                                placeholder="Gadget comprasion" required><?php echo $gcomprasion ?></textarea>
                             <center>
                                 <input type="submit" class="submit" name="update-submit" id="update-submit"
                                     value="Update">

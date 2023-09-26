@@ -20,6 +20,7 @@ html {
 
 body {
    background-color: #fcfafa;
+   background-image: linear-gradient(180deg, rgba(234, 228, 194, 0.776), #fff);
    background-size: cover;
    background-repeat: no-repeat;
    background-position: center;
@@ -85,8 +86,9 @@ button#modal-btn.login-btn {
    width: 6%;
    font-size: 1rem;
    border-radius: 25px;
+   border: 0;
    background-color: var(--bgcolor);
-   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
    cursor: pointer;
    font-size: 15px;
    text-transform: capitalize;
@@ -162,7 +164,7 @@ i.fa-magnifying-glass {
 .pro_img {
    height: 110px;
    width: 110px;
-   border-radius: 5px;
+   border-radius: 15px;
 }
 .search-item {
    position: relative;
@@ -201,6 +203,17 @@ i.fa-magnifying-glass {
    height: 35px;
    width: 125px;
    border-radius: 15px;
+}
+
+.back-arrow {
+   position: fixed;
+   background-color: transparent;
+   color: var(--color);
+   margin: 1rem;
+   padding: 0.5rem;
+   font-size: xx-large;
+   text-decoration: none;
+   border-radius: 50%;
 }
 /* login popup */
 .container {
@@ -317,10 +330,12 @@ main {
    height: 92vh;
    width: 100%;
    background-size: cover;
+   background-position: center;
 }
 .background1:hover {
-   background-color: white;
-   filter: blur(8px);
+   background-color: transparent;
+   filter: blur(2px);
+   transform: rotatey(180deg);
 }
 .cont-text {
    position: absolute;
@@ -353,7 +368,9 @@ main {
    width: 6%;
    font-size: 1rem;
    border-radius: 25px;
-   background-color: white;
+   background-color: var(--bgcolor);
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+   border: 0;
    cursor: pointer;
    font-size: 15px;
    text-transform: capitalize;
@@ -366,9 +383,7 @@ main {
    text-decoration: none;
    color: black;
 }
-.signup:hover a {
-   color: #16b7b4;
-}
+
 
 /* silder */
 #slider {
@@ -383,12 +398,12 @@ h2.product-category {
    text-align: center;
    border-radius: 15px 15px 0px 0px;
    width: 100%;
-   background-color: #bad2d2;
+   background-color: #98d8d8a8;
 }
 .product-details {
    width: 100%;
    border-radius: 0rem 0rem 1rem 1rem;
-   background-color: #727777ac;
+   background-color: #b8b8b8ac;
    margin: 0px 0 15px 0;
    padding: 30px 50px 30px 770px;
    display: flex;
@@ -429,6 +444,7 @@ h2.product-category {
    padding: 5px;
    width: 200px;
    height: 200px;
+   border-radius: 15px;
 }
 
 .pro-name,
@@ -451,13 +467,15 @@ h2.product-category {
    justify-content: center;
    flex-direction: column;
 }
-.g-new {
+a.g-new {
    display: flex;
    justify-content: flex-start;
    align-items: center;
+   gap: 1rem;
    background-color: rgb(231, 234, 236);
    color: #232426;
    margin: 1rem;
+   padding: 16px;
    border: 1px solid var(--color);
    border-radius: 10px;
    width: 80%;
@@ -469,6 +487,7 @@ h2.product-category {
 .g-img {
    height: 200px;
    width: 200px;
+   border-radius: 25%;
 }
 .g-new:hover {
    transform: scale(1.05);
@@ -507,7 +526,7 @@ h2.product-category {
 
 /* footer */
 footer {
-   background-color: #333;
+   background-color: #333333e2;
    color: var(--prcolor);
    padding: 20px 0;
    font-size: 14px;

@@ -85,13 +85,13 @@ do {
                class="fa-solid fa-magnifying-glass"></i>
          </form>
       </ul>
-      <a href="user.php">&LeftArrow;</a>
+      <a class="back-arrow" href="user.php">&LeftArrow;</a>
       <h2 class="result">Found results.</h2>
       <?php
       echo '<div class="searchcontainer">';
       foreach ($value as $item) {
          echo '<a href="gadgetdetails.php?g_id=' . $item[0]['g_id'] . '" class="search-item">';
-         echo "<img class='pro_img' src='image/product/{$item[0]['gimage']}' alt='Gadget Image'>";
+         echo "<img class='g-img' src='image/product/{$item[0]['gimage']}' alt='Gadget Image'>";
          echo '<div class="gadget-section">';
          echo '<div class="gadget-name">' . $item[0]['gname'] . '</div>';
          echo '<div class="gadget-price">Rs:' . $item[0]['gprice'] . '</div>';

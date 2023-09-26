@@ -19,8 +19,8 @@ header {
    justify-content: flex-start;
    gap: 5rem;
    padding: 0px 10rem;
-   background-color: rgba(50, 50, 25, 0.4);
-   border-radius: 0 0 25px 25px;
+   background-color: rgba(240, 248, 255, 0.365);
+   border-bottom: 2px solid rgba(0, 0, 0, 0.4);
    width: 100%;
 }
 
@@ -405,4 +405,34 @@ articale {
 .innerlink p:hover {
    background-color: #007bff;
    color: #fff;
+}
+/* Style the container */
+.submitted-feedback {
+   font-family: Arial, sans-serif;
+   margin: 20px;
+   padding: 20px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   background-color: #f9f9f9;
+}
+
+/* Style the reviews list */
+.submitted-feedback ul {
+   list-style: none;
+   padding: 0;
+}
+
+/* Style each review item */
+.submitted-feedback li {
+   margin: 10px 0;
+   padding: 10px;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   background-color: #fff;
+   list-style: none;
+}
+
+
+.submitted-feedback li strong {
+   font-weight: bold;
 }

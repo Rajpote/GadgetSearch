@@ -148,6 +148,7 @@ if (isset($_POST['update-submit'])) {
 <body>
     <header>
         <div>
+            
             <a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
         </div>
         <ul class="navbar">

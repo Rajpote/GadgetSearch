@@ -210,7 +210,7 @@ $feedbackResults = $stmtFeedback->fetchAll(PDO::FETCH_ASSOC);
                                 <?php echo $row['gname']; ?>
                             </th>
                             <?php
-                            // Display the selected gadget names for comparison in table header
+
                             foreach ($selectedGadgetDetails as $selectedGadget) {
                                 echo '<th class="table-heading">' . $selectedGadget['gname'] . '</th>';
                             }
@@ -228,15 +228,17 @@ $feedbackResults = $stmtFeedback->fetchAll(PDO::FETCH_ASSOC);
                                 ?>
                             </td>
                             <td class="table-body">
-                                <p>Select gadgets for comparison:</p>
+                                <p>Gadgets comparison:</p>
                                 <form class="compare-form" action="" method="POST">
-                                    <select name="comparison_gadgets[]" multiple="3">
-                                        <?php
-                                        foreach ($comparisonGadgets as $compGadget) {
-                                            echo '<option value="' . $compGadget['g_id'] . '">' . $compGadget['gname'] . '</option>';
-                                        }
-                                        ?>
-                                    </select>
+                                    <div class="select-container">
+                                        <select name="comparison_gadgets[]" multiple="3">
+                                            <?php
+                                            foreach ($comparisonGadgets as $compGadget) {
+                                                echo '<option value="' . $compGadget['g_id'] . '">' . $compGadget['gname'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
                                     <input type="submit" name="compare-submit" value="Compare">
                                 </form>
                                 <?php
@@ -313,7 +315,7 @@ $feedbackResults = $stmtFeedback->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     </form>
                     <div class="submitted-feedback">
-                        <h2>Submitted Feedback</h2>
+                        <h2> Reviews</h2>
                         <ul>
                             <?php
                             foreach ($feedbackResults as $feedback) {

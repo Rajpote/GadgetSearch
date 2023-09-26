@@ -384,7 +384,6 @@ main {
    color: black;
 }
 
-
 /* silder */
 #slider {
    position: relative;
@@ -517,11 +516,13 @@ a.g-new {
    margin: 5px 25px 5px 25px;
    height: 100px;
    width: 100px;
-   transition: transform 0.35s;
+   transition: transform 1.2s;
+   border-radius: 25px;
 }
 .image-brands:hover {
    cursor: pointer;
    transform: scale(1.2);
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 /* footer */

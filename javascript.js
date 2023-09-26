@@ -13,15 +13,13 @@ window.alert = function(message, timeout=null){
    top:200px;
    left:45%;
    color:white;
-   background:rgb(49, 65, 57);
+   background: rgba(0, 0, 0, 0.5);
    height:150px;
    width:15%;
    text-align:center;
    font-size:30px;
    text-transform: capitalize;
    padding: 20px;
-   border-radius: 10px;
-   box-shadow: 5px 10px 5px 10px #00000022;
    display: flex;
    flex-direction:column;
    `);

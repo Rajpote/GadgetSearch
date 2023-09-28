@@ -3,7 +3,7 @@ include 'connect.php';
 
 if (isset($_GET['id'])) {
     $Id = $_GET['id'];
-    $query = "DELETE FROM feedback WHERE Id = :Id";
+    $query = "DELETE FROM feedback WHERE feedback_id  = :Id";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':Id', $Id);
     if ($stmt->execute()) {

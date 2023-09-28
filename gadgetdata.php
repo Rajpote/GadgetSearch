@@ -36,21 +36,17 @@ $userCount = $pdo->query("SELECT COUNT(id) FROM register")->fetchColumn();
 </head>
 
 <body>
-    <header>
-        <div>
-            <a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
-        </div>
+    <nav>
+        <header><a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a></header>
         <ul class="navbar">
             <li><a href="admin.php">Dashboard</a></li>
             <li><a class="active" href="gadgetdata.php">Gadget data</a></li>
             <li><a href="userdata.php">User data</a></li>
             <li><a href="feedback.php">User feedback</a></li>
         </ul>
-
-        <a href="home.php" class="logout">logout</a>
-    </header>
+    </nav>
     <main id="gadgetdata">
-        <div class="gadgetdata">
+        <div class="data">
             <div class="table-content">
                 <h1>
                     no of gadgets
@@ -86,9 +82,9 @@ $userCount = $pdo->query("SELECT COUNT(id) FROM register")->fetchColumn();
             </div>
 
         </div>
-        <div><a href="#">top of the page</a></div>
+        <div class="top"><a href="#">top</a></div>
     </main>
-    
+
 
     <script src="javascript.js"></script>
 </body>

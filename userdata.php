@@ -16,13 +16,13 @@ if (!isset($_SESSION['adminname'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-   <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-   <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-   <link rel="manifest" href="favicon/site.webmanifest">
-   <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
-   <meta name="msapplication-TileColor" content="#da532c">
-   <meta name="theme-color" content="#ffffff">
-   
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
@@ -31,21 +31,17 @@ if (!isset($_SESSION['adminname'])) {
 </head>
 
 <body>
-    <header>
-        <div>
-            <a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
-        </div>
+    <nav>
+        <header><a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a></header>
         <ul class="navbar">
             <li><a href="admin.php">Dashboard</a></li>
             <li><a href="gadgetdata.php">Gadget data</a></li>
             <li><a class="active" href="userdata.php">User data</a></li>
-            <li><a href="feedback.php">User Feedback</a></li>
+            <li><a href="feedback.php">User feedback</a></li>
         </ul>
-        
-        <a href="home.php" class="logout">logout</a>
-    </header>
+    </nav>
     <main>
-        <div class="userdata">
+        <div class="data">
             <h1>user details</h1>
             <?php
             $query = "SELECT * FROM register";

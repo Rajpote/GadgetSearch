@@ -300,6 +300,7 @@ do {
       function showDeviceType(type) {
          window.location.href = "category.php?type=" + type;
       }
+
    </script>
 </body>
 

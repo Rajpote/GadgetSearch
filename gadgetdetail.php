@@ -146,21 +146,16 @@ if (isset($_POST['update-submit'])) {
 </head>
 
 <body>
-    <header>
-        <div>
-            
-            <a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
-        </div>
+    <nav>
+        <header><a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a></header>
         <ul class="navbar">
             <li><a href="admin.php">Dashboard</a></li>
-            <li><a class="active" href="gadgetdetail.php">Gadget</a></li>
             <li><a href="gadgetdata.php">Gadget data</a></li>
+            <li><a class="active" href="gadgetdetail.php">Gadget</a></li>
             <li><a href="userdata.php">User data</a></li>
-            <li><a href="feedback.php">User Feedback</a></li>
+            <li><a href="feedback.php">User feedback</a></li>
         </ul>
-
-        <a href="home.php" class="logout">logout</a>
-    </header>
+    </nav>
     <main>
         <div id="add-update">
             <div class="gadget-details" id="gadget-details">
@@ -200,7 +195,7 @@ if (isset($_POST['update-submit'])) {
                                     <input type="file" class="image" name="imageone" id="imageone"
                                         placeholder="Gadget Image URL" required>
                                     <input type="file" class="image" name="imagetwo" id="imagetwo"
-                                        placeholder="Gadget Image URL" required>
+                                        placeholder="Gadget Image URL">
                                 </div>
                                 <div class="con">
                                     <input type="text" class="link" name="glink" id="glink" placeholder="Gadget Link"
@@ -267,7 +262,7 @@ if (isset($_POST['update-submit'])) {
                                     <input type="file" class="image" name="imageone" id="imageone"
                                         placeholder="Gadget Image URL" value="<?php echo $imageone ?>" required><br>
                                     <input type="file" class="image" name="imagetwo" id="imagetwo"
-                                        placeholder="Gadget Image URL" value="<?php echo $imagetwo ?>" required>
+                                        placeholder="Gadget Image URL" value="<?php echo $imagetwo ?>">
                                 </div>
                                 <div class="con">
                                     <input type="text" class="link" name="glink" id="glink" placeholder="Gadget Link"

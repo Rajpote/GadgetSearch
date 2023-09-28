@@ -33,20 +33,17 @@ if (!isset($_SESSION['adminname'])) {
 </head>
 
 <body>
-   <header>
-      <div>
-         <a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a>
-      </div>
+   <nav>
+      <header><a class="logo" href="admin.php"><img src="image/gadget search-logos/logo.png" alt="" /></a></header>
       <ul class="navbar">
          <li><a href="admin.php">Dashboard</a></li>
          <li><a href="gadgetdata.php">Gadget data</a></li>
          <li><a href="userdata.php">User data</a></li>
-         <li><a class="active" href="feedback.php">User Feedback</a></li>
+         <li><a class="active" href="feedback.php">User feedback</a></li>
       </ul>
-      <a href="home.php" class="logout">logout</a>
-   </header>
+   </nav>
    <main>
-      <div class="userdata">
+      <div class="data">
          <h1>user feedback</h1>
          <?php
          $query = "SELECT * FROM feedback";
@@ -63,7 +60,7 @@ if (!isset($_SESSION['adminname'])) {
                   <th>User Name</th>
                   <th>Feedback</th>
                   <th>Rating</th>
-                  <th>gid</th>
+                  <th>Gadget id</th>
                   <th>Operation</th>
                </tr>
                <?php

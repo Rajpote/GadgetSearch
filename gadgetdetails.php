@@ -148,7 +148,7 @@ $feedbackResults = $stmtFeedback->fetchAll(PDO::FETCH_ASSOC);
             <main>
                 <section class="section1">
                     <?php
-                    echo "<img src='image/product/{$row['gimage']}' alt='Gadget Image'>";
+                    echo "<img class='st-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
                     ?>
                     <div class="title">
                         <h4 class="name" colspan="2">
@@ -334,7 +334,8 @@ $feedbackResults = $stmtFeedback->fetchAll(PDO::FETCH_ASSOC);
         }
     }
     ?>
-    <a class="top" href="#">top</a>
+    <div class="top"><a href="#">top</a></div>
+
     <!-- Your JavaScript code here -->
 
 

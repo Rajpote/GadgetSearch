@@ -227,7 +227,6 @@ do {
                                     echo '<i class="fa-solid fa-star-half-stroke" style="color: gold;"></i>';
                                 }
 
-
                                 $emptyStars = 5 - $fullStars - ($hasHalfStar ? 1 : 0);
 
                                 for ($i = 1; $i <= $emptyStars; $i++) {
@@ -241,7 +240,13 @@ do {
                     </a>
                 <?php endforeach; ?>
             </div>
+        <?php else: ?>
+            <div style="margin: 35vh 35vw;">
+                <p>No Gadgets Found</p>
+
+            </div>
         <?php endif; ?>
+
 
 
         <!-- Pagination -->

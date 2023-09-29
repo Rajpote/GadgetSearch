@@ -73,15 +73,12 @@ do {
          <li><a href="user.php">Home</a></li>
          <li><a class="active" href="gadget.php">Gadget</a></li>
          <li><a href="about.php">About Us</a></li>
-      </ul>
-
-      <ul class="navbar">
          <form action="search.php" method="post">
             <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" /><i
                id="search-icon" class="fa-solid fa-magnifying-glass"></i>
          </form>
-         <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
       </ul>
+      <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
 
       <div id="my-modal" class="modal">
          <form action="" method="POST" class="login-form">
@@ -162,18 +159,18 @@ do {
 
                echo '<a href="gadgetdetails.php?g_id=' . $gadget_id . '" class="g-item">';
 
-               
+
                if (isset($row['gimage']) && !empty($row['gimage'])) {
                   echo "<img class='gadget-img' src='image/product/{$row['gimage']}' alt='Gadget Image'>";
                }
 
                echo '<section class="gadget-section">';
-               
+
                if (isset($row['gname']) && !empty($row['gname'])) {
                   echo '<div class="gadget-name">' . $row['gname'] . '</div>';
                }
 
-              
+
                if (isset($row['gprice']) && !empty($row['gprice'])) {
                   echo '<div class="gadget-price">Rs:' . $row['gprice'] . '</div>';
                }
@@ -200,17 +197,17 @@ do {
                   $emptyStars = 5 - $fullStars - ($hasHalfStar ? 1 : 0);
 
                   for ($i = 1; $i <= $emptyStars; $i++) {
-                     echo '<i class="fa-regular fa-star" style="color:gold;"></i>'; 
+                     echo '<i class="fa-regular fa-star" style="color:gold;"></i>';
                   }
 
-                  echo " $average_rating_formatted"; 
+                  echo " $average_rating_formatted";
                   ?>
                </div>
 
                </section>
-            </a>
+               </a>
 
-            <?php
+               <?php
             }
          } else {
             echo "No gadgets found.";

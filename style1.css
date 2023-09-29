@@ -30,15 +30,10 @@ body {
 header {
    display: flex;
    align-items: center;
-   justify-content: left;
+   justify-content: center;
    padding: 0px 20px;
    background-color: var(--bgcolor);
-   position: fixed;
-   top: 0;
-   left: 0;
    width: 100%;
-   overflow: hidden;
-   z-index: 999;
 }
 
 img {
@@ -49,6 +44,7 @@ img {
    display: flex;
    align-items: center;
    justify-content: center;
+   gap: 1.1rem;
    width: 100%;
 }
 .navbar li {
@@ -79,9 +75,6 @@ img {
 }
 /* login-btn */
 button#modal-btn.login-btn {
-   position: absolute;
-   top: 18%;
-   left: 92%;
    height: 35px;
    width: 6%;
    font-size: 1rem;
@@ -122,9 +115,6 @@ i#xmark.fa-xmark {
 
 /* search */
 input#search.search-bar {
-   position: absolute;
-   top: 15%;
-   left: 53%;
    width: 300px;
    margin: 10px 0;
    padding: 0.5rem 0px 0.5rem 3rem;
@@ -147,8 +137,8 @@ input#search.search-bars {
 i.fa-magnifying-glass {
    color: var(--color);
    position: absolute;
-   top: 2.3rem;
-   right: 43rem;
+   top: 2.2rem;
+   right: 42rem;
 }
 .result {
    display: grid;
@@ -318,7 +308,7 @@ form.login-form {
 }
 /* main body */
 main {
-   margin-top: 6rem;
+   margin-top: 0;
    width: 100%;
 }
 #hero {
@@ -331,11 +321,6 @@ main {
    width: 100%;
    background-size: cover;
    background-position: center;
-}
-.background1:hover {
-   background-color: transparent;
-   filter: blur(2px);
-   transform: rotatey(180deg);
 }
 .cont-text {
    position: absolute;

@@ -73,8 +73,8 @@ main {
    margin: 1rem 0;
 }
 .st-img {
-   width: 40%;
-   height: 75vh;
+   width: 25vw;
+   height: 50vh;
    max-width: 100%;
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -206,7 +206,7 @@ table {
    width: 100%;
    padding: 10px;
    border-collapse: collapse;
-   margin: 20px;
+   margin-top: 7vh;
    background-color: #fff;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -377,11 +377,6 @@ table.details-table tr:hover {
 .showcomparison:hover,
 .showfeedback:hover {
    color: rgb(229, 231, 231);
-}
-articale {
-   margin: 0 auto;
-   display: block;
-   width: 85%;
 }
 .innerlink {
    display: flex;

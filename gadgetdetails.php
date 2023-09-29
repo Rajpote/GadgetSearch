@@ -186,7 +186,7 @@ $feedbackResults = $stmtFeedback->fetchAll(PDO::FETCH_ASSOC);
                     $gdis = explode("\n", $row['gdis']);
                     echo "<ul>";
                     foreach ($gdis as $point) {
-                        echo "<li class='points'>$point</li>";
+                        echo "<li class='points' style='font-size: 1.15rem;'>$point</li>";
                     }
                     echo "</ul>";
                     ?>
@@ -222,7 +222,7 @@ $feedbackResults = $stmtFeedback->fetchAll(PDO::FETCH_ASSOC);
                                 $gspecifation = explode("\n", $row['gspecification']);
                                 echo "<ul>";
                                 foreach ($gspecifation as $point) {
-                                    echo "<li class='point'>$point</li>";
+                                    echo "<li class='point' style='font-size: 1.15rem; margin-bottom: 1vh; text-align: justify;'>$point</li>";
                                 }
                                 echo "</ul>";
                                 ?>
@@ -231,7 +231,7 @@ $feedbackResults = $stmtFeedback->fetchAll(PDO::FETCH_ASSOC);
                                 <p>Gadgets comparison:</p>
                                 <form class="compare-form" action="" method="POST">
                                     <div class="select-container">
-                                        <select name="comparison_gadgets[]" multiple="3">
+                                        <select name="comparison_gadgets[]">
                                             <?php
                                             foreach ($comparisonGadgets as $compGadget) {
                                                 echo '<option value="' . $compGadget['g_id'] . '">' . $compGadget['gname'] . '</option>';
@@ -247,7 +247,7 @@ $feedbackResults = $stmtFeedback->fetchAll(PDO::FETCH_ASSOC);
                                         $selectedSpecs = explode("\n", $selectedGadget['gspecification']);
                                         echo "<ul>";
                                         foreach ($selectedSpecs as $spec) {
-                                            echo "<li class='point'>$spec</li>";
+                                            echo "<li class='point' style='font-size: 1.15rem; margin-bottom: 1vh; text-align: justify;'>$spec</li>";
                                         }
                                         echo "</ul>";
                                     }

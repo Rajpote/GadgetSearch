@@ -386,7 +386,7 @@ h2.product-category {
    border-radius: 0rem 0rem 1rem 1rem;
    background-color: #b8b8b8ac;
    margin: 0px 0 15px 0;
-   padding: 30px 50px 30px 770px;
+   padding: 30px 50px 30px 800px;
    display: flex;
    align-items: center;
    justify-content: center;
@@ -411,7 +411,7 @@ h2.product-category {
    height: 75%;
    border-radius: 15px;
    margin: 0px 50px 0px 50px;
-   padding: 10px 10px 10px 10px;
+   padding: 10px;
    box-shadow: 2px 2px 3px rgb(26, 20, 20);
    background-color: var(--prcolor);
    transition: transform 0.5s;

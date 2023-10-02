@@ -101,7 +101,7 @@ if (isset($_POST['login-submit'])) {
          <div class="product-details">
             <div class="pro-container">
                <?php
-               $sql = "SELECT * FROM gadget_details WHERE category = 'deals'";
+               $sql = "SELECT * FROM gadget_details WHERE category = 'deals' limit 6";
                $stmt = $pdo->query($sql);
 
                if ($stmt->rowCount() > 0) {

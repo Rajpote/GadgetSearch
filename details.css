@@ -239,7 +239,9 @@ table tr:hover {
    border-radius: 10px;
    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
-
+.compare-form select {
+   padding: 10px;
+}
 input[name="compare-submit"] {
    background-color: #007bff;
    color: #fff;

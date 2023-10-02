@@ -54,7 +54,7 @@ if (isset($_GET['pricerange']) && isset($_GET['type'])) {
     $stmt->bindParam(':pricerange', $pricerange);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    $totalGadgets = $result['total'];
+    @$totalGadgets = $result['total'];
 
     $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
     $offset = ($currentPage - 1) * $perPage;

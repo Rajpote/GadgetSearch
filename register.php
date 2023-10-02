@@ -123,7 +123,7 @@ if (isset($_POST['submit'])) {
                 <textarea name="address" id="address" cols="30" rows="2" name="address"></textarea>
             </div>
             <div class="container0">
-                <input type="checkbox">
+                <input type="checkbox" required>
                 <span>I agree with all the <strong>terms & conditions</strong></span>
             </div>
             <div class="reg-btn">

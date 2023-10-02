@@ -89,7 +89,7 @@ if (isset($_POST['submit'])) {
                     name="address"><?php echo $result['address']; ?></textarea>
             </div>
             <div class="container0">
-                <input type="checkbox">
+                <input type="checkbox" required>
                 <span>I agree with all thr <strong>term & condition</strong> </span>
             </div>
             <div class="reg-btn">

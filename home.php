@@ -62,9 +62,6 @@ if (isset($_POST['login-submit'])) {
          <li><a class="active" href="home.php">Home</a></li>
          <li><a href="#" onclick="alertPopup('login first')">Gadget</a></li>
          <li><a href="#" onclick="alertPopup('login first')">About Us</a></li>
-
-         <input type="search" class="search-bar" placeholder="Search . . . " id="search" /><i
-            class="fa-solid fa-magnifying-glass"></i>
       </ul>
       <button id="modal-btn" class="login-btn">Login <i class="fa-solid fa-right-to-bracket"></i></button>
 

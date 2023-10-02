@@ -29,6 +29,8 @@ if (!isset($_SESSION['adminname'])) {
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
    <link rel="stylesheet" href="admin.css" />
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
    <title>GadgetSearch</title>
 </head>
 
@@ -62,6 +64,8 @@ if (!isset($_SESSION['adminname'])) {
                   <th>Rating</th>
                   <th>Gadget id</th>
                   <th>Operation</th>
+                  <th>Update Status</th>
+                  <th>Status</th>
                </tr>
                <?php
                foreach ($data as $result) {
@@ -72,11 +76,18 @@ if (!isset($_SESSION['adminname'])) {
                            <td>" . $result['feedback'] . "</td>
                            <td>" . $result['rating'] . "</td>
                            <td>" . $result['g_id'] . "</td>
-                           <td>
-    <a href='deletefeedback.php?id=" . $result['feedback_id'] . "'><input type='submit' value='delete' class='delete' name='delete-user'></a>
-</td>
+                           <td><a href='deletefeedback.php?id=" . $result['feedback_id'] . "'><input type='submit' value='delete' class='delete' name='delete-user'></a>
+                           </td>
 
-                        </tr>
+                        
+                        <td>
+                        <select class='form-select' name='status' onchange='updateStatus(this, " . $result['feedback_id'] . ")'>
+                            <option value='' disabled selected>Update</option>
+                            <option value='Approved'>Approve</option>
+                        </select>
+                    </td>
+                    <td id='status-" . $result['feedback_id'] . "'>" . $result['status'] . "</td>
+                    </tr>
                      ";
                }
                ?>
@@ -86,6 +97,25 @@ if (!isset($_SESSION['adminname'])) {
          ?>
       </div>
    </main>
+
+   <script>
+      function updateStatus(selectElement, feedback_id) {
+         var status = selectElement.value;
+         var xhr = new XMLHttpRequest();
+         xhr.open('POST', 'updatestatus.php', true);
+         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+         xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+               var statusCell = document.getElementById('status-' + feedback_id);
+               statusCell.textContent = status;
+            }
+         };
+
+         var data = 'feedback_id=' + encodeURIComponent(feedback_id) + '&status=' + encodeURIComponent(status);
+         xhr.send(data);
+      }
+   </script>
    <script src="javascript.js"></script>
 </body>
 

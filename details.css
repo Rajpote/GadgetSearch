@@ -84,8 +84,14 @@ img.gadget {
 }
 
 .gadget-full {
-   width: 500px;
+   width: 80%;
    height: auto;
+   padding-right: 10px;
+   margin: 0 auto;
+}
+.gadget-small {
+   width: 300px;
+   height: 250px;
    padding-right: 10px;
    margin: 0 auto;
 }
@@ -123,7 +129,6 @@ p,
    border-radius: 5px;
 }
 
-/* Style for the table header */
 .elink th {
    background-color: #007bff;
    color: #fff;
@@ -131,13 +136,11 @@ p,
    text-align: left;
 }
 
-/* Style for the table data */
 .elink td {
    padding: 10px;
    border-top: 1px solid #ddd;
 }
 
-/* Style for the "Buy Now" link */
 .elink a {
    text-decoration: none;
    background-color: #007bff;
@@ -147,7 +150,6 @@ p,
    transition: background-color 0.3s;
 }
 
-/* Style for the "Buy Now" link on hover */
 .elink a:hover {
    background-color: #0056b3;
 }
@@ -300,7 +302,6 @@ table.details-table tr:hover {
 
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css);
 
-/*styling star rating*/
 
 .rating {
    border: none;
@@ -389,7 +390,6 @@ table.details-table tr:hover {
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Style for the individual link elements */
 .innerlink p {
    cursor: pointer;
    padding: 10px 20px;
@@ -397,12 +397,11 @@ table.details-table tr:hover {
    transition: background-color 0.3s;
 }
 
-/* Style for the link elements on hover */
 .innerlink p:hover {
    background-color: #007bff;
    color: #fff;
 }
-/* Style the container */
+
 .submitted-feedback {
    font-family: Arial, sans-serif;
    margin: 20px;
@@ -412,13 +411,12 @@ table.details-table tr:hover {
    background-color: #f9f9f9;
 }
 
-/* Style the reviews list */
+
 .submitted-feedback ul {
    list-style: none;
    padding: 0;
 }
 
-/* Style each review item */
 .submitted-feedback li {
    margin: 10px 0;
    padding: 10px;
@@ -430,4 +428,9 @@ table.details-table tr:hover {
 
 .submitted-feedback li strong {
    font-weight: bold;
+}
+.images{
+   display: flex;
+   flex-direction: column;
+
 }

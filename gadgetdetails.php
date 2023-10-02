@@ -35,7 +35,7 @@ if (isset($_POST['feedback-submit'])) {
     if (hasUserReviewed($pdo, $gadgetID, $uname)) {
         echo '<script>alert("You have already reviewed this gadget.");</script>';
     } else {
-        $sql = "INSERT INTO feedback (uname, feedback, rating, g_id) VALUES (:uname, :feedback, :rating, :gadgetID)";
+        $sql = "INSERT INTO feedback (uname, feedback, rating, g_id, status) VALUES (:uname, :feedback, :rating, :gadgetID, 'Pending')";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':uname', $uname);
         $stmt->bindParam(':feedback', $feedback);
@@ -191,12 +191,12 @@ $feedbackResults = $stmtFeedback->fetchAll(PDO::FETCH_ASSOC);
                     echo "</ul>";
                     ?>
                 </div>
-
-                <?php
-                echo "<img class='gadget-full' src='image/product/{$row['imageone']}' alt='Gadget Image'>";
-                echo "<img class='gadget-full' src='image/product/{$row['imagetwo']}' alt='Gadget Image'>";
-                ?>
-
+                <div class="images">
+                    <?php
+                    echo "<img class='gadget-full' src='image/product/{$row['imageone']}' alt='Gadget Image'>";
+                    echo "<img class='gadget-small' src='image/product/{$row['imagetwo']}' alt='Gadget Image'>";
+                    ?>
+                </div>
                 <div class="innerlink">
                     <p class="showcomparison">Comparison</p>
                     <p class="showlink">Buy Link</p>
@@ -315,19 +315,22 @@ $feedbackResults = $stmtFeedback->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     </form>
                     <div class="submitted-feedback">
-                        <h2> Reviews</h2>
+                        <h2>Reviews</h2>
                         <ul>
                             <?php
                             foreach ($feedbackResults as $feedback) {
-                                echo '<li>';
-                                echo '<strong>Username:</strong> ' . $feedback['uname'] . '<br>';
-                                echo '<strong>Rating:</strong> ' . $feedback['rating'] . '<br>';
-                                echo '<strong>Feedback:</strong> ' . $feedback['feedback'];
-                                echo '</li>';
+                                if ($feedback['status'] === 'Approved') {
+                                    echo '<li>';
+                                    echo '<strong>Username:</strong> ' . $feedback['uname'] . '<br>';
+                                    echo '<strong>Rating:</strong> ' . $feedback['rating'] . '<br>';
+                                    echo '<strong>Feedback:</strong> ' . $feedback['feedback'];
+                                    echo '</li>';
+                                }
                             }
                             ?>
                         </ul>
                     </div>
+
                 </articale>
             </main>
             <?php

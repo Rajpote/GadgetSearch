@@ -73,15 +73,13 @@ do {
             <li><a href="user.php">Home</a></li>
             <li><a class="active" href="gadget.php">Gadget</a></li>
             <li><a href="about.php">About Us</a></li>
-        </ul>
 
-        <ul class="navbar">
             <form action="search.php" method="post">
                 <input type="text" name="search" class="search-bar" placeholder="Search . . . " id="search" /><i
                     id="search-icon" class="fa-solid fa-magnifying-glass"></i>
             </form>
-            <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
         </ul>
+        <button id="modal-btn" class="login-btn"><i class="fa-solid fa-user"></i></button>
 
         <div id="my-modal" class="modal">
             <form action="" method="POST" class="login-form">
